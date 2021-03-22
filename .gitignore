@@ -1,0 +1,19 @@
+# Ignore Microsoft Word system files
+*.tmp
+~$*.doc*
+Backup of *.doc*
+
+# Ignore contents of private folder, with the exception of its readme file
+private/**
+!private/readme.md
+
+# Ignore contents of scratch folder, with the exception of its readme file
+scratch/**
+!scratch/readme.md
+
+# Ignore common R files
+.Rproj.user
+.Rhistory
+.RData
+
+
