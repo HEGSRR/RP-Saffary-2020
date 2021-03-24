@@ -1,0 +1,130 @@
+---
+title: "Reproduction"
+author: "Sarah Bardin and Josh Gilman"
+date: "3/21/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, results='hide', warning = F, message = F)
+
+library("tidyverse")
+library(spdep)
+library(maptools)
+library(sp)
+library(rgdal)
+library(DCluster)
+library(readr)
+library(readxl)
+library(tidycensus)
+library(sf)
+library(here)
+```
+
+# Data Preparation
+## Create Working File
+In order to reproduce Saffary et al.'s paper *Spatial Dynamics of COVID-19 in US Counties*, we need to first create a working data set. To do this, we've downloaded the data provided by Saffary et al. (data_22.05.2020.xlsx) as well as a Census county-level boundary file. We merge the two files together and restrict to counties with non-missing data. This achieves a sample size of 3,142 counties, which is the same sample size reported by Saffery et al. for their analysis.
+
+```{r read_in}
+##-----------------------##
+#------ READ IN DATA -----#
+##-----------------------##
+
+#---Saffery Data---#
+orig.data <- read_xlsx(here("data", "raw", "public", "data_22.05.2020.xlsx"))
+
+#-Clean up variable names-#
+names(orig.data) <- substr(names(orig.data),1,regexpr(",",names(orig.data)))
+names(orig.data) <- substr(names(orig.data),1,nchar(names(orig.data))-1)
+str(orig.data)
+
+#---Boundary Data---#
+boundaries <- get_estimates(geography = "county", 
+                     product = "population", 
+                     year = 2018,                  ## Saffary used 2018 boundary data
+                     geometry = TRUE)
+
+boundaries <- boundaries %>% 
+                  filter(variable == "POP") 
+
+str(boundaries)
+
+##-----------------------##
+#------ MERGE DATA  -----#
+##-----------------------##
+ds <- inner_join(boundaries, orig.data, by = "GEOID") 
+ds <- st_transform(ds, 5070)
+ds <- ds %>% filter(!is.na(STATENM))  ## Results in 3,142 obs which matches article
+
+```
+
+## Reproduce Global Moran's I 
+After creating a working data file, we attempt to reproduce the global Moran's I statistics for the cases and deaths outcomes. We must use a the zero.policy = TRUE option in the weights construction, as there are counties with no neighbors in the data set. In part, this is due to the fact that the data set with 3,142 counties includes counties in Hawaii and Alaska. Because Saffery et al. indicated that Hawaii and Alaska were omitted from the analysis, we drop these counties, resulting in a data file with 3,108 counties. We again attempt to reproduce the global Moran's I statistics and again we find that there are counties without neighbors; an investigation into the noncontiguous counties identifed that Nantucket, MA is an island county. Despite needing to allow for counties with no neighbors, we are able to achieve similar I statisitics for both outcomes (to the third decimal place). **NOTE:** With rounding, we'd get an I statistic that is 0.001 higher than reported in the publication.
+
+```{r global, results= T}
+##------------------------------------##
+#------ PERFORM GLOBAL MORAN'S I  -----#
+##------------------------------------##
+# Create spatial weights matrix with queen adjacency and binary connectivity
+QN <- poly2nb(ds, queen = TRUE)
+QN1.lw <- nb2listw(QN, style = "B", zero.policy = TRUE) ## there are empty neighbor sets
+                                                        ## so used zero.policy option
+moran.test(as.numeric(ds$DEATH100), QN1.lw, zero.policy = TRUE)
+
+##------------------------------------##
+#----- TEST OUT DROPPING AK AND HI ----#
+##------------------------------------##
+
+#--DEATH RATE--#
+ds2 <- ds %>% filter(substr(GEOID,1,2) != "02" & substr(GEOID,1,2) != "15") 
+
+QN.v2 <- poly2nb(ds2, queen = TRUE)
+QN1.lw.v2 <- nb2listw(QN.v2, style = "B", zero.policy = TRUE) ## there are still empty neighbor sets
+                                                              ## so used zero.policy option
+moran.test(as.numeric(ds2$DEATH100), QN1.lw.v2, zero.policy = TRUE)
+
+#--CASE RATE--#
+moran.test(as.numeric(ds2$CASS100), QN1.lw.v2, zero.policy = TRUE)
+
+```
+
+After reproducing the global moran's I for the case and death rates, respectively, we also attempted to reproduce the local univariate moran's I for the case and death rates. We produced maps to mimic those in the original publication to assist in our visual inspection of the results. There are some discrepancies between these maps and those in Figures 1.c and 1.d. of the publication.
+
+
+```{r local, results= T}
+ds2$localI_case <- localmoran(as.numeric(ds2$CASS100), QN1.lw.v2)[,4]
+ds2$localI_death <- localmoran(as.numeric(ds2$DEATH100), QN1.lw.v2)[,4]
+
+# Create a color palette range from red to blue with 7 colors, rev() reverses the order so low values are blue and high values are red
+SigColor <- rev(RColorBrewer::brewer.pal(7, "RdBu"))
+# set breaks to critical z values
+breaks <- c(-100, -2.58, -1.96, -1.65, 1.65, 1.96, 2.58, 100)
+
+# findInterval() assigns ranks to the zvalues based on which bin the z values would fall into where the bins are broken up by the "breaks" variable created above
+ds2$localI_case_sigbreaks <- findInterval(ds2$localI_case, breaks, all.inside = TRUE)
+ds2$localI_death_sigbreaks <- findInterval(ds2$localI_death, breaks, all.inside = TRUE)
+
+#Create Local Moran's I Plot
+theme_set(theme_void())
+
+#--Cases--#
+I.local.plot.case <- ggplot(ds2, aes(fill = as.factor(localI_case_sigbreaks)))+
+  geom_sf() +
+    scale_fill_manual(values = SigColor,
+                    name = "z-score",
+                    breaks = 1:7,
+                    labels = c("z < -2.58","-2.58 < z < -1.96","-1.96 < z < -1.65","-1.65 < z < 1.65","1.65 < z < 1.96","1.96 < z < 2.58","z > 2.58")) +
+  labs(title = "I - Death Rate")
+I.local.plot.case
+
+#--Deaths--#
+I.local.plot.death <- ggplot(ds2, aes(fill = as.factor(localI_death_sigbreaks)))+
+  geom_sf() +
+    scale_fill_manual(values = SigColor,
+                    name = "z-score",
+                    breaks = 1:7,
+                    labels = c("z < -2.58","-2.58 < z < -1.96","-1.96 < z < -1.65","-1.65 < z < 1.65","1.65 < z < 1.96","1.96 < z < 2.58","z > 2.58")) +
+  labs(title = "I - Death Rate")
+I.local.plot.death
+
+```
