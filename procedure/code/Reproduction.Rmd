@@ -22,6 +22,13 @@ library(here)
 library(spatialreg)
 ```
 
+
+```{r}
+rm(list=ls())
+```
+
+
+
 # Data Preparation
 ## Create Working File
 In order to reproduce Saffary et al.'s paper *Spatial Dynamics of COVID-19 in US Counties*, we need to first create a working data set. To do this, we've downloaded the data provided by Saffary et al. (data_22.05.2020.xlsx) as well as a Census county-level boundary file. We merge the two files together and restrict to counties with non-missing data. This achieves a sample size of 3,142 counties, which is the same sample size reported by Saffery et al. for their analysis.
@@ -131,7 +138,88 @@ I.local.plot.death
 ```
 
 
-```{r bivariate, results = T}
+```{r bivariate functions}
+#-- Takes vectors of predictors/responses to be tested with Bivariate Moran's I --#
+variables_func <- function(predictors, responses, df, WM) {
+  for (i in predictors) {
+    for (j in responses) {
+      individual_tests(i,j,df,WM)
+    }
+  }
+}
+
+#-- Performs individual Bivariate Moran's I tests for x,y pairs --#
+# quosures if needed https://stackoverflow.com/questions/43438001/how-to-pass-column-names-into-a-function-dplyr
+individual_tests <- function(predictor, response, df, WM) {
+
+  x <- df %>%
+    dplyr::pull(predictor)
+
+  y <- df %>%
+    dplyr::pull(response)
+ 
+  #-- PERFORM BIVARIATE MORAN'S I --#
+  m <- moran_I(x, y, WM)
+
+  #global bivariate
+  (global_moran <- m[[1]][1])
+
+  # Local values
+  m_i <- m[[2]]
+
+  # local simulations
+    local_sims <- simula_moran(x, y, WM)$local_sims
+
+  # global pseudo p-value
+  # get all simulated global moran
+    global_sims <- simula_moran(x, y, WM)$global_sims
+
+  # Proportion of simulated global values that are higher (in absolute terms) than the actual index
+    moran_pvalue <- sum(abs(global_sims) > abs( global_moran )) / length(global_sims)
+    #> 0
+
+  # Identifying the significant values
+    alpha <- .05  # for a 95% confidence interval
+    probs <- c(alpha/2, 1-alpha/2)
+    intervals <- t( apply(local_sims, 1, function(x) quantile(x, probs=probs)))
+    sig <- ( m_i < intervals[,1] )  | ( m_i > intervals[,2] )
+    df$sig <- sig
+    
+    # Plotting
+    vis_tests(x, y, predictor, response, df, WM)
+}
+
+#-- LISA visualizations --#
+vis_tests <- function(x, y, predictor, response, df, WM) {
+  
+  # Identifying the LISA clusters
+    xp <- scale(x)[,1]
+    yp <- scale(y)[,1]
+
+  patterns <- as.character( interaction(xp > 0, WM%*%yp > 0) )
+  patterns <- patterns %>%
+      str_replace_all("TRUE","High") %>%
+      str_replace_all("FALSE","Low")
+
+  patterns[df$sig==0] <- "Not significant"
+  df$patterns <- patterns
+
+  # Rename LISA clusters
+  df$patterns2 <- factor(df$patterns, levels=c("High.High", "High.Low", "Low.High", "Low.Low", "Not significant"),
+                                    labels=c("High  - High", "High - Low", "Low - High","Low - Low", "Not significant"))
+  
+  ### PLOT
+
+  g <- ggplot() +
+    geom_sf(data=df, aes(fill=patterns2), color="NA") +
+    scale_fill_manual(values = c("red", "pink", "light blue", "dark blue", "grey80")) +
+    guides(fill = guide_legend(title="LISA clusters")) + ggtitle(paste("LISA ", response, " vs ", predictor)) +
+    theme_minimal()
+  
+  print(g)
+}
+
+
 # CODE BORROWED FROM https://gist.github.com/rafapereirabr/5348193abf779625f5e8c5090776a228
 #-- Bivariate Moran's I --#
 moran_I <- function(x, y = NULL, W){
@@ -147,7 +235,6 @@ moran_I <- function(x, y = NULL, W){
   
   list(global = global, local  = as.numeric(local))
 }
-
 
 #-- Permutations for the Bivariate Moran's I --#
 simula_moran <- function(x, y = NULL, W, nsims = 2000){
@@ -250,4 +337,3 @@ ggplot() +
   guides(fill = guide_legend(title="LISA clusters")) +
   theme_minimal()
 ```
-
