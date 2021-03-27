@@ -250,4 +250,3 @@ ggplot() +
   guides(fill = guide_legend(title="LISA clusters")) +
   theme_minimal()
 ```
-
