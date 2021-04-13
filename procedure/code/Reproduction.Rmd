@@ -8,6 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F, results='hide', warning = F, message = F)
 
+set.seed(1)
 rm(list=ls())
 
 library(tidyverse)
@@ -22,15 +23,15 @@ library(tidycensus)
 library(sf)
 library(here)
 library(spatialreg)
+library(maps)
+library(patchwork)
+library(ggpubr)
 
 output_maps <- here("results", "maps")
 
 ```
 
 
-```{r}
-rm(list=ls())
-```
 
 
 
@@ -89,15 +90,25 @@ int.data <- int.data %>%
                               DEATH100,
                               CASES,
                               DEATHS,
-                              STATENM)
+                              STATENM) %>% 
+                dplyr::mutate(PCP_impute_zero = ifelse(is.na(PCP), 0, PCP)) %>% # impute all NA values with 0
+                dplyr::mutate(PCP_impute_mean = ifelse(is.na(PCP), 54.5, PCP)) # impute all NA values with mean
+
 str(int.data)
 ds <- inner_join(boundaries, int.data, by = "GEOID") 
 ds <- st_transform(ds, 5070)
 ds <- ds %>% filter(!is.na(STATENM))  ## Results in 3,142 obs which matches article
 
-summary(ds$PCP)
+summary(ds$PCP_impute_zero)
+summary(ds$PCP_impute_mean)
 
+##-----------------------##
+#------ STATES DATA  -----#
+##-----------------------##
+states <- st_as_sf(map("state", plot = FALSE, fill = TRUE)) # for highlighting state boundaries as
 ```
+
+
 
 ## Reproduce Global Moran's I 
 After creating a working data file, we attempt to reproduce the global Moran's I statistics for the cases and deaths outcomes. We must use a the zero.policy = TRUE option in the weights construction, as there are counties with no neighbors in the data set. In part, this is due to the fact that the data set with 3,142 counties includes counties in Hawaii and Alaska. Because Saffery et al. indicated that Hawaii and Alaska were omitted from the analysis, we drop these counties, resulting in a data file with 3,108 counties. We again attempt to reproduce the global Moran's I statistics and again we find that there are counties without neighbors; an investigation into the noncontiguous counties identifed that Nantucket, MA is an island county. Despite needing to allow for counties with no neighbors, we are able to achieve similar I statisitics for both outcomes (to the third decimal place). **NOTE:** With rounding, we'd get an I statistic that is 0.001 higher than reported in the publication.
@@ -126,6 +137,21 @@ W  <- as(lw, "symmetricMatrix")
 W  <- as.matrix(W/rowSums(W))
 W[which(is.na(W))] <- 0
 
+##------------------------------------##
+#-------- Filter Matrix for PCP -------#
+##------------------------------------##
+
+ds3 <- ds2 %>% 
+  filter(!is.na(PCP))  # 143 NA values; 2962 rows after filter.
+
+#--Define Weighting Scheme--#
+nb2 <- poly2nb(ds3, queen = TRUE)
+lw2 <- nb2listw(nb2, style = "B", zero.policy = TRUE) ## there are still empty neighbor sets
+                                                              ## so used zero.policy option
+W2 <- as(lw2, "symmetricMatrix")
+W2 <- as.matrix(W2/rowSums(W2))
+W2[which(is.na(W2))] <- 0
+
 #--DEATH RATE--#
 moran.test(as.numeric(ds2$DEATH100), lw, zero.policy = TRUE)
 
@@ -135,7 +161,6 @@ moran.test(as.numeric(ds2$CASS100), lw, zero.policy = TRUE)
 ```
 
 After reproducing the global moran's I for the case and death rates, respectively, we also attempted to reproduce the local univariate moran's I for the case and death rates. We produced maps to mimic those in the original publication to assist in our visual inspection of the results. There are some discrepancies between these maps and those in Figures 1.c and 1.d. of the publication.
-
 
 ```{r local, results= T}
 #Create Local Moran's I Plot
@@ -172,10 +197,12 @@ cases_z <- scale(ds2$CASS100)[,1]
 
   cases <- ggplot() +
     geom_sf(data=ds2, aes(fill=patterns2), color="NA") +
+    geom_sf(data = states, fill = "NA") +
     scale_fill_manual(values = c("red", "pink", "light blue", "grey80")) +
-    guides(fill = guide_legend(title="LISA clusters")) + ggtitle("Cases LISA")
+    guides(fill = guide_legend(title="Patterns")) + theme(
+      legend.position = "bottom"
+    )
 
-  ggsave(path = output_maps, "fig1_cases_lisa.png", height = 4, width = 6, scale = 1.5)
 #------------------#
 #--LISA for Deaths--#
 #------------------#
@@ -202,28 +229,32 @@ deaths_z <- scale(ds2$DEATH100)[,1]
 
   deaths <- ggplot() +
     geom_sf(data=ds2, aes(fill=patterns2), color="NA") +
+    geom_sf(data = states, fill = "NA") +
     scale_fill_manual(values = c("red", "pink", "light blue", "grey80")) +
-    guides(fill = guide_legend(title="LISA clusters")) + ggtitle("Deaths LISA") 
-
-  ggsave(path = output_maps, "fig1_deaths_lisa.png", height = 4, width = 6, scale = 1.5)
-  
+    guides(fill = guide_legend(title="Patterns")) + theme(
+      legend.position = "bottom"
+    )
 
 ```
 
 
 ```{r bivariate functions}
 #-- Takes vectors of predictors/responses to be tested with Bivariate Moran's I --#
-variables_func <- function(predictors, responses, df, WM) {
+variables_func <- function(predictors, responses, df, df_states, WM) {
+  ggplots <- list()
+  count = 1
   for (i in predictors) {
     for (j in responses) {
-      individual_tests(i,j,df,WM)
+      ggplots[[count]] <- individual_tests(i,j,df, df_states,WM)
+      count = count + 1
     }
   }
+  return(ggplots)
 }
 
 #-- Performs individual Bivariate Moran's I tests for x,y pairs --#
 # quosures if needed https://stackoverflow.com/questions/43438001/how-to-pass-column-names-into-a-function-dplyr
-individual_tests <- function(predictor, response, df, WM) {
+individual_tests <- function(predictor, response, df, df_states, WM) {
 
   x <- df %>%
     dplyr::pull(predictor)
@@ -236,6 +267,9 @@ individual_tests <- function(predictor, response, df, WM) {
 
   #global bivariate
   (global_moran <- m[[1]][1])
+  print(predictor)
+  print(response)
+  print(m[[1]][1])
 
   # Local values
   m_i <- m[[2]]
@@ -250,6 +284,7 @@ individual_tests <- function(predictor, response, df, WM) {
   # Proportion of simulated global values that are higher (in absolute terms) than the actual index
     moran_pvalue <- sum(abs(global_sims) > abs( global_moran )) / length(global_sims)
     #> 0
+    print(moran_pvalue)
 
   # Identifying the significant values
     alpha <- .05  # for a 95% confidence interval
@@ -259,11 +294,11 @@ individual_tests <- function(predictor, response, df, WM) {
     df$sig <- sig
     
     # Plotting
-    vis_tests(x, y, predictor, response, df, WM)
+    g <- vis_tests(x, y, predictor, response, df, df_states, WM)
 }
 
 #-- LISA visualizations --#
-vis_tests <- function(x, y, predictor, response, df, WM) {
+vis_tests <- function(x, y, predictor, response, df, df_states, WM) {
   
   # Identifying the LISA clusters
     xp <- scale(x)[,1]
@@ -284,16 +319,24 @@ vis_tests <- function(x, y, predictor, response, df, WM) {
   ### PLOT
 
   g <- ggplot() +
+
     geom_sf(data=df, aes(fill=patterns2), color="NA") +
+    geom_sf(data = df_states, fill = "NA") +
     scale_fill_manual(values = c("red", "pink", "light blue", "dark blue", "grey80")) +
-    guides(fill = guide_legend(title="LISA clusters")) + ggtitle(paste("LISA ", response, " vs ", predictor)) +
-    theme_minimal()
+    guides(fill = guide_legend(title = "Patterns")) +
+    theme_minimal() + theme(
+      legend.position = "bottom"
+    )
   
-  print(g)
-<<<<<<< HEAD
-=======
-  ggsave(path = output_maps, paste0(predictor,response,".png"), height = 4, width = 6, scale = 1.5)
->>>>>>> c2524d5dc49b0f4089759e45813808e6d27e7ef2
+  return(g)
+  
+  # ggsave(path = output_maps, paste0(predictor,response,".png"), height = 4, width = 6, scale = 1.5)
+  
+#   print(g)
+# <<<<<<< HEAD
+# =======
+#   ggsave(path = output_maps, paste0(predictor,response,".png"), height = 4, width = 6, scale = 1.5)
+# >>>>>>> c2524d5dc49b0f4089759e45813808e6d27e7ef2
 }
 
 
@@ -344,19 +387,118 @@ simula_moran <- function(x, y = NULL, W, nsims = 999){
 
 ```{r bivariate, results = T}
 #--------------------------------------------#
-predictors = c("ICUBEDS")
-#, "DIABETS", "OBESITY","BLACK", "HISPANC", "WHITE", "UNINSRD", "VACCNTN") # all predictors
-responses = c("CASS100", "DEATH100")
+predictors <- c("ICUBEDS", "OBESITY", "DIABETS", "BLACK", "HISPANC", "WHITE", "UNINSRD", "VACCNTN")
+responses <- c("CASS100", "DEATH100")
 
-variables_func(responses, predictors, ds2, W) #--- Per the figure foot notes, Saffary looked at responses by predictor as opposed to predictor by response
+ggp <- variables_func(responses, predictors, ds2, states, W) #--- Per the figure foot notes, Saffary looked at responses by predictor as opposed to predictor by response
 
+ggp_PCP_filter <- variables_func(responses, ("PCP"), ds3, states, W2)
+ggp_PCP_impute_zero <- variables_func(responses, ("PCP_impute_zero"), ds2, states, W)
+ggp_PCP_impute_mean <- variables_func(responses, ("PCP_impute_mean"), ds2, states, W)
 ```
 
 
-Progress Notes:
-1.) Need to figure out how to impute PCP variable.
+```{r figures}
+# placeholder ggplots
+void1 <- ggplot() + theme_void() 
+void2 <- ggplot() + theme_void()
+void3 <- ggplot() + theme_void()
 
-2.) I did not write the code to save the figure outputs to the Rproject. This will probably be a good thing to do because it takes a while to run the code chunk that does all Moran calculations
+#--------------------------------#
+#---- Figure PCP_impute_zero ----#
+#--------------------------------#
+
+ggp_PCP_impute_zero[[1]]
+ggsave(path = output_maps, "Cases_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
+
+ggp_PCP_impute_zero[[2]]
+ggsave(path = output_maps, "Deaths_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
+
+#--------------------------------#
+#---- Figure PCP_impute_mean ----#
+#--------------------------------#
+
+ggp_PCP_impute_mean[[1]]
+ggsave(path = output_maps, "Cases_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
+ggp_PCP_impute_mean[[2]]
+ggsave(path = output_maps, "Deaths_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
+
+#------------------#
+#---- Figure 1 ----#
+#------------------#
+
+ggarrange(void1, void2, cases, deaths,
+                    labels = c("A", "B", "C", "D"), heights = c(1,5),
+                    ncol = 2, nrow = 2)
+
+ggsave(path = output_maps, "fig1.png", height = 4, width = 6, scale = 2.5)
+
+#-------------------------------#
+#-- Figure 2 (PCP filter NA) ---#
+#-------------------------------#
+
+ggarrange(void1, void2,  ggp[[1]], ggp_PCP_filter[[1]], ggp[[9]], ggp_PCP_filter[[2]],
+                    labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
+                    ncol = 2, nrow = 3)
+
+ggsave(path = output_maps, "fig2.png", height = 4, width = 6, scale = 2.5)
+
+#---------------------------------#
+#-- Figure 2 (PCP impute zero) ---#
+#---------------------------------#
+
+ggarrange(void1, void2,  ggp[[1]], ggp_PCP_impute_zero[[1]], ggp[[9]], ggp_PCP_impute_zero[[2]],
+                    labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
+                    ncol = 2, nrow = 3)
+
+ggsave(path = output_maps, "fig2.png", height = 4, width = 6, scale = 2.5)
+
+#---------------------------------#
+#-- Figure 2 (PCP impute mean) ---#
+#---------------------------------#
+
+ggarrange(void1, void2,  ggp[[1]], ggp_PCP_impute_mean[[1]], ggp[[9]], ggp_PCP_impute_mean[[2]],
+                    labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
+                    ncol = 2, nrow = 3)
+
+ggsave(path = output_maps, "fig2.png", height = 4, width = 6, scale = 2.5)
+
+
+#------------------#
+#---- Figure 3 ----#
+#------------------#
+
+ggarrange(void1, void2, ggp[[3]], ggp[[11]],
+                    labels = c("A", "B", "C", "D"), heights = c(1,5),
+                    ncol = 2, nrow = 2)
+
+ggsave(path = output_maps, "fig3.png", height = 4, width = 6, scale = 2.5)
+
+
+# ------------------#
+# ---- Figure 5 ----#
+# ------------------#
+ggarrange(void1, void2, void3, ggp[[4]], ggp[[5]], ggp[[6]], ggp[[12]], ggp[[13]], ggp[[14]], font.label = list(size = 23),
+                    labels = c("A", "D", "G", "B", "E", "H", "C", "F", "I"), heights = c(1,5,5),
+                    ncol = 3, nrow = 3)
+
+ggsave(path = output_maps, "fig5.png", height = 4, width = 6, scale = 3.8)
+
+```
+
+```{r}
+ggarrange(void1, void2, void3, void1, void2, void3, void3, void3, void3, font.label = list(size = 23, color = "red"),
+                    labels = c("A", "D", "G", "B", "E", "H", "C", "F", "I"), heights = c(1,5,5),
+                    ncol = 3, nrow = 3)
+
+ggsave(path = output_maps, "fig5.png", height = 4, width = 6, scale = 3.8)
+
+ggarrange(void1, void2, void3, void1, void2, void3, void3, void3, void3,
+                    labels = c("A", "D", "G", "B", "E", "H", "C", "F", "I"), heights = c(1,5,5),
+                    ncol = 3, nrow = 3)
+```
+
+
 
 <<<<<<< HEAD
 ggplot() +
