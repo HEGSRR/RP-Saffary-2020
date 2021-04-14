@@ -267,9 +267,9 @@ individual_tests <- function(predictor, response, df, df_states, WM) {
 
   #global bivariate
   (global_moran <- m[[1]][1])
-  print(predictor)
-  print(response)
-  print(m[[1]][1])
+  # print(predictor)
+  # print(response)
+  # print(m[[1]][1])
 
   # Local values
   m_i <- m[[2]]
@@ -284,7 +284,7 @@ individual_tests <- function(predictor, response, df, df_states, WM) {
   # Proportion of simulated global values that are higher (in absolute terms) than the actual index
     moran_pvalue <- sum(abs(global_sims) > abs( global_moran )) / length(global_sims)
     #> 0
-    print(moran_pvalue)
+    # print(moran_pvalue)
 
   # Identifying the significant values
     alpha <- .05  # for a 95% confidence interval
@@ -441,7 +441,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_filter[[1]], ggp[[9]], ggp_PCP_filter
                     labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
                     ncol = 2, nrow = 3)
 
-ggsave(path = output_maps, "fig2.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_maps, "fig2_PCP_filtered.png", height = 4, width = 6, scale = 2.5)
 
 #---------------------------------#
 #-- Figure 2 (PCP impute zero) ---#
@@ -451,7 +451,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_impute_zero[[1]], ggp[[9]], ggp_PCP_i
                     labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
                     ncol = 2, nrow = 3)
 
-ggsave(path = output_maps, "fig2.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_maps, "fig2_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
 
 #---------------------------------#
 #-- Figure 2 (PCP impute mean) ---#
@@ -461,7 +461,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_impute_mean[[1]], ggp[[9]], ggp_PCP_i
                     labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
                     ncol = 2, nrow = 3)
 
-ggsave(path = output_maps, "fig2.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_maps, "fig2_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
 
 
 #------------------#
@@ -486,17 +486,6 @@ ggsave(path = output_maps, "fig5.png", height = 4, width = 6, scale = 3.8)
 
 ```
 
-```{r}
-ggarrange(void1, void2, void3, void1, void2, void3, void3, void3, void3, font.label = list(size = 23, color = "red"),
-                    labels = c("A", "D", "G", "B", "E", "H", "C", "F", "I"), heights = c(1,5,5),
-                    ncol = 3, nrow = 3)
-
-ggsave(path = output_maps, "fig5.png", height = 4, width = 6, scale = 3.8)
-
-ggarrange(void1, void2, void3, void1, void2, void3, void3, void3, void3,
-                    labels = c("A", "D", "G", "B", "E", "H", "C", "F", "I"), heights = c(1,5,5),
-                    ncol = 3, nrow = 3)
-```
 
 
 
