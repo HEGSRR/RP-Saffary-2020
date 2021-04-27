@@ -26,6 +26,7 @@ library(spatialreg)
 library(maps)
 library(patchwork)
 library(ggpubr)
+library(fdrtool)
 
 output_maps <- here("results", "maps")
 
@@ -184,15 +185,15 @@ cases_z <- scale(ds2$CASS100)[,1]
   patterns <- patterns %>%
       str_replace_all("TRUE","High") %>%
       str_replace_all("FALSE","Low")
-  
+
   patterns[ds2$localI_case_sigbreaks == 4] <- "Not significant"
   ds2$patterns <- patterns
 
   # Rename LISA clusters
-  ds2$patterns2 <- factor(ds2$patterns, 
+  ds2$patterns2 <- factor(ds2$patterns,
                                      levels=c("High.High", "High.Low", "Low.High", "Low.Low", "Not significant"),
                                      labels=c("High  - High", "High - Low", "Low - High","Low - Low", "Not significant"))
-  
+
   ### PLOT
 
   cases <- ggplot() +
@@ -206,7 +207,7 @@ cases_z <- scale(ds2$CASS100)[,1]
 #------------------#
 #--LISA for Deaths--#
 #------------------#
-  
+
 ds2$localI_death <- localmoran(as.numeric(ds2$DEATH100), lw)[,4]
 ds2$localI_death_sigbreaks <- findInterval(ds2$localI_death, breaks, all.inside = TRUE)
 
@@ -221,10 +222,10 @@ deaths_z <- scale(ds2$DEATH100)[,1]
   ds2$patterns <- patterns
 
   # Rename LISA clusters
-  ds2$patterns2 <- factor(ds2$patterns, 
+  ds2$patterns2 <- factor(ds2$patterns,
                                      levels=c("High.High", "High.Low", "Low.High", "Low.Low", "Not significant"),
                                      labels=c("High  - High", "High - Low", "Low - High","Low - Low", "Not significant"))
-  
+
   ### PLOT
 
   deaths <- ggplot() +
@@ -237,15 +238,106 @@ deaths_z <- scale(ds2$DEATH100)[,1]
 
 ```
 
+Below is an attempt to reproduce the multiple comparisons corrections in the supplementary figures using bonferroni/fdr corrections. The bonferroni adjustment uses the "p.adjust" function from the stats package. The fdr adjustment uses the "fdrtool" function from the fdrtools package. The algorithm implemented in the function is described in detail in the documentation on page 5: https://cran.r-project.org/web/packages/fdrtool/fdrtool.pdf on page 5. There are many possible packages for performing fdr corrections: http://www.strimmerlab.org/notes/fdr.html. For univariate corrections, I tried just this one.
+
+Analysis: The corrections, especially fdr, do not match the publication supp. figures at all. I do not know why. Theoretically, the bonferroni correction should be close. However, it is not. I do not know why it is not close.
+```{r local}
+#-------------------------------------------------------------------------#
+#--Multiple comparison corrections for Cases/Deaths univariate Moran's I--#
+#-------------------------------------------------------------------------#
+
+# function takes the variable, dataframe, weight matrices, and multiple comparisons correction (as a string)
+univariate_mc <- function(variable, df, WM1, WM2, mc_approach) {
+  # quosures https://stackoverflow.com/questions/43438001/how-to-pass-column-names-into-a-function-dplyr
+  variable <- enquo(variable)
+  var1 <- quo_name(variable)
+
+  var_vec <- df %>%
+    dplyr::pull(var1)
+  
+  var_vec
+  
+  # Moran's I values
+  df$localI_case <- localmoran(as.numeric(var_vec), WM1)[,4]
+  
+  
+  # P-values
+  cases_p_values <- localmoran(as.numeric(var_vec), WM1)[,5]
+
+
+  if (mc_approach == "bonferroni") {
+    # bonferroni adjustment
+    cases_p <- p.adjust(cases_p_values, method = "bonferroni")
+    cases_sig <- (cases_p < 0.05)
+    df$cases_sig <- cases_sig
+
+  } else {
+    # FDR adjustment
+    cases_p <- fdrtool(cases_p_values, statistic = "pvalue", plot = FALSE)
+    cases_p <- unlist(cases_p[1])
+    cases_sig <- (cases_p < 0.05)
+    df$cases_sig <- cases_sig
+
+  }
+
+  # Identify high and low clusters using the interaction between the weights matrix and the standardized cases
+  cases_z <- scale(df$CASS100)[,1]
+  patterns <- as.character( interaction(cases_z > 0, WM2%*%cases_z > 0) )
+  patterns <- patterns %>%
+      str_replace_all("TRUE","High") %>%
+      str_replace_all("FALSE","Low")
+
+  # bonferroni adjustment
+  patterns[df$cases_sig == FALSE] <- "Not significant"
+  df$patterns <- patterns
+
+  # Rename LISA clusters
+  df$patterns2 <- factor(df$patterns,
+                                     levels=c("High.High", "High.Low", "Low.High", "Low.Low", "Not significant"),
+                                     labels=c("High  - High", "High - Low", "Low - High","Low - Low", "Not significant"))
+
+  ### PLOT
+
+  ### PLOT
+  colors <- c("High  - High" = "red", "High - Low" = "pink", "Low - High" = "light blue", "Low - Low" = "dark blue", "Not significant" = "grey80")
+
+  theme_set(theme_void())
+
+  g <- ggplot() +
+    geom_sf(data=df, aes(fill=patterns2), color="NA") +
+    geom_sf(data = states, fill = "NA") +
+    scale_fill_manual(values = colors) +
+    guides(fill = guide_legend(title="Patterns")) + ggtitle(paste("  ", mc_approach, " ", var1)) + theme(
+      legend.position = "bottom"
+    )
+
+  return(g)
+}
+
+
+```
+
+
+
+```{r}
+cases_bonferroni <- univariate_mc("CASS100", ds2, lw, W, "bonferroni")
+cases_fdr <- univariate_mc("CASS100", ds2, lw, W, "fdr")
+deaths_bonferroni <- univariate_mc("DEATH100", ds2, lw, W, "bonferroni")
+deaths_fdr <- univariate_mc("DEATH100", ds2, lw, W, "fdr")
+```
 
 ```{r bivariate functions}
+#------------------------#
+#-- bivariate Moran's I--#
+#------------------------#
+
 #-- Takes vectors of predictors/responses to be tested with Bivariate Moran's I --#
-variables_func <- function(predictors, responses, df, df_states, WM) {
+variables_func <- function(predictors, responses, df, df_states, WM, mc_approach) {
   ggplots <- list()
   count = 1
   for (i in predictors) {
     for (j in responses) {
-      ggplots[[count]] <- individual_tests(i,j,df, df_states,WM)
+      ggplots[[count]] <- individual_tests(i,j,df, df_states, WM, mc_approach)
       count = count + 1
     }
   }
@@ -253,8 +345,7 @@ variables_func <- function(predictors, responses, df, df_states, WM) {
 }
 
 #-- Performs individual Bivariate Moran's I tests for x,y pairs --#
-# quosures if needed https://stackoverflow.com/questions/43438001/how-to-pass-column-names-into-a-function-dplyr
-individual_tests <- function(predictor, response, df, df_states, WM) {
+individual_tests <- function(predictor, response, df, df_states, WM, mc_approach) {
 
   x <- df %>%
     dplyr::pull(predictor)
@@ -267,49 +358,81 @@ individual_tests <- function(predictor, response, df, df_states, WM) {
 
   #global bivariate
   (global_moran <- m[[1]][1])
-  # print(predictor)
-  # print(response)
-  # print(m[[1]][1])
 
   # Local values
-  m_i <- m[[2]]
-
+  m_i <- m[[2]] # calculated Moran's I value for each county.
+  
   # local simulations
-    local_sims <- simula_moran(x, y, WM)$local_sims
-
+  local_sims <- simula_moran(x, y, WM)$local_sims # returns matrix. 999 simulations (columns) for each county (rows).
+  
   # global pseudo p-value
-  # get all simulated global moran
-    global_sims <- simula_moran(x, y, WM)$global_sims
+  global_sims <- simula_moran(x, y, WM)$global_sims
 
   # Proportion of simulated global values that are higher (in absolute terms) than the actual index
-    moran_pvalue <- sum(abs(global_sims) > abs( global_moran )) / length(global_sims)
-    #> 0
-    # print(moran_pvalue)
-
-  # Identifying the significant values
-    alpha <- .05  # for a 95% confidence interval
-    probs <- c(alpha/2, 1-alpha/2)
-    intervals <- t( apply(local_sims, 1, function(x) quantile(x, probs=probs)))
-    sig <- ( m_i < intervals[,1] )  | ( m_i > intervals[,2] )
-    df$sig <- sig
+  moran_pvalue <- sum(abs(global_sims) > abs( global_moran )) / length(global_sims)
     
-    # Plotting
-    g <- vis_tests(x, y, predictor, response, df, df_states, WM)
+    
+  # Logic to deal with no correction, bonferroni, or fdr
+  if (mc_approach == "none") {
+    # Identifying the significant values
+    alpha <- .05  # for a 95% confidence interval; bonferroni adjustment would be dividing this value by 3108.
+    probs <- c(alpha/2, 1-alpha/2)
+    intervals <- t( apply(local_sims, 1, function(x) quantile(x, probs=probs))) # t() transposes matrix; apply(X, margin, function) applies function to margins of matrix;
+    sig <- ( m_i < intervals[,1] )  | ( m_i > intervals[,2] ) # Is the Moran's I value outside the intervals (significant); row number = total # of counties.
+  }  else {
+
+    n = nrow(WM)
+    p_vec <- numeric(n) # allocate p-value vector
+    
+    # calculate local pseudo p-value
+    for (i in 1:n) {
+      p_vec[[i]] <- sum(abs(local_sims[i,]) > abs(m_i[i])) / length(local_sims[i,])
+    }
+
+    if (mc_approach == "bonferroni") {
+      # Stats package
+      # adj_p_vec <- p.adjust(p_vec, method = "bonferroni")
+      # sig <- (adj_p_vec < 0.05)
+      
+      # Custom correction (alpha divided by number of comparisons (3105))
+      alpha <- 0.000016103  # for a 95% confidence interval; bonferroni adjustment would be dividing this value by 3108.
+      probs <- c(alpha/2, 1-alpha/2)
+      intervals <- t( apply(local_sims, 1, function(x) quantile(x, probs=probs))) # t() transposes matrix; apply(X, margin, function) applies function to margins of matrix;
+      sig <- ( m_i < intervals[,1] )  | ( m_i > intervals[,2] ) # Is the Moran's I value outside the intervals (significant); row number = total # of counties.
+      
+    }
+    else {
+      # Stats package
+      # adj_p_vec <- p.adjust(p_vec, method = "fdr")
+      
+      # fdrtools package
+      adj_p_vec <- fdrtool(p_vec, statistic = "pvalue", plot = FALSE)
+      adj_p_vec <- unlist(adj_p_vec[1])
+      sig <- (adj_p_vec < 0.05)
+    }
+  }
+
+  df$sig <- sig
+
+  # Plotting
+  g <- vis_tests(x, y, predictor, response, df, df_states, WM, mc_approach)
 }
 
 #-- LISA visualizations --#
-vis_tests <- function(x, y, predictor, response, df, df_states, WM) {
+vis_tests <- function(x, y, predictor, response, df, df_states, WM, mc_approach) {
   
   # Identifying the LISA clusters
     xp <- scale(x)[,1]
     yp <- scale(y)[,1]
 
-  patterns <- as.character( interaction(xp > 0, WM%*%yp > 0) )
+  patterns <- as.character( interaction(xp > 0, WM%*%yp > 0))
+  
   patterns <- patterns %>%
       str_replace_all("TRUE","High") %>%
       str_replace_all("FALSE","Low")
-
-  patterns[df$sig==0] <- "Not significant"
+  
+  patterns[df$sig==0] <- "Not significant" # not sure what this is doing.
+  # print(patterns)
   df$patterns <- patterns
 
   # Rename LISA clusters
@@ -317,16 +440,29 @@ vis_tests <- function(x, y, predictor, response, df, df_states, WM) {
                                     labels=c("High  - High", "High - Low", "Low - High","Low - Low", "Not significant"))
   
   ### PLOT
-
-  g <- ggplot() +
-
-    geom_sf(data=df, aes(fill=patterns2), color="NA") +
-    geom_sf(data = df_states, fill = "NA") +
-    scale_fill_manual(values = c("red", "pink", "light blue", "dark blue", "grey80")) +
-    guides(fill = guide_legend(title = "Patterns")) +
-    theme_minimal() + theme(
-      legend.position = "bottom"
-    )
+  colors <- c("High  - High" = "red", "High - Low" = "pink", "Low - High" = "light blue", "Low - Low" = "dark blue", "Not significant" = "grey80")
+  
+  if (mc_approach == "none") {
+    g <- ggplot() +
+      geom_sf(data=df, aes(fill=patterns2), color="NA") +
+      geom_sf(data = df_states, fill = "NA") +
+      scale_fill_manual(values = colors) +
+      guides(fill = guide_legend(title = "Patterns")) +
+      theme_minimal() + theme(
+        legend.position = "bottom"
+      )
+  } else {
+    
+    g <- ggplot() +
+      geom_sf(data=df, aes(fill=patterns2), color="NA") +
+      geom_sf(data = df_states, fill = "NA") +
+      scale_fill_manual(values = colors) +
+      guides(fill = guide_legend(title = "Patterns")) +
+      theme_minimal() + ggtitle(paste(mc_approach, " ", predictor, " vs ", response)) + theme(
+        legend.position = "bottom"
+      )
+    
+  }
   
   return(g)
   
@@ -385,17 +521,47 @@ simula_moran <- function(x, y = NULL, W, nsims = 999){
 ```
 
 
-```{r bivariate, results = T}
-#--------------------------------------------#
+```{r}
 predictors <- c("ICUBEDS", "OBESITY", "DIABETS", "BLACK", "HISPANC", "WHITE", "UNINSRD", "VACCNTN")
 responses <- c("CASS100", "DEATH100")
-
-ggp <- variables_func(responses, predictors, ds2, states, W) #--- Per the figure foot notes, Saffary looked at responses by predictor as opposed to predictor by response
-
-ggp_PCP_filter <- variables_func(responses, ("PCP"), ds3, states, W2)
-ggp_PCP_impute_zero <- variables_func(responses, ("PCP_impute_zero"), ds2, states, W)
-ggp_PCP_impute_mean <- variables_func(responses, ("PCP_impute_mean"), ds2, states, W)
 ```
+
+
+```{r bivariate, results = T}
+#--------------------------------------------#
+
+ggp <- variables_func(responses, predictors, ds2, states, W, "none") #--- Per the figure foot notes, Saffary looked at responses by predictor as opposed to predictor by response
+ggp_PCP_filter <- variables_func(responses, ("PCP"), ds3, states, W2, "none")
+ggp_PCP_impute_zero <- variables_func(responses, ("PCP_impute_zero"), ds2, states, W, "none")
+ggp_PCP_impute_mean <- variables_func(responses, ("PCP_impute_mean"), ds2, states, W, "none")
+```
+
+Psuedo P-values were calculated for each county using the same formula as the global Moran's I p-value: Proportion of simulated values (in absolute terms) that are higher than the calculated Moran's I value. I am pretty confident that my method for calculating the pseudo p-values for the supp. figures is correct because I am using the same method that reproduced the global Moran's I p-values in table 2. Although I am calculating pseudo p-values for local rather than global, the method should work for both because I am still comparing calculated Moran's I values against the 999 simulated values.
+
+
+BONFERRONI CORRECTION
+I tried two methods to perform the bonferroni correction. First, I divided the alpha value by the number of comparisons (3105), keeping all other code the same as when we did non-corrected maps (which matched the paper well). Strangely, these maps did not match the supplementary bon. figures very well. Next, I used the "p.adjust" function from the stats package to perform the bonferroni correction. With this method, I calculated psuedo p-values (See note above). This package produced very similar (if not identical?) to the manually dividing the alpha method. This provides evidence that the psuedo p-value calculation is correct.
+
+FDR CORRECTION
+
+I tried two different packages (out of many possible http://www.strimmerlab.org/notes/fdr.html) to calculate the false discover rate. First, I used the "p.adjust" function from the stats package https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/p.adjust. The documentation says their fdr algorithm is patterned after this paper: 
+
+Benjamini, Y., and Hochberg, Y. (1995). Controlling the false discovery rate: a practical and powerful approach to multiple testing. Journal of the Royal Statistical Society Series B, 57, 289--300. http://www.jstor.org/stable/2346101.
+
+Next, I used the "fdrtool" function from the fdrtool package. The algorithm implemented in the function is described in detail in the documentation on page 5: https://cran.r-project.org/web/packages/fdrtool/fdrtool.pdf on page 5
+
+Analysis: 
+Bonferroni: The bonferroni corrections I produced did not match the Saffary et al. maps. The Saffary bonferroni corrections have almost no significant counties. The reproductions have some significant counties. Both approaches produced the same map reproductions. I do not know how to explain the differences between our reproductions and Saffary supp. figures. The bonferroni correction should not have variability between packages, approaches. This idea was supported by my two approaches that produced the same maps.
+
+FDR: Neither method reproduced the fdrmaps-adjusted maps perfectly. The p.adjust seemed to create better-matching maps for the ICUBEDS variable, but the fdrtools method seemed to create better-matching maps for all other variables. Overall, the variation between the sets of maps I produced was much less than the variation between my maps and the maps from the paper. Not sure what that means. Not sure where the differences are coming from.
+```{r bivariate supplementary, results = T}
+ggp_supp_fdr <- variables_func(responses, predictors, ds2, states, W, "fdr")
+ggp_supp_bon <- variables_func(responses, predictors, ds2, states, W, "bonferroni")
+
+ggp_supp_fdr_PCP <- variables_func(responses, ("PCP"), ds3, states, W2, "fdr")
+ggp_supp_bon_PCP <- variables_func(responses, ("PCP"), ds3, states, W2, "bonferroni")
+```
+
 
 
 ```{r figures}
@@ -428,7 +594,7 @@ ggsave(path = output_maps, "Deaths_PCP_impute_mean.png", height = 4, width = 6, 
 #------------------#
 
 ggarrange(void1, void2, cases, deaths,
-                    labels = c("A", "B", "C", "D"), heights = c(1,5),
+                    labels = c("A", "B", "C", "D"), heights = c(0.5,5),
                     ncol = 2, nrow = 2)
 
 ggsave(path = output_maps, "fig1.png", height = 4, width = 6, scale = 2.5)
@@ -469,7 +635,7 @@ ggsave(path = output_maps, "fig2_PCP_impute_mean.png", height = 4, width = 6, sc
 #------------------#
 
 ggarrange(void1, void2, ggp[[3]], ggp[[11]],
-                    labels = c("A", "B", "C", "D"), heights = c(1,5),
+                    labels = c("A", "B", "C", "D"), heights = c(0.5,5),
                     ncol = 2, nrow = 2)
 
 ggsave(path = output_maps, "fig3.png", height = 4, width = 6, scale = 2.5)
@@ -484,6 +650,25 @@ ggarrange(void1, void2, void3, ggp[[4]], ggp[[5]], ggp[[6]], ggp[[12]], ggp[[13]
 
 ggsave(path = output_maps, "fig5.png", height = 4, width = 6, scale = 3.8)
 
+```
+
+
+```{r supp. figures}
+# univariate
+ggarrange(cases_bonferroni, cases_fdr, deaths_bonferroni, deaths_fdr, ncol = 2, nrow = 2)
+ggsave(path = output_maps, "supp_univariate.png", height = 5, width = 5, scale = 2.0)
+
+# bivariate 1st 12
+void1 <- ggplot() + theme_void()
+ggarrange(ggp_supp_bon[[1]], ggp_supp_fdr[[1]], ggp_supp_bon[[9]], ggp_supp_fdr[[9]], ggp_supp_bon_PCP[[1]], ggp_supp_fdr_PCP[[1]], ggp_supp_bon_PCP[[2]], ggp_supp_fdr_PCP[[2]], ggp_supp_bon[[3]], ggp_supp_fdr[[3]], ggp_supp_bon[[11]], ggp_supp_fdr[[11]], ncol = 2, nrow = 6)
+
+ggsave(path = output_maps, "supp_bivariate_1.png", height = 10, width = 3, scale = 4.0)
+
+# bivariate 2nd 12
+void1 <- ggplot() + theme_void()
+ggarrange(ggp_supp_bon[[4]], ggp_supp_fdr[[4]], ggp_supp_bon[[11]], ggp_supp_fdr[[11]], ggp_supp_bon[[5]], ggp_supp_fdr[[5]], ggp_supp_bon[[13]], ggp_supp_fdr[[13]], ggp_supp_bon[[6]], ggp_supp_fdr[[6]], ggp_supp_bon[[14]], ggp_supp_fdr[[14]], ncol = 2, nrow = 6)
+
+ggsave(path = output_maps, "supp_bivariate_2.png", height = 10, width = 3, scale = 4.0)
 ```
 
 
