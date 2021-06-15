@@ -16,4 +16,10 @@ scratch/**
 .Rhistory
 .RData
 
+# General MacOS files
+.DS_Store
+.AppleDouble
+.LSOverride
 
+# Thumbnails
+._*
