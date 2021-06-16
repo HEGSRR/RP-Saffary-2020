@@ -25,6 +25,7 @@ library(patchwork)
 library(ggpubr)
 library(fdrtool)
 output_maps <- here("results", "maps")
+ouput_figures <- here("results", "figures")
 
 ##------------------------------------##
 #--  DEFINE SPATIAL WEIGHTS MATRICES --#
@@ -34,11 +35,13 @@ output_maps <- here("results", "maps")
 ds_contiguous <- st_read(here("data", "derived", "ds_contiguous.shp"))
 ds_contiguous <- ds_contiguous[-c(329,1168,1816),] ## remove cases with no neighbors
 
+#--Define Contiguous Weighting Scheme--#
+# Create symmetrical, row standardized queen weight matrix w/ first order contiguity
 nb <- poly2nb(ds_contiguous, queen = TRUE)
 lw <- nb2listw(nb, style = "B", zero.policy = TRUE) ## there are empty neighbor sets, so used zero.policy option
-W  <- as(lw, "symmetricMatrix")
-W  <- as.matrix(W/rowSums(W))
-W[which(is.na(W))] <- 0
+W  <- as(lw, "symmetricMatrix") ## make symmetrical
+W <- as.matrix(W/rowSums(W)) ## row standardize
+W[which(is.na(W))] <- 0 ## assign NA to zero
 
 #--PCP Analysis Data--#
 # NOTE: Because the PCP variable contains missing data, we use the data set which filters out these NA values
@@ -46,16 +49,19 @@ W[which(is.na(W))] <- 0
 ds_pcp <- st_read(here("data", "derived", "ds_pcp.shp"))
 
 #--Define PCP Weighting Scheme--#
+# Create symmetrical, row standardized queen weight matrix w/ first order contiguity
 nb2 <- poly2nb(ds_pcp, queen = TRUE)
 lw2 <- nb2listw(nb2, style = "B", zero.policy = TRUE) ## there are still empty neighbor sets
 ## so used zero.policy option
-W2 <- as(lw2, "symmetricMatrix")
-W2 <- as.matrix(W2/rowSums(W2))
-W2[which(is.na(W2))] <- 0
+W2 <- as(lw2, "symmetricMatrix") ## make symmetrical
+W2 <- as.matrix(W2/rowSums(W2)) ## row standardize
+W2[which(is.na(W2))] <- 0 ## assign NA to zero
+
 
 ##-----------------------------------------##
 #- STEP 1) Calculate Table 1 Summary Stats -#
 ##-----------------------------------------##
+# Note: include non-contiguous US counties in this part of analysis because original authors did
 ds_full <- st_read(here("data", "derived", "ds_full.shp"))
 summary(ds_full)  ## Need to report the mean, median, and IQR for all variables for Table 1
 
@@ -108,11 +114,15 @@ states <- st_as_sf(map("state", plot = FALSE, fill = TRUE)) # for highlighting s
 cases <- ggplot() +
   geom_sf(data=ds_contiguous, aes(fill=patterns2), color="NA") +
   geom_sf(data = states, fill = "NA") +
-  scale_fill_manual(values = c("red", "pink", "light blue","blue", "grey80")) +
+  scale_fill_manual(values = c("red", "pink", "light blue", "grey80", "blue")) + ## SWITCHE "blue" and "grey08'
   guides(fill = guide_legend(title="Patterns")) + theme(
     legend.position = "bottom"
 )
 #cases
+
+## ERROR: "Not significant" gets filled in as blue, not grey: we found that the Low-Low are not counted in the 
+## levels as there are none (the solution commented line 117) 
+# unique(ds_contiguous$patterns2)
 
 #----------------#
 #-- DEATH RATE --#
@@ -140,11 +150,15 @@ ds_contiguous$patterns2 <- factor(ds_contiguous$patterns,
 deaths <- ggplot() +
   geom_sf(data=ds_contiguous, aes(fill=patterns2), color="NA") +
   geom_sf(data = states, fill = "NA") +
-  scale_fill_manual(values = c("red", "pink", "light blue","blue", "grey80")) +
+  scale_fill_manual(values = c("red", "pink", "light blue", "grey80", "blue")) + #Switch "grey80" and "blue"
   guides(fill = guide_legend(title="Patterns")) + theme(
     legend.position = "bottom"
 )
 #deaths
+
+## ERROR: "Not significant" gets filled in as blue, not grey: we found that the Low-Low are not counted in the 
+## levels as there are none (the solution commented line 153) 
+# unique(ds_contiguous$patterns2)
 
 
 #-----------------------------------------------------------------------------------#
@@ -472,19 +486,19 @@ void3 <- ggplot() + theme_void()
 #--------------------------------#
 
 ggp_PCP_impute_zero[[1]]
-ggsave(path = output_maps, "Cases_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "Cases_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
 
 ggp_PCP_impute_zero[[2]]
-ggsave(path = output_maps, "Deaths_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "Deaths_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
 
 #--------------------------------#
 #---- Figure PCP_impute_mean ----#
 #--------------------------------#
 
 ggp_PCP_impute_mean[[1]]
-ggsave(path = output_maps, "Cases_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "Cases_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
 ggp_PCP_impute_mean[[2]]
-ggsave(path = output_maps, "Deaths_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "Deaths_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
 
 #------------------#
 #---- Figure 1 ----#
@@ -494,7 +508,7 @@ ggarrange(void1, void2, cases, deaths,
           labels = c("A", "B", "C", "D"), heights = c(0.5,5),
           ncol = 2, nrow = 2)
 
-ggsave(path = output_maps, "fig1.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig1.png", height = 4, width = 6, scale = 2.5)
 
 #-------------------------------#
 #-- Figure 2 (PCP filter NA) ---#
@@ -504,7 +518,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_filter[[1]], ggp[[9]], ggp_PCP_filter
           labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
           ncol = 2, nrow = 3)
 
-ggsave(path = output_maps, "fig2_PCP_filtered.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig2_PCP_filtered.png", height = 4, width = 6, scale = 2.5)
 
 #---------------------------------#
 #-- Figure 2 (PCP impute zero) ---#
@@ -514,7 +528,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_impute_zero[[1]], ggp[[9]], ggp_PCP_i
           labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
           ncol = 2, nrow = 3)
 
-ggsave(path = output_maps, "fig2_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig2_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
 
 #---------------------------------#
 #-- Figure 2 (PCP impute mean) ---#
@@ -524,7 +538,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_impute_mean[[1]], ggp[[9]], ggp_PCP_i
           labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
           ncol = 2, nrow = 3)
 
-ggsave(path = output_maps, "fig2_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig2_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
 
 
 #------------------#
@@ -535,7 +549,7 @@ ggarrange(void1, void2, ggp[[3]], ggp[[11]],
           labels = c("A", "B", "C", "D"), heights = c(0.5,5),
           ncol = 2, nrow = 2)
 
-ggsave(path = output_maps, "fig3.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig3.png", height = 4, width = 6, scale = 2.5)
 
 
 # ------------------#
@@ -545,4 +559,4 @@ ggarrange(void1, void2, void3, ggp[[4]], ggp[[5]], ggp[[6]], ggp[[12]], ggp[[13]
           labels = c("A", "D", "G", "B", "E", "H", "C", "F", "I"), heights = c(1,5,5),
           ncol = 3, nrow = 3)
 
-ggsave(path = output_maps, "fig5.png", height = 4, width = 6, scale = 3.8)
+ggsave(path = output_figures, "fig5.png", height = 4, width = 6, scale = 3.8)
