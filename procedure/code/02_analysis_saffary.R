@@ -25,7 +25,7 @@ library(patchwork)
 library(ggpubr)
 library(fdrtool)
 output_maps <- here("results", "maps")
-ouput_figures <- here("results", "figures") #follows R&R template better
+output_figures <- here("results", "figures") #follows R&R template better
 
 ##------------------------------------##
 #--  DEFINE SPATIAL WEIGHTS MATRICES --#
@@ -508,7 +508,7 @@ ggarrange(void1, void2, cases, deaths,
           labels = c("A", "B", "C", "D"), heights = c(0.5,5),
           ncol = 2, nrow = 2)
 
-ggsave(path = output_figures, "fig1.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig1_cd.png", height = 4, width = 6, scale = 2.5)
 
 #-------------------------------#
 #-- Figure 2 (PCP filter NA) ---#
@@ -518,7 +518,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_filter[[1]], ggp[[9]], ggp_PCP_filter
           labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
           ncol = 2, nrow = 3)
 
-ggsave(path = output_figures, "fig2_PCP_filtered.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig2_PCP_filtered_bcef.png", height = 4, width = 6, scale = 2.5)
 
 #---------------------------------#
 #-- Figure 2 (PCP impute zero) ---#
@@ -528,7 +528,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_impute_zero[[1]], ggp[[9]], ggp_PCP_i
           labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
           ncol = 2, nrow = 3)
 
-ggsave(path = output_figures, "fig2_PCP_impute_zero.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig2_PCP_impute_zero_bcef.png", height = 4, width = 6, scale = 2.5)
 
 #---------------------------------#
 #-- Figure 2 (PCP impute mean) ---#
@@ -538,7 +538,7 @@ ggarrange(void1, void2,  ggp[[1]], ggp_PCP_impute_mean[[1]], ggp[[9]], ggp_PCP_i
           labels = c("A", "D", "B", "E", "C", "F"), heights = c(1,5,5),
           ncol = 2, nrow = 3)
 
-ggsave(path = output_figures, "fig2_PCP_impute_mean.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig2_PCP_impute_mean_bcef.png", height = 4, width = 6, scale = 2.5)
 
 
 #------------------#
@@ -549,7 +549,7 @@ ggarrange(void1, void2, ggp[[3]], ggp[[11]],
           labels = c("A", "B", "C", "D"), heights = c(0.5,5),
           ncol = 2, nrow = 2)
 
-ggsave(path = output_figures, "fig3.png", height = 4, width = 6, scale = 2.5)
+ggsave(path = output_figures, "fig3_diabetes_cd.png", height = 4, width = 6, scale = 2.5)
 
 
 # ------------------#
@@ -559,4 +559,4 @@ ggarrange(void1, void2, void3, ggp[[4]], ggp[[5]], ggp[[6]], ggp[[12]], ggp[[13]
           labels = c("A", "D", "G", "B", "E", "H", "C", "F", "I"), heights = c(1,5,5),
           ncol = 3, nrow = 3)
 
-ggsave(path = output_figures, "fig5.png", height = 4, width = 6, scale = 3.8)
+ggsave(path = output_figures, "fig5_demographic_bcefhi.png", height = 4, width = 6, scale = 3.8)
