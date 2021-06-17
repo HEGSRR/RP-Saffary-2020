@@ -25,7 +25,7 @@ library(patchwork)
 library(ggpubr)
 library(fdrtool)
 output_maps <- here("results", "maps")
-ouput_figures <- here("results", "figures")
+ouput_figures <- here("results", "figures") #follows R&R template better
 
 ##------------------------------------##
 #--  DEFINE SPATIAL WEIGHTS MATRICES --#
