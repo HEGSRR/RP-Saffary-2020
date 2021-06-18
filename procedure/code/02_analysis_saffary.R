@@ -160,6 +160,9 @@ deaths <- ggplot() +
 ## levels as there are none (the solution commented line 153) 
 # unique(ds_contiguous$patterns2)
 
+#-----------------------------------------------------------------------------------#
+#----- SHIFT GEARS TO PERFORM MULTIPLE CORRCETION TESTING // PART OF APPENDIX ------#
+#-----------------------------------------------------------------------------------#
 
 #-----------------------------------------------------------------------------------#
 #-- STEP 3b) Multiple comparison corrections for Cases/Deaths univariate Moran's I--#
