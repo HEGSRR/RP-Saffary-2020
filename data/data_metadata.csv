@@ -1,3 +1,6 @@
-path,name,format,sources,metadata
-raw/private/rawfile1.csv,Name of data file 1,csv,,rawfile1_variables.pdf
-raw/derived/public/cleanDataFile1.csv,Clean public version of rawfile1.csv,csv,data/raw/private/rawfile1.csv,
+path,name,format,sources,metadata,status
+raw/public/,2020 County Health Rankings Data - v2,xlsx,County Health Rankings,metadata/chr_data_dict.pdf; metadata/chr_codebook.pdf,in paper
+raw/public/,data_22.05.2020,xlsx,US Covid-19 from USA Facts ; ICU Data,metadata/covid_metadata.html; metadata/icu_data_dict.pdf;,in paper
+raw/derived/,ds_contiguous,.shp,01_construct_saffary.R; export data for all counties except Alaska,,in reproduction code
+raw/derived/,ds_full,.shp,01_construct_saffary.R; export data for all counties,,in reproduction code
+raw/derived/,ds_pcp,.shp,01_construct_saffary.R; export data for all counties with PCP data,,in reproduction code

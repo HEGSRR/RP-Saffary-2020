@@ -42,7 +42,9 @@ str(orig.data)
 boundaries <- get_estimates(geography = "county", 
                             product = "population", 
                             year = 2018,                  ## Saffary used 2018 boundary data
-                            geometry = TRUE)
+                            geometry = TRUE
+                            #key = 'add you key here'
+                            )
 
 boundaries <- boundaries %>% 
   filter(variable == "POP") 
@@ -78,7 +80,9 @@ str(int.data)
 ds_full <- inner_join(boundaries, int.data, by = "GEOID") 
 ds_full <- st_transform(ds_full, 5070)
 ds_full <- ds_full %>% filter(!is.na(STATENM))  ## Results in 3,142 obs which matches article
-                                                ## NOTE: ds_full is used only for descriptive stats in Table 1
+
+
+## NOTE: ds_full is used only for descriptive stats in Table 1
 summary(ds_full)  
 
 ##-----------------------##
@@ -89,6 +93,7 @@ st_write(ds_full,here("data", "derived", "ds_full.shp"), delete_dsn=TRUE)
 ds_contiguous <- ds_full %>% filter(substr(GEOID,1,2) != "02" & substr(GEOID,1,2) != "15") 
 st_write(ds_contiguous,here("data", "derived", "ds_contiguous.shp"), delete_dsn=TRUE)
 
+## Why is this in the "EXPORT DATA" section?? ##
 ds_pcp <- ds_contiguous %>% filter(!is.na(PCP))
 st_write(ds_pcp,here("data", "derived", "ds_pcp.shp"), delete_dsn=TRUE)
 

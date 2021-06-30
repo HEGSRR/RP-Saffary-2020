@@ -1,0 +1,1579 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1"><script type="text/javascript">(window.NREUM||(NREUM={})).init={privacy:{cookies_enabled:true}};(window.NREUM||(NREUM={})).loader_config={xpid:"VgMCVV5VCBAHU1BWAAUFV1c=",licenseKey:"NRJS-c11b817f31177e0b4d1",applicationID:"771474213"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var i=e[n]={exports:{}};t[n][0].call(i.exports,function(e){var i=t[n][1][e];return r(i||e)},i,i.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var i=0;i<n.length;i++)r(n[i]);return r}({1:[function(t,e,n){function r(t){try{s.console&&console.log(t)}catch(e){}}var i,o=t("ee"),a=t(25),s={};try{i=localStorage.getItem("__nr_flags").split(","),console&&"function"==typeof console.log&&(s.console=!0,i.indexOf("dev")!==-1&&(s.dev=!0),i.indexOf("nr_dev")!==-1&&(s.nrDev=!0))}catch(c){}s.nrDev&&o.on("internal-error",function(t){r(t.stack)}),s.dev&&o.on("fn-err",function(t,e,n){r(n.stack)}),s.dev&&(r("NR AGENT IN DEVELOPMENT MODE"),r("flags: "+a(s,function(t,e){return t}).join(", ")))},{}],2:[function(t,e,n){function r(t,e,n,r,s){try{p?p-=1:i(s||new UncaughtException(t,e,n),!0)}catch(f){try{o("ierr",[f,c.now(),!0])}catch(d){}}return"function"==typeof u&&u.apply(this,a(arguments))}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function i(t,e){var n=e?null:c.now();o("err",[t,n])}var o=t("handle"),a=t(26),s=t("ee"),c=t("loader"),f=t("gos"),u=window.onerror,d=!1,l="nr@seenError";if(!c.disabled){var p=0;c.features.err=!0,t(1),window.onerror=r;try{throw new Error}catch(h){"stack"in h&&(t(9),t(8),"addEventListener"in window&&t(5),c.xhrWrappable&&t(10),d=!0)}s.on("fn-start",function(t,e,n){d&&(p+=1)}),s.on("fn-err",function(t,e,n){d&&!n[l]&&(f(n,l,function(){return!0}),this.thrown=!0,i(n))}),s.on("fn-end",function(){d&&!this.thrown&&p>0&&(p-=1)}),s.on("internal-error",function(t){o("ierr",[t,c.now(),!0])})}},{}],3:[function(t,e,n){var r=t("loader");r.disabled||(r.features.ins=!0)},{}],4:[function(t,e,n){function r(t){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var i=t("ee"),o=t("handle"),a=t(9),s=t(8),c="learResourceTimings",f="addEventListener",u="resourcetimingbufferfull",d="bstResource",l="resource",p="-start",h="-end",m="fn"+p,w="fn"+h,v="bstTimer",g="pushState",y=t("loader");if(!y.disabled){y.features.stn=!0,t(7),"addEventListener"in window&&t(5);var x=NREUM.o.EV;i.on(m,function(t,e){var n=t[0];n instanceof x&&(this.bstStart=y.now())}),i.on(w,function(t,e){var n=t[0];n instanceof x&&o("bst",[n,e,this.bstStart,y.now()])}),a.on(m,function(t,e,n){this.bstStart=y.now(),this.bstType=n}),a.on(w,function(t,e){o(v,[e,this.bstStart,y.now(),this.bstType])}),s.on(m,function(){this.bstStart=y.now()}),s.on(w,function(t,e){o(v,[e,this.bstStart,y.now(),"requestAnimationFrame"])}),i.on(g+p,function(t){this.time=y.now(),this.startPath=location.pathname+location.hash}),i.on(g+h,function(t){o("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),f in window.performance&&(window.performance["c"+c]?window.performance[f](u,function(t){o(d,[window.performance.getEntriesByType(l)]),window.performance["c"+c]()},!1):window.performance[f]("webkit"+u,function(t){o(d,[window.performance.getEntriesByType(l)]),window.performance["webkitC"+c]()},!1)),document[f]("scroll",r,{passive:!0}),document[f]("keypress",r,!1),document[f]("click",r,!1)}}},{}],5:[function(t,e,n){function r(t){for(var e=t;e&&!e.hasOwnProperty(u);)e=Object.getPrototypeOf(e);e&&i(e)}function i(t){s.inPlace(t,[u,d],"-",o)}function o(t,e){return t[1]}var a=t("ee").get("events"),s=t("wrap-function")(a,!0),c=t("gos"),f=XMLHttpRequest,u="addEventListener",d="removeEventListener";e.exports=a,"getPrototypeOf"in Object?(r(document),r(window),r(f.prototype)):f.prototype.hasOwnProperty(u)&&(i(window),i(f.prototype)),a.on(u+"-start",function(t,e){var n=t[1],r=c(n,"nr@wrapped",function(){function t(){if("function"==typeof n.handleEvent)return n.handleEvent.apply(n,arguments)}var e={object:t,"function":n}[typeof n];return e?s(e,"fn-",null,e.name||"anonymous"):n});this.wrapped=t[1]=r}),a.on(d+"-start",function(t){t[1]=this.wrapped||t[1]})},{}],6:[function(t,e,n){function r(t,e,n){var r=t[e];"function"==typeof r&&(t[e]=function(){var t=o(arguments),e={};i.emit(n+"before-start",[t],e);var a;e[m]&&e[m].dt&&(a=e[m].dt);var s=r.apply(this,t);return i.emit(n+"start",[t,a],s),s.then(function(t){return i.emit(n+"end",[null,t],s),t},function(t){throw i.emit(n+"end",[t],s),t})})}var i=t("ee").get("fetch"),o=t(26),a=t(25);e.exports=i;var s=window,c="fetch-",f=c+"body-",u=["arrayBuffer","blob","json","text","formData"],d=s.Request,l=s.Response,p=s.fetch,h="prototype",m="nr@context";d&&l&&p&&(a(u,function(t,e){r(d[h],e,f),r(l[h],e,f)}),r(s,"fetch",c),i.on(c+"end",function(t,e){var n=this;if(e){var r=e.headers.get("content-length");null!==r&&(n.rxSize=r),i.emit(c+"done",[null,e],n)}else i.emit(c+"done",[t],n)}))},{}],7:[function(t,e,n){var r=t("ee").get("history"),i=t("wrap-function")(r);e.exports=r;var o=window.history&&window.history.constructor&&window.history.constructor.prototype,a=window.history;o&&o.pushState&&o.replaceState&&(a=o),i.inPlace(a,["pushState","replaceState"],"-")},{}],8:[function(t,e,n){var r=t("ee").get("raf"),i=t("wrap-function")(r),o="equestAnimationFrame";e.exports=r,i.inPlace(window,["r"+o,"mozR"+o,"webkitR"+o,"msR"+o],"raf-"),r.on("raf-start",function(t){t[0]=i(t[0],"fn-")})},{}],9:[function(t,e,n){function r(t,e,n){t[0]=a(t[0],"fn-",null,n)}function i(t,e,n){this.method=n,this.timerDuration=isNaN(t[1])?0:+t[1],t[0]=a(t[0],"fn-",this,n)}var o=t("ee").get("timer"),a=t("wrap-function")(o),s="setTimeout",c="setInterval",f="clearTimeout",u="-start",d="-";e.exports=o,a.inPlace(window,[s,"setImmediate"],s+d),a.inPlace(window,[c],c+d),a.inPlace(window,[f,"clearImmediate"],f+d),o.on(c+u,r),o.on(s+u,i)},{}],10:[function(t,e,n){function r(t,e){d.inPlace(e,["onreadystatechange"],"fn-",s)}function i(){var t=this,e=u.context(t);t.readyState>3&&!e.resolved&&(e.resolved=!0,u.emit("xhr-resolved",[],t)),d.inPlace(t,g,"fn-",s)}function o(t){y.push(t),h&&(b?b.then(a):w?w(a):(E=-E,R.data=E))}function a(){for(var t=0;t<y.length;t++)r([],y[t]);y.length&&(y=[])}function s(t,e){return e}function c(t,e){for(var n in t)e[n]=t[n];return e}t(5);var f=t("ee"),u=f.get("xhr"),d=t("wrap-function")(u),l=NREUM.o,p=l.XHR,h=l.MO,m=l.PR,w=l.SI,v="readystatechange",g=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"],y=[];e.exports=u;var x=window.XMLHttpRequest=function(t){var e=new p(t);try{u.emit("new-xhr",[e],e),e.addEventListener(v,i,!1)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}return e};if(c(p,x),x.prototype=p.prototype,d.inPlace(x.prototype,["open","send"],"-xhr-",s),u.on("send-xhr-start",function(t,e){r(t,e),o(e)}),u.on("open-xhr-start",r),h){var b=m&&m.resolve();if(!w&&!m){var E=1,R=document.createTextNode(E);new h(a).observe(R,{characterData:!0})}}else f.on("fn-end",function(t){t[0]&&t[0].type===v||a()})},{}],11:[function(t,e,n){function r(t){if(!s(t))return null;var e=window.NREUM;if(!e.loader_config)return null;var n=(e.loader_config.accountID||"").toString()||null,r=(e.loader_config.agentID||"").toString()||null,f=(e.loader_config.trustKey||"").toString()||null;if(!n||!r)return null;var h=p.generateSpanId(),m=p.generateTraceId(),w=Date.now(),v={spanId:h,traceId:m,timestamp:w};return(t.sameOrigin||c(t)&&l())&&(v.traceContextParentHeader=i(h,m),v.traceContextStateHeader=o(h,w,n,r,f)),(t.sameOrigin&&!u()||!t.sameOrigin&&c(t)&&d())&&(v.newrelicHeader=a(h,m,w,n,r,f)),v}function i(t,e){return"00-"+e+"-"+t+"-01"}function o(t,e,n,r,i){var o=0,a="",s=1,c="",f="";return i+"@nr="+o+"-"+s+"-"+n+"-"+r+"-"+t+"-"+a+"-"+c+"-"+f+"-"+e}function a(t,e,n,r,i,o){var a="btoa"in window&&"function"==typeof window.btoa;if(!a)return null;var s={v:[0,1],d:{ty:"Browser",ac:r,ap:i,id:t,tr:e,ti:n}};return o&&r!==o&&(s.d.tk=o),btoa(JSON.stringify(s))}function s(t){return f()&&c(t)}function c(t){var e=!1,n={};if("init"in NREUM&&"distributed_tracing"in NREUM.init&&(n=NREUM.init.distributed_tracing),t.sameOrigin)e=!0;else if(n.allowed_origins instanceof Array)for(var r=0;r<n.allowed_origins.length;r++){var i=h(n.allowed_origins[r]);if(t.hostname===i.hostname&&t.protocol===i.protocol&&t.port===i.port){e=!0;break}}return e}function f(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.enabled}function u(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.exclude_newrelic_header}function d(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&NREUM.init.distributed_tracing.cors_use_newrelic_header!==!1}function l(){return"init"in NREUM&&"distributed_tracing"in NREUM.init&&!!NREUM.init.distributed_tracing.cors_use_tracecontext_headers}var p=t(22),h=t(13);e.exports={generateTracePayload:r,shouldGenerateTrace:s}},{}],12:[function(t,e,n){function r(t){var e=this.params,n=this.metrics;if(!this.ended){this.ended=!0;for(var r=0;r<l;r++)t.removeEventListener(d[r],this.listener,!1);e.aborted||(n.duration=a.now()-this.startTime,this.loadCaptureCalled||4!==t.readyState?null==e.status&&(e.status=0):o(this,t),n.cbTime=this.cbTime,u.emit("xhr-done",[t],t),s("xhr",[e,n,this.startTime]))}}function i(t,e){var n=c(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.parsedOrigin=c(e),t.sameOrigin=t.parsedOrigin.sameOrigin}function o(t,e){t.params.status=e.status;var n=w(e,t.lastSize);if(n&&(t.metrics.rxSize=n),t.sameOrigin){var r=e.getResponseHeader("X-NewRelic-App-Data");r&&(t.params.cat=r.split(", ").pop())}t.loadCaptureCalled=!0}var a=t("loader");if(a.xhrWrappable&&!a.disabled){var s=t("handle"),c=t(13),f=t(11).generateTracePayload,u=t("ee"),d=["load","error","abort","timeout"],l=d.length,p=t("id"),h=t(18),m=t(17),w=t(14),v=window.XMLHttpRequest;a.features.xhr=!0,t(10),t(6),u.on("new-xhr",function(t){var e=this;e.totalCbs=0,e.called=0,e.cbTime=0,e.end=r,e.ended=!1,e.xhrGuids={},e.lastSize=null,e.loadCaptureCalled=!1,e.params=this.params||{},e.metrics=this.metrics||{},t.addEventListener("load",function(n){o(e,t)},!1),h&&(h>34||h<10)||window.opera||t.addEventListener("progress",function(t){e.lastSize=t.loaded},!1)}),u.on("open-xhr-start",function(t){this.params={method:t[0]},i(this,t[1]),this.metrics={}}),u.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid);var n=f(this.parsedOrigin);if(n){var r=!1;n.newrelicHeader&&(e.setRequestHeader("newrelic",n.newrelicHeader),r=!0),n.traceContextParentHeader&&(e.setRequestHeader("traceparent",n.traceContextParentHeader),n.traceContextStateHeader&&e.setRequestHeader("tracestate",n.traceContextStateHeader),r=!0),r&&(this.dt=n)}}),u.on("send-xhr-start",function(t,e){var n=this.metrics,r=t[0],i=this;if(n&&r){var o=m(r);o&&(n.txSize=o)}this.startTime=a.now(),this.listener=function(t){try{"abort"!==t.type||i.loadCaptureCalled||(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof e.onload))&&i.end(e)}catch(n){try{u.emit("internal-error",[n])}catch(r){}}};for(var s=0;s<l;s++)e.addEventListener(d[s],this.listener,!1)}),u.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),u.on("xhr-load-added",function(t,e){var n=""+p(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),u.on("xhr-load-removed",function(t,e){var n=""+p(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),u.on("addEventListener-end",function(t,e){e instanceof v&&"load"===t[0]&&u.emit("xhr-load-added",[t[1],t[2]],e)}),u.on("removeEventListener-end",function(t,e){e instanceof v&&"load"===t[0]&&u.emit("xhr-load-removed",[t[1],t[2]],e)}),u.on("fn-start",function(t,e,n){e instanceof v&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=a.now()))}),u.on("fn-end",function(t,e){this.xhrCbStart&&u.emit("xhr-cb-time",[a.now()-this.xhrCbStart,this.onload,e],e)}),u.on("fetch-before-start",function(t){function e(t,e){var n=!1;return e.newrelicHeader&&(t.set("newrelic",e.newrelicHeader),n=!0),e.traceContextParentHeader&&(t.set("traceparent",e.traceContextParentHeader),e.traceContextStateHeader&&t.set("tracestate",e.traceContextStateHeader),n=!0),n}var n,r=t[1]||{};"string"==typeof t[0]?n=t[0]:t[0]&&t[0].url?n=t[0].url:window.URL&&t[0]&&t[0]instanceof URL&&(n=t[0].href),n&&(this.parsedOrigin=c(n),this.sameOrigin=this.parsedOrigin.sameOrigin);var i=f(this.parsedOrigin);if(i&&(i.newrelicHeader||i.traceContextParentHeader))if("string"==typeof t[0]||window.URL&&t[0]&&t[0]instanceof URL){var o={};for(var a in r)o[a]=r[a];o.headers=new Headers(r.headers||{}),e(o.headers,i)&&(this.dt=i),t.length>1?t[1]=o:t.push(o)}else t[0]&&t[0].headers&&e(t[0].headers,i)&&(this.dt=i)})}},{}],13:[function(t,e,n){var r={};e.exports=function(t){if(t in r)return r[t];var e=document.createElement("a"),n=window.location,i={};e.href=t,i.port=e.port;var o=e.href.split("://");!i.port&&o[1]&&(i.port=o[1].split("/")[0].split("@").pop().split(":")[1]),i.port&&"0"!==i.port||(i.port="https"===o[0]?"443":"80"),i.hostname=e.hostname||n.hostname,i.pathname=e.pathname,i.protocol=o[0],"/"!==i.pathname.charAt(0)&&(i.pathname="/"+i.pathname);var a=!e.protocol||":"===e.protocol||e.protocol===n.protocol,s=e.hostname===document.domain&&e.port===n.port;return i.sameOrigin=a&&(!e.hostname||s),"/"===i.pathname&&(r[t]=i),i}},{}],14:[function(t,e,n){function r(t,e){var n=t.responseType;return"json"===n&&null!==e?e:"arraybuffer"===n||"blob"===n||"json"===n?i(t.response):"text"===n||""===n||void 0===n?i(t.responseText):void 0}var i=t(17);e.exports=r},{}],15:[function(t,e,n){function r(){}function i(t,e,n){return function(){return o(t,[f.now()].concat(s(arguments)),e?null:this,n),e?void 0:this}}var o=t("handle"),a=t(25),s=t(26),c=t("ee").get("tracer"),f=t("loader"),u=NREUM;"undefined"==typeof window.newrelic&&(newrelic=u);var d=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],l="api-",p=l+"ixn-";a(d,function(t,e){u[e]=i(l+e,!0,"api")}),u.addPageAction=i(l+"addPageAction",!0),u.setCurrentRouteName=i(l+"routeName",!0),e.exports=newrelic,u.interaction=function(){return(new r).get()};var h=r.prototype={createTracer:function(t,e){var n={},r=this,i="function"==typeof e;return o(p+"tracer",[f.now(),t,n],r),function(){if(c.emit((i?"":"no-")+"fn-start",[f.now(),r,i],n),i)try{return e.apply(this,arguments)}catch(t){throw c.emit("fn-err",[arguments,this,t],n),t}finally{c.emit("fn-end",[f.now()],n)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(t,e){h[e]=i(p+e)}),newrelic.noticeError=function(t,e){"string"==typeof t&&(t=new Error(t)),o("err",[t,f.now(),!1,e])}},{}],16:[function(t,e,n){function r(t){if(NREUM.init){for(var e=NREUM.init,n=t.split("."),r=0;r<n.length-1;r++)if(e=e[n[r]],"object"!=typeof e)return;return e=e[n[n.length-1]]}}e.exports={getConfiguration:r}},{}],17:[function(t,e,n){e.exports=function(t){if("string"==typeof t&&t.length)return t.length;if("object"==typeof t){if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if(!("undefined"!=typeof FormData&&t instanceof FormData))try{return JSON.stringify(t).length}catch(e){return}}}},{}],18:[function(t,e,n){var r=0,i=navigator.userAgent.match(/Firefox[\/\s](\d+\.\d+)/);i&&(r=+i[1]),e.exports=r},{}],19:[function(t,e,n){function r(){return s.exists&&performance.now?Math.round(performance.now()):(o=Math.max((new Date).getTime(),o))-a}function i(){return o}var o=(new Date).getTime(),a=o,s=t(27);e.exports=r,e.exports.offset=a,e.exports.getLastTimestamp=i},{}],20:[function(t,e,n){function r(t){return!(!t||!t.protocol||"file:"===t.protocol)}e.exports=r},{}],21:[function(t,e,n){function r(t,e){var n=t.getEntries();n.forEach(function(t){"first-paint"===t.name?d("timing",["fp",Math.floor(t.startTime)]):"first-contentful-paint"===t.name&&d("timing",["fcp",Math.floor(t.startTime)])})}function i(t,e){var n=t.getEntries();n.length>0&&d("lcp",[n[n.length-1]])}function o(t){t.getEntries().forEach(function(t){t.hadRecentInput||d("cls",[t])})}function a(t){if(t instanceof h&&!w){var e=Math.round(t.timeStamp),n={type:t.type};e<=l.now()?n.fid=l.now()-e:e>l.offset&&e<=Date.now()?(e-=l.offset,n.fid=l.now()-e):e=l.now(),w=!0,d("timing",["fi",e,n])}}function s(t){d("pageHide",[l.now(),t])}if(!("init"in NREUM&&"page_view_timing"in NREUM.init&&"enabled"in NREUM.init.page_view_timing&&NREUM.init.page_view_timing.enabled===!1)){var c,f,u,d=t("handle"),l=t("loader"),p=t(24),h=NREUM.o.EV;if("PerformanceObserver"in window&&"function"==typeof window.PerformanceObserver){c=new PerformanceObserver(r);try{c.observe({entryTypes:["paint"]})}catch(m){}f=new PerformanceObserver(i);try{f.observe({entryTypes:["largest-contentful-paint"]})}catch(m){}u=new PerformanceObserver(o);try{u.observe({type:"layout-shift",buffered:!0})}catch(m){}}if("addEventListener"in document){var w=!1,v=["click","keydown","mousedown","pointerdown","touchstart"];v.forEach(function(t){document.addEventListener(t,a,!1)})}p(s)}},{}],22:[function(t,e,n){function r(){function t(){return e?15&e[n++]:16*Math.random()|0}var e=null,n=0,r=window.crypto||window.msCrypto;r&&r.getRandomValues&&(e=r.getRandomValues(new Uint8Array(31)));for(var i,o="xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",a="",s=0;s<o.length;s++)i=o[s],"x"===i?a+=t().toString(16):"y"===i?(i=3&t()|8,a+=i.toString(16)):a+=i;return a}function i(){return a(16)}function o(){return a(32)}function a(t){function e(){return n?15&n[r++]:16*Math.random()|0}var n=null,r=0,i=window.crypto||window.msCrypto;i&&i.getRandomValues&&Uint8Array&&(n=i.getRandomValues(new Uint8Array(31)));for(var o=[],a=0;a<t;a++)o.push(e().toString(16));return o.join("")}e.exports={generateUuid:r,generateSpanId:i,generateTraceId:o}},{}],23:[function(t,e,n){function r(t,e){if(!i)return!1;if(t!==i)return!1;if(!e)return!0;if(!o)return!1;for(var n=o.split("."),r=e.split("."),a=0;a<r.length;a++)if(r[a]!==n[a])return!1;return!0}var i=null,o=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var s=navigator.userAgent,c=s.match(a);c&&s.indexOf("Chrome")===-1&&s.indexOf("Chromium")===-1&&(i="Safari",o=c[1])}e.exports={agent:i,version:o,match:r}},{}],24:[function(t,e,n){function r(t){function e(){t(a&&document[a]?document[a]:document[i]?"hidden":"visible")}"addEventListener"in document&&o&&document.addEventListener(o,e,!1)}e.exports=r;var i,o,a;"undefined"!=typeof document.hidden?(i="hidden",o="visibilitychange",a="visibilityState"):"undefined"!=typeof document.msHidden?(i="msHidden",o="msvisibilitychange"):"undefined"!=typeof document.webkitHidden&&(i="webkitHidden",o="webkitvisibilitychange",a="webkitVisibilityState")},{}],25:[function(t,e,n){function r(t,e){var n=[],r="",o=0;for(r in t)i.call(t,r)&&(n[o]=e(r,t[r]),o+=1);return n}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],26:[function(t,e,n){function r(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,i=n-e||0,o=Array(i<0?0:i);++r<i;)o[r]=t[e+r];return o}e.exports=r},{}],27:[function(t,e,n){e.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(t,e,n){function r(){}function i(t){function e(t){return t&&t instanceof r?t:t?f(t,c,a):a()}function n(n,r,i,o,a){if(a!==!1&&(a=!0),!p.aborted||o){t&&a&&t(n,r,i);for(var s=e(i),c=m(n),f=c.length,u=0;u<f;u++)c[u].apply(s,r);var l=d[y[n]];return l&&l.push([x,n,r,s]),s}}function o(t,e){g[t]=m(t).concat(e)}function h(t,e){var n=g[t];if(n)for(var r=0;r<n.length;r++)n[r]===e&&n.splice(r,1)}function m(t){return g[t]||[]}function w(t){return l[t]=l[t]||i(n)}function v(t,e){p.aborted||u(t,function(t,n){e=e||"feature",y[n]=e,e in d||(d[e]=[])})}var g={},y={},x={on:o,addEventListener:o,removeEventListener:h,emit:n,get:w,listeners:m,context:e,buffer:v,abort:s,aborted:!1};return x}function o(t){return f(t,c,a)}function a(){return new r}function s(){(d.api||d.feature)&&(p.aborted=!0,d=p.backlog={})}var c="nr@context",f=t("gos"),u=t(25),d={},l={},p=e.exports=i();e.exports.getOrSetContext=o,p.backlog=d},{}],gos:[function(t,e,n){function r(t,e,n){if(i.call(t,e))return t[e];var r=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:r,writable:!0,enumerable:!1}),r}catch(o){}return t[e]=r,r}var i=Object.prototype.hasOwnProperty;e.exports=r},{}],handle:[function(t,e,n){function r(t,e,n,r){i.buffer([t],r),i.emit(t,e,n)}var i=t("ee").get("handle");e.exports=r,r.ee=i},{}],id:[function(t,e,n){function r(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:a(t,o,function(){return i++})}var i=1,o="nr@id",a=t("gos");e.exports=r},{}],loader:[function(t,e,n){function r(){if(!S++){var t=O.info=NREUM.info,e=m.getElementsByTagName("script")[0];if(setTimeout(f.abort,3e4),!(t&&t.licenseKey&&t.applicationID&&e))return f.abort();c(E,function(e,n){t[e]||(t[e]=n)});var n=a();s("mark",["onload",n+O.offset],null,"api"),s("timing",["load",n]);var r=m.createElement("script");0===t.agent.indexOf("http://")||0===t.agent.indexOf("https://")?r.src=t.agent:r.src=p+"://"+t.agent,e.parentNode.insertBefore(r,e)}}function i(){"complete"===m.readyState&&o()}function o(){s("mark",["domContent",a()+O.offset],null,"api")}var a=t(19),s=t("handle"),c=t(25),f=t("ee"),u=t(23),d=t(20),l=t(16),p=l.getConfiguration("ssl")===!1?"http":"https",h=window,m=h.document,w="addEventListener",v="attachEvent",g=h.XMLHttpRequest,y=g&&g.prototype,x=!d(h.location);NREUM.o={ST:setTimeout,SI:h.setImmediate,CT:clearTimeout,XHR:g,REQ:h.Request,EV:h.Event,PR:h.Promise,MO:h.MutationObserver};var b=""+location,E={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1209.min.js"},R=g&&y&&y[w]&&!/CriOS/.test(navigator.userAgent),O=e.exports={offset:a.getLastTimestamp(),now:a,origin:b,features:{},xhrWrappable:R,userAgent:u,disabled:x};if(!x){t(15),t(21),m[w]?(m[w]("DOMContentLoaded",o,!1),h[w]("load",r,!1)):(m[v]("onreadystatechange",i),h[v]("onload",r)),s("mark",["firstbyte",a.getLastTimestamp()],null,"api");var S=0}},{}],"wrap-function":[function(t,e,n){function r(t,e){function n(e,n,r,c,f){function nrWrapper(){var o,a,u,l;try{a=this,o=d(arguments),u="function"==typeof r?r(o,a):r||{}}catch(p){i([p,"",[o,a,c],u],t)}s(n+"start",[o,a,c],u,f);try{return l=e.apply(a,o)}catch(h){throw s(n+"err",[o,a,h],u,f),h}finally{s(n+"end",[o,a,l],u,f)}}return a(e)?e:(n||(n=""),nrWrapper[l]=e,o(e,nrWrapper,t),nrWrapper)}function r(t,e,r,i,o){r||(r="");var s,c,f,u="-"===r.charAt(0);for(f=0;f<e.length;f++)c=e[f],s=t[c],a(s)||(t[c]=n(s,u?c+r:r,i,c,o))}function s(n,r,o,a){if(!h||e){var s=h;h=!0;try{t.emit(n,r,o,e,a)}catch(c){i([c,n,r,o],t)}h=s}}return t||(t=u),n.inPlace=r,n.flag=l,n}function i(t,e){e||(e=u);try{e.emit("internal-error",t)}catch(n){}}function o(t,e,n){if(Object.defineProperty&&Object.keys)try{var r=Object.keys(t);return r.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(o){i([o],n)}for(var a in t)p.call(t,a)&&(e[a]=t[a]);return e}function a(t){return!(t&&t instanceof Function&&t.apply&&!t[l])}function s(t,e){var n=e(t);return n[l]=t,o(t,n,u),n}function c(t,e,n){var r=t[e];t[e]=s(r,n)}function f(){for(var t=arguments.length,e=new Array(t),n=0;n<t;++n)e[n]=arguments[n];return e}var u=t("ee"),d=t(26),l="nr@original",p=Object.prototype.hasOwnProperty,h=!1;e.exports=r,e.exports.wrapFunction=s,e.exports.wrapInPlace=c,e.exports.argsToArray=f},{}]},{},["loader",2,12,4,3]);</script><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam-cell.nr-data.net","errorBeacon":"bam-cell.nr-data.net","licenseKey":"NRJS-c11b817f31177e0b4d1","applicationID":"771474213","transactionName":"ZwZaNUEFVhZZAkNRWl5MfhRdB0wMVw8YT1RXF1kIX0pbClYVRVFXHhFXFEcFWgldPkdZUlVNVQ5XAVQWAjNYTUFRAVQEYwVfAHUIT1FbHgpWBVYcZxdXFENd","queueTime":0,"applicationTime":390,"agent":""}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detailed Methodology and Sources: COVID-19 Data - USAFacts</title>
+<meta name="description" content="Our nation, in numbers. USAFacts provides a comprehensive, nonpartisan view of the state of our union." />
+<link rel="canonical" href="https://usafacts.org/articles/detailed-methodology-covid-19-data/" />
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+<meta name="algolia-prefix" content="prod">
+<script>webpack_static_url = "https://staticweb.usafacts.org/static/bundles/";</script>
+<link rel="preconnect" href="//staticweb.usafacts.org" crossorigin>
+<link rel="preconnect" href="//fonts.gstatic.com/" crossorigin>
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-3113a0cb.2452b55f.css" as="style" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/main.83984a09.css" as="style" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-059be3de.2c22debc.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-15ab8956.0f36db06.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-24e11f67.16258bf7.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-2a49b74c.f56800f2.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-2e031043.261d2f6e.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-306954a6.45a7a480.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-49d0a293.fd300a3c.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-536eaa00.c5cf42c3.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-5c163be3.769924b0.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-6b40552d.16e5261d.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-70e2792b.5bdc7350.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-a49c5adc.a0caa5c6.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-ae502bed.9931f868.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-b527da5c.c28ce106.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-cfc888f5.1459a95c.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-e5203dbc.0e9d3179.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-f363bead.9a0491b6.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-f82e0cd2.251040f8.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/vendor-fcf017cf.eed2646c.js" as="script" />
+<link rel="preload" href="https://staticweb.usafacts.org/static/main.56af839f.js" as="script" />
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="apple-touch-icon" sizes="180x180" href="https://staticweb.usafacts.org/static/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://staticweb.usafacts.org/static/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://staticweb.usafacts.org/static/favicon/favicon-16x16.png">
+<link rel="mask-icon" href="https://staticweb.usafacts.org/static/favicon/safari-pinned-tab.svg" color="#e3007d">
+<meta name="msapplication-TileColor" content="#e3007d">
+<meta name="theme-color" content="#e3007d">
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Detailed Methodology and Sources: COVID-19 Data - USAFacts",
+    "image": "https://staticweb.usafacts.org/media/images/Covid.2e16d0ba.fill-2400x1260.format-jpeg_eZgJhgj.jpg",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://usafacts.org/articles/detailed-methodology-covid-19-data/"
+    },
+    "author": {
+      "@context": "http://schema.org/",
+      "@type": "Organization",
+      "@id": "http://usafacts.org",
+      "name": "USAFacts",
+      "areaServed": "United States",
+      "duns": "4d9afcf0ebf27bc3f1e5a8294d285c80",
+      "email": "info@usafacts.org",
+      "url": "https://usafacts.org",
+      "logo": "https://staticweb.usafacts.org/media/images/White_house.width-1600.jpg",
+      "founder": "Steve Ballmer",
+      "legalName": "USAFacts Institute"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "USAFacts",
+      "logo": "https://staticweb.usafacts.org/media/images/White_house.width-1600.jpg"
+    },
+    "datePublished": "2020-04-01T11:05:25.576418-07:00",
+    "dateModified": "2021-02-19T14:53:28.742467-08:00",
+    "description": "Our nation, in numbers. USAFacts provides a comprehensive, nonpartisan view of the state of our union.",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "xpath": [
+        "/html/head/title",
+        "/html/head/meta[@name='description']/@content"
+      ]
+    }
+   }
+  </script>
+<meta itemprop="name" content="Detailed Methodology and Sources: COVID-19 Data - USAFacts">
+<meta itemprop="description" content="Our nation, in numbers. USAFacts provides a comprehensive, nonpartisan view of the state of our union.">
+<meta itemprop="image" content="https://staticweb.usafacts.org/media/images/Covid.2e16d0ba.fill-2400x1260.format-jpeg_eZgJhgj.jpg">
+<meta property="og:title" content="Detailed Methodology and Sources: COVID-19 Data - USAFacts" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://usafacts.org/articles/detailed-methodology-covid-19-data/" />
+<meta property="og:image" content="https://staticweb.usafacts.org/media/images/Covid.2e16d0ba.fill-2400x1260.format-jpeg_eZgJhgj.jpg" />
+<meta property="og:description" content="Our nation, in numbers. USAFacts provides a comprehensive, nonpartisan view of the state of our union." />
+<meta property="og:site_name" content="USAFacts" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@USAFacts">
+<meta name="twitter:title" content="Detailed Methodology and Sources: COVID-19 Data - USAFacts">
+<meta name="twitter:description" content="Our nation, in numbers. USAFacts provides a comprehensive, nonpartisan view of the state of our union.">
+<meta name="twitter:creator" content="@USAFacts">
+<meta name="twitter:image" content="https://staticweb.usafacts.org/media/images/Covid.2e16d0ba.fill-2400x1260.format-jpeg_eZgJhgj.jpg">
+<link type="text/css" href="https://staticweb.usafacts.org/static/vendor-3113a0cb.2452b55f.css" rel="stylesheet" />
+<link type="text/css" href="https://staticweb.usafacts.org/static/main.83984a09.css" rel="stylesheet" />
+<link type="text/css" href="//fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;400;600;700&display=swap" rel="stylesheet" defer>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://staticweb.usafacts.org/static/css/usafacts-metrics.css?v=2" />
+
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.defer=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-P4PQFV9');</script>
+
+</head>
+<body class="publication relative antialiased font-base overflow-x-hidden" data-model="base">
+
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4PQFV9"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+<header class="header w-full absolute top-0 z-50 js-header bg-white">
+<div class="fluid-container-full max-w-screen-3xl">
+<div class="header-content flex items-center justify-between">
+<a href="#" class="text-gray-800 flex items-center mr-5 xl:mr-6 hover:text-usafacts-pink more-menu-link cursor-pointer" aria-label="Open Menu">
+<svg width="18" height="18" class="fill-current inline-block"><use xlink:href="#menu"></use></svg>
+</a>
+<div class="flex-shrink h-6 md:h-10">
+<a href="/" class="h-full flex items-center text-usafacts-blue" aria-label="USAFacts back to home">
+<svg class="header__brand fill-current"><use xlink:href="#brand"></use></svg>
+<span class="hidden font-bold text-3xl tracking-tight">USAFacts</span>
+</a>
+</div>
+<nav class="hidden w-full flex-grow xl:flex md:items-center md:w-auto">
+<div class="header-mainnav md:flex-grow ml-12 2xl:ml-24 md:mr-8">
+<div class="inline-block border-black border-t-4 text-base">
+<a href="/issues/" class="border-gray-900 border-t-4 text-gray-900 inline-block font-base font-bold uppercase tracking-widest text-sm -mt-1 mx-2 2xl:mx-5 first:ml-0 last:mr-0 py-10 has-dropdown" data-content="dropmenu--issues">Issues</a>
+<a href="/data/" class="border-gray-900 border-t-4 text-gray-900 inline-block font-base font-bold uppercase tracking-widest text-sm -mt-1 mx-2 2xl:mx-5 first:ml-0 last:mr-0 py-10 has-dropdown" data-content="dropmenu--data">Data</a>
+<a href="/reports/" class="border-gray-900 border-t-4 text-gray-900 inline-block font-base font-bold uppercase tracking-widest text-sm -mt-1 mx-2 2xl:mx-5 first:ml-0 last:mr-0 py-10 has-dropdown" data-content="dropmenu--reports">Reports</a>
+</div>
+<div class="hidden xl:inline-block border-usafacts-blue border-t-4 text-base xl:ml-6 2xl:ml-8">
+<a href="/issues/coronavirus/" class="border-usafacts-blue border-t-4 hover:border-usafacts-pink hover:text-usafacts-pink text-usafacts-blue inline-block font-base font-bold uppercase tracking-widest text-sm -mt-1 mx-2 2xl:mx-5 first:ml-0 last:mr-0 py-10">Coronavirus</a>
+<a href="/state-of-the-union/" class="border-usafacts-blue border-t-4 hover:border-usafacts-pink hover:text-usafacts-pink text-usafacts-blue inline-block font-base font-bold uppercase tracking-widest text-sm -mt-1 mx-2 2xl:mx-5 first:ml-0 last:mr-0 py-10">State of the Union</a>
+</div>
+</div>
+</nav>
+<div class="flex-shrink py-6 xl:py-0">
+<div class="flex h-6 md:h-12 content-center justify-end">
+<form action="/search/" class="search__form js-search">
+<div class="search__field">
+<div class="relative">
+<div class="search__toggle">
+<svg width="18" height="18" class="fill-current inline-block"><use xlink:href="#search"></use></svg>
+</div>
+<input id="search-field" name="query" value="" type="search" class="search__input placeholder-gray-500" aria-label="Search for issues, topics, states etc…" placeholder="Search for issues, topics, states etc…">
+<input class="hidden" type="submit">
+</div>
+</div>
+</form>
+<div class="search__close">
+<svg width="15" height="15" class="block md:hidden fill-current inline-block"><use xlink:href="#close"></use></svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="header-background content-visibility-auto" aria-hidden="true"></div>
+<div class="header-dropdown-wrapper content-visibility-auto">
+<div class="header-dropdown-container">
+<div id="dropmenu--issues" class="header-dropdown">
+<div class="header-dropdown-content pt-2 pb-8">
+<div class="fluid-container-full max-w-screen-3xl">
+<div class="flex justify-center gap-padding md:gap-4">
+<div class="w-full xl:w-1/3 xl:w-1/4 2xl:w-1/5">
+<a href="/issues/education/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-1 xl:p-2 2xl:p-3 3xl:p-6 3xl:pb-5 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-sm xl:text-lg 2xl:text-xl text-white leading-tight text-shadow font-headings font-bold">Education</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/ppp_listing.2e16d0ba.fill-400x300.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/ppp_listing.2e16d0ba.fill-400x300.format-jpeg.jpg" type="image/jpeg">
+<img alt="Education" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/ppp_listing.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</a>
+</div>
+<div class="w-full xl:w-1/3 xl:w-1/4 2xl:w-1/5">
+<a href="/issues/healthcare/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-1 xl:p-2 2xl:p-3 3xl:p-6 3xl:pb-5 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-sm xl:text-lg 2xl:text-xl text-white leading-tight text-shadow font-headings font-bold">Healthcare</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+ <span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/1_Issues_Nav_Healthca.2e16d0ba.fill-400x300.format-webp_sQomOiP.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/1_Issues_Nav_Healthcar.2e16d0ba.fill-400x300.format-jpeg_AeVd4Dn.jpg" type="image/jpeg">
+<img alt="Healthcare" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/1_Issues_Nav_Healthcare_400x300_zBxxq8e.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</a>
+</div>
+<div class="w-full xl:w-1/3 xl:w-1/4 2xl:w-1/5">
+<a href="/issues/immigration/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-1 xl:p-2 2xl:p-3 3xl:p-6 3xl:pb-5 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-sm xl:text-lg 2xl:text-xl text-white leading-tight text-shadow font-headings font-bold">Immigration</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/2_Issues_Nav_Immigrat.2e16d0ba.fill-400x300.format-webp_Wb60SwN.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/2_Issues_Nav_Immigrati.2e16d0ba.fill-400x300.format-jpeg_rQ0Dfzg.jpg" type="image/jpeg">
+<img alt="Immigration" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/2_Issues_Nav_Immigration_400x300_vszjk1b.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</a>
+</div>
+<div class="w-full xl:w-1/3 xl:w-1/4 2xl:w-1/5">
+<a href="/issues/trade-and-tariffs/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-1 xl:p-2 2xl:p-3 3xl:p-6 3xl:pb-5 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-sm xl:text-lg 2xl:text-xl text-white leading-tight text-shadow font-headings font-bold">Trade &amp; Tariffs</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/3_Issues_Nav_TradeTar.2e16d0ba.fill-400x300.format-webp_H7bRqwG.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/3_Issues_Nav_TradeTari.2e16d0ba.fill-400x300.format-jpeg_f0hWz7F.jpg" type="image/jpeg">
+<img alt="Trade &amp; Tariffs" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/3_Issues_Nav_TradeTariffs_400x300_aAeAQuT.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</a>
+</div>
+<div class="w-full xl:w-1/3 xl:w-1/4 2xl:w-1/5">
+<a href="/issues/jobs-and-unemployment/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-1 xl:p-2 2xl:p-3 3xl:p-6 3xl:pb-5 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-sm xl:text-lg 2xl:text-xl text-white leading-tight text-shadow font-headings font-bold">Jobs &amp; Unemployment</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/4_Issues_Nav_JobsUnem.2e16d0ba.fill-400x300.format-webp_yDYcLHM.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/4_Issues_Nav_JobsUnemp.2e16d0ba.fill-400x300.format-jpeg_ZkOJrEb.jpg" type="image/jpeg">
+<img alt="Jobs &amp; Unemployment" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/4_Issues_Nav_JobsUnemployment_400x300_dqV6vNb.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</a>
+</div>
+<div class="w-full xl:w-1/3 xl:w-1/4 2xl:w-1/5">
+<a href="/issues/coronavirus/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-1 xl:p-2 2xl:p-3 3xl:p-6 3xl:pb-5 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-sm xl:text-lg 2xl:text-xl text-white leading-tight text-shadow font-headings font-bold">Coronavirus Stats &amp; Data</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/5_Issues_Nav_Coronavi.2e16d0ba.fill-400x300.format-webp_WrqebuS.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/5_Issues_Nav_Coronavir.2e16d0ba.fill-400x300.format-jpeg_JOjas1k.jpg" type="image/jpeg">
+<img alt="Coronavirus Stats &amp; Data" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/5_Issues_Nav_Coronavirus_400x300.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</a>
+</div>
+<div class="w-full xl:w-1/3 xl:w-1/4 2xl:w-1/5">
+<a href="/issues/race-in-america/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-1 xl:p-2 2xl:p-3 3xl:p-6 3xl:pb-5 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-sm xl:text-lg 2xl:text-xl text-white leading-tight text-shadow font-headings font-bold">Race in America</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/6_Issues_Nav_RaceInAm.2e16d0ba.fill-400x300.format-webp_WJtsh0P.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/6_Issues_Nav_RaceInAme.2e16d0ba.fill-400x300.format-jpeg_ok8rbhB.jpg" type="image/jpeg">
+<img alt="Race in America" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/6_Issues_Nav_RaceInAmerica_400x300_lIHdANU.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="dropmenu--data" class="header-dropdown">
+<div class="header-dropdown-content pt-2 pb-12">
+<div class="fluid-container-full max-w-screen-3xl">
+<div class="flex gap-padding gap-4 xl:gap-5">
+<div class="flex-shrink">
+<div class="h-full ml-2 xl:w-32 xl:w-48 border-r border-gray-200">
+<a href="#datasub-topics" class="datasub__menu border-r-2 border-transparent text-gray-900 block text-sm xl:text-base font-bold uppercase tracking-widest py-3 xl:py-4 text-right pr-6 xl:pr-12 hover:text-usafacts-pink current">By Topic</a>
+</div>
+</div>
+<div class="flex-1">
+<div id="datasub-topics" class="datasub__group current">
+<div class="flex gap-padding gap-4 pt-2">
+<div class="w-full xl:w-1/4">
+<h3 class="heading--piped text-usafacts-blue">
+<a href="/data/topics/government-finances/" class="text-usafacts-blue hover:text-usafacts-pink">Government Finances</a>
+</h3>
+<a href="/data/topics/government-finances/debt/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Debt</a>
+<a href="/data/topics/government-finances/government-run-business/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Government-Run Business</a>
+<a href="/data/topics/government-finances/revenue/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Revenue</a>
+ <a href="/data/topics/government-finances/spending/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Spending</a>
+<a href="/data/topics/government-finances/employment/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Government Employment</a>
+</div>
+<div class="w-full xl:w-1/4">
+<h3 class="heading--piped text-usafacts-blue">
+<a href="/data/topics/security-safety/" class="text-usafacts-blue hover:text-usafacts-pink">Security &amp; Safety</a>
+</h3>
+<a href="/data/topics/security-safety/child-care-and-safety/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Child Care &amp; Wellbeing</a>
+<a href="/data/topics/security-safety/crime-and-justice/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Crime &amp; Justice</a>
+<a href="/data/topics/security-safety/fire-and-disaster/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Fire &amp; Disaster</a>
+<a href="/data/topics/security-safety/regulation/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Regulation</a>
+<a href="/data/topics/security-safety/national-defense-and-foreign-aid/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">National Defense &amp; Foreign Aid</a>
+<a href="/data/topics/security-safety/energy-and-environment/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Energy &amp; Environment</a>
+</div>
+<div class="w-full xl:w-1/4">
+<h3 class="heading--piped text-usafacts-blue">
+<a href="/data/topics/economy/" class="text-usafacts-blue hover:text-usafacts-pink">Economy</a>
+</h3>
+<a href="/data/topics/economy/economic-indicators/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Economic Indicators</a>
+<a href="/data/topics/economy/jobs-and-income/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Jobs &amp; Income</a>
+<a href="/data/topics/economy/wealth-and-savings/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Wealth &amp; Savings</a>
+<a href="/data/topics/economy/taxes/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Taxes</a>
+<a href="/data/topics/economy/trade/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Trade</a>
+<a href="/data/topics/economy/public-research-development/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Public Research &amp; Development</a>
+
+</div>
+<div class="w-full xl:w-1/4">
+<h3 class="heading--piped text-usafacts-blue">
+<a href="/data/topics/people-society/" class="text-usafacts-blue hover:text-usafacts-pink">People &amp; Society</a>
+</h3>
+<a href="/data/topics/people-society/transportation/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Transportation</a>
+<a href="/data/topics/people-society/population-and-demographics/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Population &amp; Demographics</a>
+<a href="/data/topics/people-society/health/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Health</a>
+<a href="/data/topics/people-society/education/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Education</a>
+<a href="/data/topics/people-society/poverty/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Poverty</a>
+<a href="/data/topics/people-society/social-security-and-medicare/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Social Security &amp; Medicare</a>
+<a href="/data/topics/people-society/immigration/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Immigration</a>
+<a href="/data/topics/people-society/democracy-and-society/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Democracy &amp; Society</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="dropmenu--reports" class="header-dropdown">
+<div class="header-dropdown-content pt-2 pb-12">
+<div class="fluid-container-full max-w-screen-3xl">
+<div class="flex flex-wrap gap-padding gap-5">
+<div class="w-full md:w-1/3 xl:w-3/12">
+<h3 class="heading--piped text-usafacts-blue mb-4">
+<a href="/articles/" class="text-usafacts-blue hover:text-usafacts-pink">Articles</a>
+</h3>
+<div>
+<article class="mb-2 xl:mb-4">
+<a href="/articles/employers-added-559000-jobs-in-may-over-double-the-growth-of-april/" class="flex w-full group border-b border-gray-200">
+<div class="flex-grow self-center pb-2 xl:pb-4">
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Jobs &amp; Unemployment</p>
+<h3 class="interaction__underline text-sm xl:text-base font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">
+<span>Employers added 559,000 jobs in May, over double the growth of April</span>
+</h3>
+</div>
+<div class="flex-shrink mb-1 ml-4 self-end">
+<div class="block h-20 w-20 xl:h-24 xl:w-24 overflow-hidden">
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Article_Share_Templat.2e16d0ba.fill-160x160.format-webp_TqixSBk.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Article_Share_Template.2e16d0ba.fill-160x160.format-jpeg_OFGrhX2.jpg" type="image/jpeg">
+<img alt="Population" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Article_Share_Template_57.png" class="transition-transform transition-500 group-hover:scale-kenburns group-hover:transition-kenburns lazyload" style="" />
+</picture>
+</div>
+</div>
+</a>
+</article>
+<article class="mb-2 xl:mb-4">
+<a href="/articles/right-to-carry-gun-laws-explained/" class="flex w-full group border-b border-gray-200">
+<div class="flex-grow self-center pb-2 xl:pb-4">
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Other</p>
+<h3 class="interaction__underline text-sm xl:text-base font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">
+<span>Right to carry gun laws: Explained</span>
+</h3>
+</div>
+</a>
+</article>
+<article class="mb-2 xl:mb-4">
+<a href="/articles/over-one-third-of-americans-live-in-areas-lacking-mental-health-professionals/" class="flex w-full group border-b border-gray-200">
+<div class="flex-grow self-center pb-2 xl:pb-4">
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Healthcare</p>
+<h3 class="interaction__underline text-sm xl:text-base font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">
+<span>Over one-third of Americans live in areas lacking mental health professionals</span>
+</h3>
+</div>
+<div class="flex-shrink mb-1 ml-4 self-end">
+<div class="block h-20 w-20 xl:h-24 xl:w-24 overflow-hidden">
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Article_Share_Templat.2e16d0ba.fill-160x160.format-webp_mtU5hGC.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Article_Share_Template.2e16d0ba.fill-160x160.format-jpeg_A7jV2MV.jpg" type="image/jpeg">
+<img alt="Population" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Article_Share_Template_14_IfRLw2F.png" class="transition-transform transition-500 group-hover:scale-kenburns group-hover:transition-kenburns lazyload" style="" />
+</picture>
+</div>
+</div>
+</a>
+</article>
+</div>
+<div class="text-right">
+<a href="/articles/" class="linked mt-2" aria-label="View More Articles">View More</a>
+</div>
+</div>
+<div class="w-full md:w-1/3 xl:w-5/12">
+<h3 class="heading--piped text-usafacts-blue mb-0">
+<a href="/visualizations/" class="text-usafacts-blue hover:text-usafacts-pink">Visualizations</a>
+</h3>
+<div class="header__slides relative">
+<div class="swiper-container js-headerswiper">
+<div class="swiper-wrapper">
+<div class="header__slide swiper-slide w-full py-6">
+<article>
+<a href="/visualizations/covid-vaccine-tracker-states/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-4 md:p-6 lg:p-8 group-hover:scale-lg transition-transform transition-1000">
+<p class="text-sm mb-1 uppercase text-white tracking-wider text-shadow">Visualization</p>
+<h3 class="text-xl md:text-2xl lg:text-3xl text-white leading-tight text-shadow font-headings font-bold">How many COVID-19 vaccines have been distributed and taken?</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Report_images_Vaccine.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Report_images_Vaccine.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Report_images_Vaccine.jpg" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+</span>
+<span class="header__card aspect-ratio-16/9 block"></span>
+</a>
+</article>
+</div>
+<div class="header__slide swiper-slide w-full py-6">
+<article>
+<a href="/visualizations/coronavirus-covid-19-spread-map/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-4 md:p-6 lg:p-8 group-hover:scale-lg transition-transform transition-1000">
+<p class="text-sm mb-1 uppercase text-white tracking-wider text-shadow">Visualization</p>
+<h3 class="text-xl md:text-2xl lg:text-3xl text-white leading-tight text-shadow font-headings font-bold">Coronavirus Locations: COVID-19 Map by County and State</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Covid_Report.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Covid_Report.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Covid_Report.jpg" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+</span>
+<span class="header__card aspect-ratio-16/9 block"></span>
+</a>
+</article>
+</div>
+<div class="header__slide swiper-slide w-full py-6">
+<article>
+<a href="/visualizations/the-big-picture/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-4 md:p-6 lg:p-8 group-hover:scale-lg transition-transform transition-1000">
+<p class="text-sm mb-1 uppercase text-white tracking-wider text-shadow">Visualization</p>
+<h3 class="text-xl md:text-2xl lg:text-3xl text-white leading-tight text-shadow font-headings font-bold">Government Revenue &amp; Expenditures</h3>
+<span class="mt-3 font-base text-sm lg:text-base text-white text-shadow">Government Revenue &amp; Expenditures</span>
+<span class="hidden md:block">
+<span class="linked text-white mt-3">A combined federal, state, local view of how funds flow in and out.</span>
+</span>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Report_images_Unemplo.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Report_images_Unemploy.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Report_images_Unemployment_Claims_copy.jpg" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+</span>
+<span class="header__card aspect-ratio-16/9 block"></span>
+</a>
+</article>
+</div>
+</div>
+</div>
+<div class="header__slidenav swiper-button-prev shadow"></div>
+<div class="header__slidenav swiper-button-next shadow"></div>
+</div>
+<div class="text-right">
+<a href="/visualizations/" class="linked mt-2" aria-label="View All Visualizations">View All</a>
+</div>
+</div>
+<div class="w-full md:w-1/3 xl:w-4/12">
+<h3 class="heading--piped text-usafacts-blue">Special Reports</h3>
+<div class="annual_reports">
+<article class="mb-8 last:mb-0">
+<a href="/annual-publications/government-10-k/" class="flex block group shadow-lg">
+<span class="w-1/2 block relative">
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/10-K_2021.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/10-K_2021.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="Government 10-K 2021" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/10-K_2021.jpg" class="absolute inset-0 block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<span class="w-1/2 block bg-white p-4 md:p-8 flex items-center">
+<div>
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Special Report</p>
+<h3 class="mb-2 text-xl font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">Government 10-K 2021</h3>
+<span class="linked text-sm mt-2">Explore the Report</span>
+</div>
+</span>
+</a>
+</article>
+<article class="mb-8 last:mb-0">
+<a href="/covid-recovery-hub/" class="flex block group shadow-lg">
+<span class="w-1/2 block relative">
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Carousel_Covid_Tracke.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Carousel_Covid_Tracker.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="COVID-19 Impact and Recovery" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Carousel_Covid_Tracker-06.jpg" class="absolute inset-0 block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<span class="w-1/2 block bg-white p-4 md:p-8 flex items-center">
+<div>
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Special Report</p>
+<h3 class="mb-2 text-xl font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">COVID-19 Impact and Recovery</h3>
+<span class="linked text-sm mt-2">Explore the Report</span>
+</div>
+</span>
+</a>
+</article>
+</div>
+<div class="text-right">
+<a href="/special-reports/" class="linked mt-2" aria-label="View More Articles">View All</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<div class="more-menu fixed inset-0 flex-col md:flex-row content-visibility-auto">
+<div class="absolute top-0 left-0 right-0 fluid-container-full z-10 mobile-menu-top-bar">
+<div class="header-content flex items-center justify-between">
+<a href="#" class="py-6 close-more-slide fade absolute left-6 z-10 text-gray-800 flex items-center hover:text-usafacts-pink" aria-label="Close Menu">
+<svg style="transform:rotate(90deg);" width="18" height="18" class="fill-current inline-block"><use xlink:href="#chevron-down"></use></svg>
+</a>
+<div class="flex-shrink h-6 md:h-10">
+<a href="/" class="h-full flex items-center text-usafacts-blue more-menu-site-logo" aria-label="USAFacts back to home">
+<svg class="header__brand fill-current"><use xlink:href="#brand"></use></svg>
+<span class="hidden font-bold text-3xl tracking-tight">USAFacts</span>
+</a>
+</div>
+<a href="#" class="py-6 close-more-menu relative z-10 text-gray-800 flex items-center hover:text-usafacts-pink" aria-label="Close Menu">
+<span class="mt-0 font-base font-bold uppercase tracking-widest text-xs mr-2">Close</span>
+<svg width="18" height="18" class="fill-current inline-block"><use xlink:href="#close"></use></svg>
+</a>
+</div>
+</div>
+<div class="more-sidebar bg-white border-r border-gray-300 pt-24 h-full">
+<div class="more-sidebar-wrap">
+<div class="block border-usafacts-blue border-l-4 text-base mb-12">
+<a href="/issues/" class="moremenu--sidebar-item is-active border-gray-900 border-l-4 text-gray-900 mt-0 font-base font-bold uppercase tracking-widest text-sm -ml-1 py-5 px-8 hover:border-usafacts-pink hover:text-usafacts-pink flex justify-between items-center" data-content="moremenu--issues">
+Issues
+<svg width="16" height="12" class="fill-current inline-block -mr-2"><use xlink:href="#arrow"></use></svg>
+</a>
+<a href="/data/" class="moremenu--sidebar-item  border-gray-900 border-l-4 text-gray-900 mt-0 font-base font-bold uppercase tracking-widest text-sm -ml-1 py-5 px-8 hover:border-usafacts-pink hover:text-usafacts-pink flex justify-between items-center" data-content="moremenu--data">
+Data
+<svg width="16" height="12" class="fill-current inline-block -mr-2"><use xlink:href="#arrow"></use></svg>
+</a>
+<a href="/reports/" class="moremenu--sidebar-item  border-gray-900 border-l-4 text-gray-900 mt-0 font-base font-bold uppercase tracking-widest text-sm -ml-1 py-5 px-8 hover:border-usafacts-pink hover:text-usafacts-pink flex justify-between items-center" data-content="moremenu--reports">
+Reports
+<svg width="16" height="12" class="fill-current inline-block -mr-2"><use xlink:href="#arrow"></use></svg>
+</a>
+</div>
+<div class="block border-usafacts-blue border-l-4 text-base mb-10">
+<a href="/issues/coronavirus/" class="border-usafacts-blue border-l-4 text-usafacts-blue mt-0 font-base font-bold uppercase tracking-widest text-sm -ml-1 py-5 px-8 hover:border-usafacts-pink hover:text-usafacts-pink flex justify-between items-center">
+Coronavirus
+</a>
+<a href="/state-of-the-union/" class="border-usafacts-blue border-l-4 text-usafacts-blue mt-0 font-base font-bold uppercase tracking-widest text-sm -ml-1 py-5 px-8 hover:border-usafacts-pink hover:text-usafacts-pink flex justify-between items-center">
+State of the Union
+</a>
+</div>
+<div class="block text-base pb-6">
+<a href="/about-usafacts/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">About USAFacts</a>
+<a href="/faq/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">FAQ</a>
+<a href="/data-sources/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">Data Sources</a>
+<a href="/principles/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">Principles</a>
+<a href="/how-to-cite-usafacts/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">Citing USAFacts</a>
+<div class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900"></div>
+<a href="/press-releases/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">Press Releases</a>
+<a href="/in-the-news/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">In the News</a>
+<a href="/videos/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">Videos</a>
+<div class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900"></div>
+<a href="/contact-us/" class="border-transparent border-l-4 block text-base py-2 px-8 hover:text-usafacts-pink font-semibold text-sm block leading-tight text-gray-900">Contact Us</a>
+</div>
+</div>
+</div>
+<div class="more-content flex-1 bg-gray-100 absolute lg:relative lg:w-auto h-full w-full  right-0 top-24 lg:top-0 lg:relative">
+<div class="more-content-wrap">
+<div class="relative w-full h-full">
+<div class="moremenu--item mt-16 pb-20 moremenu--issues is-active">
+<div class="fluid-container-full max-w-screen-3xl">
+<div class="flex flex-wrap gap-padding gap-4">
+<div class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/2 xl:w-1/3 2xl:w-1/4">
+<a href="/issues/education/" class="relative block group hover:z-20">
+<span class="relative block">
+<span class="absolute z-10 bottom-0 left-0 block px-5 py-4 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-lg md:text-xl lg:text-2xl text-white leading-tight text-shadow font-headings font-bold">Education</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-overlay opacity-25 group-hover:opacity-50 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/ppp_listing.2e16d0ba.fill-400x300.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/ppp_listing.2e16d0ba.fill-400x300.format-jpeg.jpg" type="image/jpeg">
+<img alt="Education" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/ppp_listing.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<div class="pt-4 pb-8">
+<p class="text-sm lg:text-base text-gray-800 leading-relaxed">
+Look at the data on educational progress and challenges.
+</p>
+</div>
+</a>
+</div>
+<div class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/2 xl:w-1/3 2xl:w-1/4">
+<a href="/issues/healthcare/" class="relative block group hover:z-20">
+<span class="relative block">
+<span class="absolute z-10 bottom-0 left-0 block px-5 py-4 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-lg md:text-xl lg:text-2xl text-white leading-tight text-shadow font-headings font-bold">Healthcare</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-overlay opacity-25 group-hover:opacity-50 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/1_Issues_Nav_Healthca.2e16d0ba.fill-400x300.format-webp_sQomOiP.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/1_Issues_Nav_Healthcar.2e16d0ba.fill-400x300.format-jpeg_AeVd4Dn.jpg" type="image/jpeg">
+<img alt="Healthcare" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/1_Issues_Nav_Healthcare_400x300_zBxxq8e.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<div class="pt-4 pb-8">
+<p class="text-sm lg:text-base text-gray-800 leading-relaxed">
+From health insurance to prescription drug prices, the cost of healthcare has been a political issue for decades.
+</p>
+</div>
+</a>
+</div>
+<div class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/2 xl:w-1/3 2xl:w-1/4">
+<a href="/issues/immigration/" class="relative block group hover:z-20">
+<span class="relative block">
+<span class="absolute z-10 bottom-0 left-0 block px-5 py-4 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-lg md:text-xl lg:text-2xl text-white leading-tight text-shadow font-headings font-bold">Immigration</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-overlay opacity-25 group-hover:opacity-50 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/2_Issues_Nav_Immigrat.2e16d0ba.fill-400x300.format-webp_Wb60SwN.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/2_Issues_Nav_Immigrati.2e16d0ba.fill-400x300.format-jpeg_rQ0Dfzg.jpg" type="image/jpeg">
+<img alt="Immigration" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/2_Issues_Nav_Immigration_400x300_vszjk1b.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<div class="pt-4 pb-8">
+<p class="text-sm lg:text-base text-gray-800 leading-relaxed">
+Find data on a range of immigration issues, including information on asylum seekers, DACA, visas, plus border security.
+</p>
+</div>
+</a>
+</div>
+<div class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/2 xl:w-1/3 2xl:w-1/4">
+<a href="/issues/trade-and-tariffs/" class="relative block group hover:z-20">
+<span class="relative block">
+<span class="absolute z-10 bottom-0 left-0 block px-5 py-4 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-lg md:text-xl lg:text-2xl text-white leading-tight text-shadow font-headings font-bold">Trade &amp; Tariffs</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-overlay opacity-25 group-hover:opacity-50 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/3_Issues_Nav_TradeTar.2e16d0ba.fill-400x300.format-webp_H7bRqwG.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/3_Issues_Nav_TradeTari.2e16d0ba.fill-400x300.format-jpeg_f0hWz7F.jpg" type="image/jpeg">
+<img alt="Trade &amp; Tariffs" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/3_Issues_Nav_TradeTariffs_400x300_aAeAQuT.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<div class="pt-4 pb-8">
+<p class="text-sm lg:text-base text-gray-800 leading-relaxed">
+Trade is an important part of the American economy and a key driver of many industries.
+</p>
+</div>
+
+</a>
+</div>
+<div class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/2 xl:w-1/3 2xl:w-1/4">
+<a href="/issues/jobs-and-unemployment/" class="relative block group hover:z-20">
+<span class="relative block">
+<span class="absolute z-10 bottom-0 left-0 block px-5 py-4 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-lg md:text-xl lg:text-2xl text-white leading-tight text-shadow font-headings font-bold">Jobs &amp; Unemployment</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-overlay opacity-25 group-hover:opacity-50 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/4_Issues_Nav_JobsUnem.2e16d0ba.fill-400x300.format-webp_yDYcLHM.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/4_Issues_Nav_JobsUnemp.2e16d0ba.fill-400x300.format-jpeg_ZkOJrEb.jpg" type="image/jpeg">
+<img alt="Jobs &amp; Unemployment" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/4_Issues_Nav_JobsUnemployment_400x300_dqV6vNb.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<div class="pt-4 pb-8">
+<p class="text-sm lg:text-base text-gray-800 leading-relaxed">
+The number of new jobs and the unemployment rate are regularly cited in the news, but they’re just part of the picture.
+</p>
+</div>
+</a>
+</div>
+<div class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/2 xl:w-1/3 2xl:w-1/4">
+<a href="/issues/coronavirus/" class="relative block group hover:z-20">
+<span class="relative block">
+<span class="absolute z-10 bottom-0 left-0 block px-5 py-4 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-lg md:text-xl lg:text-2xl text-white leading-tight text-shadow font-headings font-bold">Coronavirus Stats &amp; Data</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-overlay opacity-25 group-hover:opacity-50 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/5_Issues_Nav_Coronavi.2e16d0ba.fill-400x300.format-webp_WrqebuS.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/5_Issues_Nav_Coronavir.2e16d0ba.fill-400x300.format-jpeg_JOjas1k.jpg" type="image/jpeg">
+<img alt="Coronavirus Stats &amp; Data" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/5_Issues_Nav_Coronavirus_400x300.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<div class="pt-4 pb-8">
+<p class="text-sm lg:text-base text-gray-800 leading-relaxed">
+Track how COVID-19 is spreading in the US, plus key indicators for pandemic recovery.
+</p>
+</div>
+</a>
+</div>
+<div class="relative w-full sm:w-1/2 md:w-1/3 lg:w-1/2 xl:w-1/3 2xl:w-1/4">
+<a href="/issues/race-in-america/" class="relative block group hover:z-20">
+<span class="relative block">
+<span class="absolute z-10 bottom-0 left-0 block px-5 py-4 group-hover:scale-lg transition-transform transition-1000">
+<h3 class="text-lg md:text-xl lg:text-2xl text-white leading-tight text-shadow font-headings font-bold">Race in America</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-overlay opacity-25 group-hover:opacity-50 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/6_Issues_Nav_RaceInAm.2e16d0ba.fill-400x300.format-webp_WJtsh0P.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/6_Issues_Nav_RaceInAme.2e16d0ba.fill-400x300.format-jpeg_ok8rbhB.jpg" type="image/jpeg">
+<img alt="Race in America" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/6_Issues_Nav_RaceInAmerica_400x300_lIHdANU.png" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg transition-750"></span>
+</span>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<div class="pt-4 pb-8">
+<p class="text-sm lg:text-base text-gray-800 leading-relaxed">
+Data shines a spotlight on racial inequities in American life.
+</p>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div class="moremenu--item mt-16 pb-20 moremenu--data">
+<div class="fluid-container-full max-w-screen-3xl">
+<div id="moremenu-datasub-topics" class="">
+<h2 class="heading--semilarge mb-4 lg:mb-6 text-gray-400">By Topic</h2>
+<div class="flex gap-padding md:gap-4 pt-2 flex-col md:flex-row flex-wrap">
+<div class="w-full md:w-1/2 xl:w-1/4  my-6">
+<h3 class="heading--piped text-usafacts-blue">
+<a href="/data/topics/government-finances/" class="text-usafacts-blue hover:text-usafacts-pink">Government Finances</a>
+</h3>
+<a href="/data/topics/government-finances/debt/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Debt</a>
+<a href="/data/topics/government-finances/government-run-business/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Government-Run Business</a>
+<a href="/data/topics/government-finances/revenue/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Revenue</a>
+<a href="/data/topics/government-finances/spending/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Spending</a>
+<a href="/data/topics/government-finances/employment/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Government Employment</a>
+</div>
+<div class="w-full md:w-1/2 xl:w-1/4  my-6">
+<h3 class="heading--piped text-usafacts-blue">
+<a href="/data/topics/security-safety/" class="text-usafacts-blue hover:text-usafacts-pink">Security &amp; Safety</a>
+</h3>
+<a href="/data/topics/security-safety/child-care-and-safety/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Child Care &amp; Wellbeing</a>
+<a href="/data/topics/security-safety/crime-and-justice/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Crime &amp; Justice</a>
+<a href="/data/topics/security-safety/fire-and-disaster/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Fire &amp; Disaster</a>
+<a href="/data/topics/security-safety/regulation/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Regulation</a>
+<a href="/data/topics/security-safety/national-defense-and-foreign-aid/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">National Defense &amp; Foreign Aid</a>
+<a href="/data/topics/security-safety/energy-and-environment/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Energy &amp; Environment</a>
+</div>
+<div class="w-full md:w-1/2 xl:w-1/4  my-6">
+<h3 class="heading--piped text-usafacts-blue">
+<a href="/data/topics/economy/" class="text-usafacts-blue hover:text-usafacts-pink">Economy</a>
+</h3>
+<a href="/data/topics/economy/economic-indicators/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Economic Indicators</a>
+<a href="/data/topics/economy/jobs-and-income/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Jobs &amp; Income</a>
+<a href="/data/topics/economy/wealth-and-savings/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Wealth &amp; Savings</a>
+<a href="/data/topics/economy/taxes/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Taxes</a>
+<a href="/data/topics/economy/trade/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Trade</a>
+ <a href="/data/topics/economy/public-research-development/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Public Research &amp; Development</a>
+</div>
+<div class="w-full md:w-1/2 xl:w-1/4  my-6">
+<h3 class="heading--piped text-usafacts-blue">
+<a href="/data/topics/people-society/" class="text-usafacts-blue hover:text-usafacts-pink">People &amp; Society</a>
+</h3>
+<a href="/data/topics/people-society/transportation/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Transportation</a>
+<a href="/data/topics/people-society/population-and-demographics/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Population &amp; Demographics</a>
+<a href="/data/topics/people-society/health/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Health</a>
+<a href="/data/topics/people-society/education/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Education</a>
+<a href="/data/topics/people-society/poverty/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Poverty</a>
+<a href="/data/topics/people-society/social-security-and-medicare/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Social Security &amp; Medicare</a>
+<a href="/data/topics/people-society/immigration/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Immigration</a>
+<a href="/data/topics/people-society/democracy-and-society/" class="font-semibold text-base block leading-tight my-4 text-gray-900 hover:text-usafacts-pink">Democracy &amp; Society</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex-1 moremenu--item mt-16 pb-20 moremenu--reports">
+<div class="fluid-container-full max-w-screen-3xl">
+<div class="flex flex-wrap gap-padding gap-4">
+<div class="w-full md:w-2/5 order-1 2xl:w-3/12">
+<h3 class="heading--piped text-usafacts-blue mb-4">
+<a href="/articles/" class="text-usafacts-blue hover:text-usafacts-pink">Articles</a>
+</h3>
+<div>
+<article class="mb-2 xl:mb-4">
+<a href="/articles/employers-added-559000-jobs-in-may-over-double-the-growth-of-april/" class="flex w-full group border-b border-gray-200">
+<div class="flex-grow self-center pb-2 xl:pb-4">
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Jobs &amp; Unemployment</p>
+<h3 class="interaction__underline text-sm xl:text-base font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">
+<span>Employers added 559,000 jobs in May, over double the growth of April</span>
+</h3>
+</div>
+<div class="flex-shrink mb-1 ml-4 self-end">
+<div class="block h-20 w-20 xl:h-24 xl:w-24 overflow-hidden">
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Article_Share_Templat.2e16d0ba.fill-160x160.format-webp_TqixSBk.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Article_Share_Template.2e16d0ba.fill-160x160.format-jpeg_OFGrhX2.jpg" type="image/jpeg">
+<img alt="Transit systems net profit" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Article_Share_Template_57.png" class="transition-transform transition-500 group-hover:scale-kenburns group-hover:transition-kenburns lazyload" style="" />
+</picture>
+</div>
+</div>
+</a>
+</article>
+<article class="mb-2 xl:mb-4">
+<a href="/articles/right-to-carry-gun-laws-explained/" class="flex w-full group border-b border-gray-200">
+<div class="flex-grow self-center pb-2 xl:pb-4">
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Other</p>
+<h3 class="interaction__underline text-sm xl:text-base font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">
+<span>Right to carry gun laws: Explained</span>
+</h3>
+</div>
+</a>
+</article>
+<article class="mb-2 xl:mb-4">
+<a href="/articles/over-one-third-of-americans-live-in-areas-lacking-mental-health-professionals/" class="flex w-full group border-b border-gray-200">
+<div class="flex-grow self-center pb-2 xl:pb-4">
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Healthcare</p>
+<h3 class="interaction__underline text-sm xl:text-base font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">
+<span>Over one-third of Americans live in areas lacking mental health professionals</span>
+</h3>
+</div>
+<div class="flex-shrink mb-1 ml-4 self-end">
+<div class="block h-20 w-20 xl:h-24 xl:w-24 overflow-hidden">
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Article_Share_Templat.2e16d0ba.fill-160x160.format-webp_mtU5hGC.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Article_Share_Template.2e16d0ba.fill-160x160.format-jpeg_A7jV2MV.jpg" type="image/jpeg">
+<img alt="Transit systems net profit" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Article_Share_Template_14_IfRLw2F.png" class="transition-transform transition-500 group-hover:scale-kenburns group-hover:transition-kenburns lazyload" style="" />
+</picture>
+</div>
+</div>
+</a>
+</article>
+</div>
+<div class="text-right">
+<a href="/articles/" class="linked mt-2" aria-label="View More Articles">View More</a>
+</div>
+</div>
+<div class="w-full md:w-full md:order-3 2xl:order-2 2xl:w-5/12">
+<h3 class="heading--piped text-usafacts-blue mb-0">
+<a href="/visualizations/" class="text-usafacts-blue hover:text-usafacts-pink">Visualizations</a>
+</h3>
+<div class="header__slides relative">
+<div class="swiper-container js-headerswiper">
+<div class="swiper-wrapper">
+<div class="header__slide swiper-slide w-full py-6">
+<article>
+<a href="/visualizations/covid-vaccine-tracker-states/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-4 md:p-6 lg:p-8 group-hover:scale-lg transition-transform transition-1000">
+<p class="text-sm mb-1 uppercase text-white tracking-wider text-shadow">Visualization</p>
+<h3 class="text-xl md:text-2xl lg:text-3xl text-white leading-tight text-shadow font-headings font-bold">How many COVID-19 vaccines have been distributed and taken?</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Report_images_Vaccine.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Report_images_Vaccine.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Report_images_Vaccine.jpg" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+</span>
+<span class="header__card aspect-ratio-16/9 block"></span>
+</a>
+</article>
+</div>
+<div class="header__slide swiper-slide w-full py-6">
+<article>
+<a href="/visualizations/coronavirus-covid-19-spread-map/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-4 md:p-6 lg:p-8 group-hover:scale-lg transition-transform transition-1000">
+<p class="text-sm mb-1 uppercase text-white tracking-wider text-shadow">Visualization</p>
+<h3 class="text-xl md:text-2xl lg:text-3xl text-white leading-tight text-shadow font-headings font-bold">Coronavirus Locations: COVID-19 Map by County and State</h3>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Covid_Report.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Covid_Report.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Covid_Report.jpg" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+</span>
+<span class="header__card aspect-ratio-16/9 block"></span>
+</a>
+</article>
+</div>
+<div class="header__slide swiper-slide w-full py-6">
+<article>
+<a href="/visualizations/the-big-picture/" class="relative block group hover:z-20">
+<span class="absolute z-10 bottom-0 left-0 block p-4 md:p-6 lg:p-8 group-hover:scale-lg transition-transform transition-1000">
+<p class="text-sm mb-1 uppercase text-white tracking-wider text-shadow">Visualization</p>
+<h3 class="text-xl md:text-2xl lg:text-3xl text-white leading-tight text-shadow font-headings font-bold">Government Revenue &amp; Expenditures</h3>
+<span class="mt-3 font-base text-sm lg:text-base text-white text-shadow">Government Revenue &amp; Expenditures</span>
+<span class="hidden md:block">
+<span class="linked text-white mt-3">A combined federal, state, local view of how funds flow in and out.</span>
+</span>
+</span>
+<span class="absolute inset-0 group-hover:scale-xl transition-transform transition-750">
+<span class="absolute inset-0 bg-gradient-black-fade opacity-50 group-hover:opacity-75 transition-opacity transition-750"></span>
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Report_images_Unemplo.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Report_images_Unemploy.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Report_images_Unemployment_Claims_copy.jpg" class="block w-full h-full object-cover lazyload" style="" />
+</picture>
+</span>
+<span class="header__card aspect-ratio-16/9 block"></span>
+</a>
+</article>
+</div>
+</div>
+</div>
+<div class="header__slidenav swiper-button-prev shadow"></div>
+<div class="header__slidenav swiper-button-next shadow"></div>
+</div>
+<div class="text-right">
+<a href="/visualizations/" class="linked mt-2" aria-label="View All Visualizations">View All</a>
+</div>
+</div>
+<div class="w-full md:w-3/5 md:order-2 2xl:order-3 2xl:w-4/12">
+<h2 class="heading--piped text-usafacts-blue">Special Reports</h2>
+<div class="annual_reports">
+<article class="mb-8 last:mb-0">
+<a href="/annual-publications/government-10-k/" class="flex block group shadow-lg">
+<span class="w-1/2 block relative">
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/10-K_2021.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/10-K_2021.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="Government 10-K 2021" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/10-K_2021.jpg" class="absolute inset-0 block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<span class="w-1/2 block bg-white p-4 md:p-8 flex items-center">
+<div>
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Special Report</p>
+<h3 class="mb-2 text-xl font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">Government 10-K 2021</h3>
+<span class="linked text-sm mt-2">View Report</span>
+</div>
+</span>
+</a>
+</article>
+<article class="mb-8 last:mb-0">
+<a href="/covid-recovery-hub/" class="flex block group shadow-lg">
+<span class="w-1/2 block relative">
+<picture>
+<source srcset="https://staticweb.usafacts.org/media/images/Carousel_Covid_Tracke.2e16d0ba.fill-800x600.format-webp.webp" type="image/webp">
+<source srcset="https://staticweb.usafacts.org/media/images/Carousel_Covid_Tracker.2e16d0ba.fill-800x600.format-jpeg.jpg" type="image/jpeg">
+<img alt="COVID-19 Impact and Recovery" loading="lazy" data-sizes="auto" data-src="https://staticweb.usafacts.org/media/original_images/Carousel_Covid_Tracker-06.jpg" class="absolute inset-0 block w-full h-full object-cover lazyload" style="" />
+</picture>
+<span class="block aspect-ratio-16/9"></span>
+</span>
+<span class="w-1/2 block bg-white p-4 md:p-8 flex items-center">
+<div>
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider">Special Report</p>
+<h3 class="mb-2 text-xl font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">COVID-19 Impact and Recovery</h3>
+<span class="linked text-sm mt-2">View Report</span>
+</div>
+</span>
+</a>
+</article>
+</div>
+<div class="text-right">
+<a href="/special-reports/" class="linked mt-2" aria-label="View More Articles">View All</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section class="banner pt-header md:pt-header-md lg:pt-header-desktop relative overflow-hidden mb-6 mb:mb-12 lg:mb-16">
+<div class="absolute inset-0 z-10 bg-cover bg-center" style="background-image: url('https://staticweb.usafacts.org/media/images/Covid.original.jpg'); opacity: 0.4; background-blend-mode: screen;"></div>
+<div class="absolute inset-0 z-20" style="background: #015193; mix-blend-mode: multiply; opacity: 1;"></div>
+<div class="container flex items-center justify-center md:max-w-screen-lg lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl px-6 md:px-8 lg:px-10 py-8 lg:py-16 relative z-30">
+<div class="w-full md:w-4/5 lg:w-4/5 text-center">
+<h1 class="text-gray-900 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold leading-none" style="color: #fff;">Detailed Methodology and Sources: COVID-19 Data</h1>
+<div class="mt-4 md:mt-6 text-base md:text-lg lg:text-xl xl:text-2xl text-type-base leading-relaxed" style="color: #fff;"><p>Detailed methodology on how USAFacts collects COVID-19 data.</p></div>
+<p class="text-type-lighter mt-4 md:mt-6 text-sm md:text-base lg:text-lg" style="color: #fff;">Published on Fri, April 24, 2020 12:00AM PDT | Updated Fri, February 19, 2021 2:53PM PST</p>
+</div>
+</div>
+</section>
+<div class="container px-6 md:px-8 lg:px-10 relative">
+<section class="relative">
+<div class="ts-rich-text rich-text-centered">
+<div class="rich-text">
+<p><a href="https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/">This interactive feature aggregates data</a> from the Centers for Disease Control and Prevention (CDC), state- and local-level public health agencies. County-level data is confirmed by referencing <a href="https://www.cdc.gov/publichealthgateway/healthdirectories/healthdepartments.html">state and local agencies directly</a>. Cases, deaths, and per capita adjustments reflect cumulative totals since January 22, 2020.</p><p>For most states, USAFacts directly collects the daily county-level cumulative totals of positive cases and deaths from a table, dashboard, or PDF on the state public health website. This data is compiled either through scraping or manual entry.</p><p>Because of the frequency with which we are currently updating this data, they may not reflect the exact numbers reported state and local government organizations or the news media. Numbers may also fluctuate as agencies update their own data. At present, USAFacts is working on ensuring this data uses the most up-to-date information possible.</p><p><b><i>Unique states</i></b></p><p>California and Texas state public health websites do not currently offer accurate county-level statistics. Instead, USAFacts individually pulls the most current numbers from each county’s public health website (58 counties for California and 254 counties for Texas).</p><p>Rhode Island’s public health website reports by town rather than the county, and we currently roll this up into counties. Rhode Island also doesn&#x27;t report towns or counties with respect to its deaths, however, the state does periodically provide data on deaths in nursing homes, providing the location for those.</p><p>The Kansas state public health agency updates its data on Mondays, Wednesdays, and Fridays. The case and death counts for Kansas counties are compiled by consulting both the state data and county public health agency data, where available. If the two sources are not reporting the same values, the higher value is recorded.</p><p>Utah’s state government groups 22 of the state&#x27;s 29 counties into one of six regional health agencies. Data for these individual counties is compiled from the six regional agencies.</p><p>Idaho&#x27;s state health agency does not update its data on Sundays.</p><p><b><i>Cases not attributed to specific counties</i></b></p><p>The 21 cases confirmed on the Grand Princess cruise ship on March 5 and 6 are attributed to the state of California, but not to any counties.</p><p>USAFacts attempts to match each case with a county, but some cases counted at the state level are not allocated to counties due to lack of information.</p><p><b><i>Counting cases and deaths</i></b></p><p>USAFacts currently counts presumptive positive cases as confirmed cases, as this is in line with how the CDC reports data. We assign cases to where the person was diagnosed as that information becomes available. </p><p>USAFacts takes deaths directly from state and local agencies. Per official <a href="https://www.cdc.gov/nchs/data/nvss/vsrg/vsrg03-508.pdf">CDC</a> reporting guidelines, deaths should only be counted as COVID-19-related if the disease played a significant role in causing death. This does mean that COVID-19 can be one of several causes of death, such as if a person passes away from having both pneumonia and COVID-19; it does not mean that anyone who happens to have COVID-19 and dies is automatically considered a COVID-19 death. If a state reports both the location of death and the location of residency, we attribute the death to the location of residency.</p><p>We rely on daily government reports. Numbers reported each day fluctuate, and some days will have lower reported numbers than the previous day. We&#x27;ve refined our process since beginning this project and revise older reported numbers to ensure the data doesn&#x27;t show decreasing cases. The logic behind this is that the number of confirmed cases cannot decrease in a given geography.</p><p><b><i>Timing</i></b></p><p>States and counties release data at various points throughout the day, with some localities updating data multiple times daily or even continuously. For USAFacts&#x27; data to be as current as possible, we mostly collect data in the evening (Pacific Time). We generally update the data on our website by 9am PST.</p><p><b><i>Entry Process and Validation</i></b></p><p>Our entry process is partially manual but automated where possible. This data is continually validated and checked by the USAFacts team.</p>
+</div>
+</div>
+<section>
+<div class="fluid-container-sm mt-6 px-0">
+<div class="flex flex-col mb-3 mt-6">
+<a class="publication__sources-heading inline-block text-2xs font-semibold uppercase tracking-wider cursor-pointer text-gray-500 mt-3 md:mt-0" tabindex="0">Sources (State Agencies) </a>
+</div>
+<div class="publication__sources text-xs border-gray-200 border-t w-full">
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://alabamapublichealth.gov/infectiousdiseases/2019-coronavirus.html">Alabama Public Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://dhss.alaska.gov/dph/Epi/id/Pages/COVID-19/monitoring.aspx">Alaska Department of Health and Social Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.azdhs.gov/preparedness/epidemiology-disease-control/infectious-disease-epidemiology/index.php#novel-coronavirus-home">Arizona Department of Health Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.healthy.arkansas.gov/programs-services/topics/novel-coronavirus">Arkansas Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/ncov2019.aspx">California Department of Public Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://covid19.colorado.gov/data">Colorado Department of Public Health & Environment</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://portal.ct.gov/Coronavirus">Connecticut State Government</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.dhss.delaware.gov/dhss/dph/epi/2019novelcoronavirus.html">Delaware Health and Social Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://coronavirus.dc.gov/page/coronavirus-data">Government of the District of Columbia</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://www.floridahealth.gov/diseases-and-conditions/COVID-19/index.html">Florida Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://dph.georgia.gov/">Georgia Department of Public Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://health.hawaii.gov/docd/advisories/novel-coronavirus-2019/#situation">Hawaii Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://coronavirus.idaho.gov/">State of Idaho</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://www.dph.illinois.gov/topics-services/diseases-and-conditions/diseases-a-z-list/coronavirus">Illinois Department of Public Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://www.in.gov/isdh/">Indiana State Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://idph.iowa.gov/Emerging-Health-Issues/Novel-Coronavirus">Iowa Department of Public Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://www.kdheks.gov/coronavirus/index.htm">Kansas Department of Health and Environment</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://chfs.ky.gov/agencies/dph/Pages/covid19.aspx">Kentucky Cabinet for Health and Family Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://ldh.la.gov/Coronavirus/">Louisiana Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.maine.gov/dhhs/mecdc/infectious-disease/epi/airborne/coronavirus.shtml">Maine Center for Disease Control & Prevention</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://phpa.health.maryland.gov/Pages/Novel-coronavirus.aspx">Maryland Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.mass.gov/info-details/covid-19-cases-quarantine-and-monitoring">Commonwealth of Massachusetts</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.michigan.gov/coronavirus">State of Michigan</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.health.state.mn.us/diseases/coronavirus/situation.html">Minnesota Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://msdh.ms.gov/msdhsite/_static/14,0,420.html">Mississippi State Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://health.mo.gov/living/healthcondiseases/communicable/novel-coronavirus/">Missouri Department of Health & Senior Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://dphhs.mt.gov/publichealth/cdepi/diseases/coronavirusmt">Montana Department of Public Health and Human Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://dhhs.ne.gov/Pages/Coronavirus.aspx">Nebraska Department of Health and Human Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://nvhealthresponse.nv.gov/">Nevada Department of Health and Human Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.dhhs.nh.gov/dphs/cdcs/2019-ncov.htm">New Hampshire Department of Health and Human Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.nj.gov/health/">New Jersey Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://cv.nmhealth.org/">New Mexico Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.health.ny.gov/diseases/communicable/coronavirus/">New York State Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www1.nyc.gov/site/doh/health/health-topics/coronavirus.page#cases">New York City Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.ncdhhs.gov/covid-19-case-count-north-carolina">North Carolina Department of Health and Human Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.health.nd.gov/diseases-conditions/coronavirus/north-dakota-coronavirus-cases">North Dakota State Government</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://odh.ohio.gov/wps/portal/gov/odh/know-our-programs/Novel-Coronavirus/2019-nCoV">Ohio Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://coronavirus.health.ok.gov/">Oklahoma State Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.oregon.gov/oha/PH/DISEASESCONDITIONS/DISEASESAZ/Pages/emerging-respiratory-infections.aspx">Oregon Health Authority</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.health.pa.gov/topics/disease/Pages/Coronavirus.aspx">Pennsylvania Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://health.ri.gov/data/covid-19/">Rhode Island Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.scdhec.gov/health/infectious-diseases/viruses/coronavirus-disease-2019-covid-19/monitoring-testing-covid-19">South Carolina Department of Health and Environmental Control</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://doh.sd.gov/news/Coronavirus.aspx">South Dakota Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.tn.gov/health/cedep/ncov.html">Tennessee Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.dshs.state.tx.us/news/updates.shtm#coronavirus">Texas Department of State Health Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://coronavirus.utah.gov/">Government of Utah</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.healthvermont.gov/response/infectious-disease/2019-novel-coronavirus">Vermont Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="http://www.vdh.virginia.gov/surveillance-and-investigation/novel-coronavirus/">Virginia Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.doh.wa.gov/emergencies/coronavirus">Washington State Department of Health</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://dhhr.wv.gov/COVID-19/Pages/default.aspx">West Virginia Department of Health & Human Resources</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://www.dhs.wisconsin.gov/outbreaks/index.htm">Wisconsin Department of Health Services</a></div></div></div>
+<div class="flex justify-between pt-3 mb-3"><div><div class="text-xs sm:text-base font-bold text-gray-800"><a href="https://health.wyo.gov/publichealth/infectious-disease-epidemiology-unit/disease/novel-coronavirus/">Wyoming Department of Health</a></div></div></div>
+</div>
+</section>
+<div class="w-full flex flex-col sm:flex-row items-center">
+<section class="sotu__share absolute top-0 hidden lg:block print:hidden bottom-0">
+<div class="w-auto sticky flex flex-right z-10" style="top: 40vh">
+<div class="sotu__share-icons sotu__share-icons--offset text-usafacts-gray">
+<svg id="share-icons__facebook" class="fill-current hover:text-usafacts-pink cursor-pointer"><use xlink:href="#facebook"></use></svg>
+<svg id="share-icons__twitter" class="fill-current hover:text-usafacts-pink cursor-pointer"><use xlink:href="#twitter"></use></svg>
+<svg id="share-icons__linkedin" class="fill-current hover:text-usafacts-pink cursor-pointer"><use xlink:href="#linkedin"></use></svg>
+<svg id="share-icons__mail" class="fill-current hover:text-usafacts-pink cursor-pointer"><use xlink:href="#mail-share"></use></svg>
+</div>
+<div class="sotu__share-label text-xs text-gray-600 uppercase tracking-widest relative py-1">Share On</div>
+</div>
+</section>
+</div>
+</section>
+<section class="mt-12 sm:mt-24 md:mt-48 print:hidden">
+<div class="container">
+<div class="mb-6 md:mb-8">
+<h2 class="inline-block text-usafacts-blue text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Explore more of USAFacts</h2>
+</div>
+<div class="flex flex-wrap flex-col sm:flex-row gap-padding gap-y-6 sm:gap-4 lg:gap-5 xl:gap-6">
+<div class="w-full sm:w-1/2 lg:w-1/3 overflow-hidden">
+<div class="flex justify-between items-bottom border-b border-gray-200 mb-4">
+<h3 class="text-gray-900 text-xs font-bold uppercase tracking-wider pb-2">Related Articles</h3>
+<a href="/articles/" class="flex items-baseline font-bold text-usafacts-blue text-xs border-b-2 border-usafacts-blue -mb-1px pb-1 hover:text-usafacts-blue hover:border-usafacts-blue">View All</a>
+</div>
+<div>
+<article class="mb-6 xl:mb-8">
+<a href="/articles/top-causes-death-united-states-heart-disease-cancer-and-covid-19/" class="flex w-full group border-b border-gray-200">
+<div class="flex-grow self-center pb-6 xl:pb-8">
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider"></p>
+<h3 class="interaction__underline text-base xl:text-lg font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">
+<span>Top causes of death in the United States: Heart disease, cancer and COVID-19</span>
+</h3>
+</div>
+</a>
+</article>
+<article class="mb-6 xl:mb-8">
+<a href="/articles/45-americans-are-feeling-down-depressed-or-hopeless-during-covid-19-pandemic/" class="flex w-full group border-b border-gray-200">
+<div class="flex-grow self-center pb-6 xl:pb-8">
+<p class="text-2xs mb-1 uppercase text-gray-700 tracking-wider"></p>
+<h3 class="interaction__underline text-base xl:text-lg font-headings font-bold text-gray-900 leading-tight group-hover:text-usafacts-blue">
+<span>48% of Americans are feeling down, depressed, or hopeless during the COVID-19 pandemic</span>
+</h3>
+</div>
+</a>
+</article>
+</div>
+</div>
+<div class="w-full sm:w-1/2 lg:w-1/3 overflow-hidden">
+<div class="flex justify-between items-bottom border-b border-gray-200 mb-4">
+<h3 class="text-gray-900 text-xs font-bold uppercase tracking-wider pb-2">Related Data</h3>
+<a href="/data/" class="flex items-baseline font-bold text-usafacts-blue text-xs border-b-2 border-usafacts-blue -mb-1px pb-1 hover:text-usafacts-blue hover:border-usafacts-blue">View All</a>
+</div>
+<div class="dividers--list flex-grow flex flex-col gap-padding gap-y-4">
+<div>
+<a href="/data/topics/people-society/health/longevity/deaths/" class="card card--small ">
+<div class="card__container justify-between">
+<div class="card__chart lg:w-auto flex items-center">
+<img alt="Deaths" loading="lazy" data-sizes="auto" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" data-src="/embed/chartthumbnail/31815.png" class="lazyload" onerror="this.style.display='none'" />
+</div>
+<div class="card__content">
+<h3 class="card__heading">Deaths</h3>
+<p class="card__details hidden lg:block">2.85 million</p>
+<p class="card__key hidden lg:block">2019</p>
+</div>
+<div class="card__action">
+<span class="card__actionText">Explore the data</span>
+<svg class="card__actionArrow" viewBox="0 0 14 10" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.42.01L13.41 5 8.42 9.99 7.38 8.94l3.2-3.2H.09V4.26h10.49l-3.2-3.2z" fill="#2565AE" fill-rule="nonzero" />
+</svg>
+</div>
+</div>
+<div class="card__background"></div>
+</a>
+</div>
+</div>
+</div>
+<div class="w-full lg:w-1/3 overflow-hidden">
+<section class="relative z-10 p-8 md:p-10 xl:p-12">
+<div class="w-48 relative z-10">
+<svg class="w-12 h-12 mb-2">
+<use xlink:href="#newsletter"></use>
+</svg>
+<p class="text-2xs mb-1 uppercase text-white tracking-wider text-semibold">Newsletter</p>
+<h2 class="mb-4 text-2xl font-headings font-bold text-white leading-tight">Data delivered to your inbox</h2>
+<p class="text-base text-white">Keep up with the latest data and most popular content.</p>
+</div>
+<form action="https://usafacts.us14.list-manage.com/subscribe/post?u=ff1bc9abb222ec965ded81e5e&amp;id=178c3e4197&SIGNUP=Detailed%20Methodology%20and%20Sources%3A%20COVID-19%20Data" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="newsletter__form validate" target="_blank" novalidate>
+<div id="mc_embed_signup_scroll" class="flex">
+<div class="mc-field-group flex-grow">
+<label for="mce-EMAIL" class="hidden">Email Address</label>
+<input type="email" value="" name="EMAIL" class="newsletter__input placeholder-white required email" id="mce-EMAIL" placeholder="Enter your email address">
+</div>
+<div id="mce-responses-publication" class="clear">
+<div class="response" id="mce-error-response-publication" style="display:none"></div>
+<div class="response" id="mce-success-response-publication" style="display:none"></div>
+</div> 
+<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ff1bc9abb222ec965ded81e5e_178c3e4197" tabindex="-1" value=""></div>
+<button type="submit" class="ml-3 flex-shrink-0 flex justify-center items-center w-10 h-10 rounded-full bg-usafacts-yellow text-usafacts-pink" aria-label="Subscribe">
+<svg width="14" height="12" class="fill-current"><use xlink:href="#arrow"></use></svg>
+</button>
+</div>
+</form>
+<div class="newsletter__bg is-notexpanding"></div>
+</section>
+</div>
+</div>
+</div>
+</section>
+</div>
+<footer class="footer mt-8 lg:mt-12 overflow-hidden">
+<div class="container px-6 md:px-8 lg:px-10">
+<div class="border-b md:border-b-2 border-usafacts-blue">
+<svg class="footer__brand fill-current"><use xlink:href="#brand-full"></use></svg>
+</div>
+<div class="flex gap-padding gap-x-4 pt-6 pb-8 lg:pb-12">
+<div class="w-full md:w-1/2 lg:w-1/3 xl:w-2/5">
+<div class="xl:pr-20">
+<h2 class="font-bold text-2xl xl:text-3xl mb-2">Our nation, in numbers</h2>
+<div class="text-base xl:text-lg text-gray-800 leading-relaxed"><p>Government data from over 70 sources organized to show how the money flows, the impact, and who &quot;the people&quot; are.</p></div>
+</div>
+</div>
+<div class="w-1/1 md:w-1/2 lg:w-2/3 xl:w-3/5 hidden md:block">
+<div class="flex flex-wrap justify-end gap-padding md:gap-x-4 lg:gap-x-5 xl:gap-x-6">
+<div class="md:w-1/2 lg:w-auto">
+<p class="text-gray-900 inline-block font-bold uppercase tracking-widest text-xs lg:text-sm md:pt-3 xl:pt-4 -mb-2 xl:-mb-1"></p>
+<a href="/issues/healthcare/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Healthcare</a>
+<a href="/issues/immigration/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Immigration</a>
+<a href="/issues/race-in-america/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Race in America</a>
+<a href="/issues/jobs-and-unemployment/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Jobs &amp; Unemployment</a>
+</div>
+<div class="md:w-1/2 lg:w-auto">
+<p class="text-gray-900 inline-block font-bold uppercase tracking-widest text-xs lg:text-sm md:pt-3 xl:pt-4 -mb-2 xl:-mb-1"></p>
+<a href="/data/topics/government-finances/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Government Finances</a>
+<a href="/data/topics/security-safety/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Safety &amp; Security</a>
+<a href="/data/topics/economy/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Economy</a>
+<a href="/data/topics/people-society/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">People &amp; Society</a>
+</div>
+<div class="md:w-1/2 lg:w-auto">
+<p class="text-gray-900 inline-block font-bold uppercase tracking-widest text-xs lg:text-sm md:pt-3 xl:pt-4 -mb-2 xl:-mb-1"></p>
+<a href="/visualizations/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Visualizations</a>
+<a href="/articles/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Articles</a>
+<a href="/annual-publications/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Annual Publications</a>
+</div>
+<div class="md:w-1/2 lg:w-auto">
+<p class="text-gray-900 inline-block font-bold uppercase tracking-widest text-xs lg:text-sm md:pt-3 xl:pt-4 -mb-2 xl:-mb-1"></p>
+<a href="/about-usafacts/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">About USAFacts</a>
+<a href="/faq/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">FAQ</a>
+<a href="/data-sources/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Data Sources</a>
+<a href="/principles/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Principles</a>
+<a href="/press-releases/" class="text-sm block leading-tight my-4 text-gray-700 hover:text-usafacts-pink">Press Releases</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-black py-6 lg:py-8">
+<div class="container px-6 md:px-8 lg:px-10">
+<div class="flex flex-col md:flex-row items-center space-between">
+<div class="w-full md:w-1/3 order-3 md:order-1">
+<p class="text-sm text-gray-400 text-center md:text-left">&copy; 2021 USAFacts. All rights reserved.</p>
+</div>
+<div class="w-full md:w-1/3 order-1 md:order-2">
+<div class="text-base flex justify-center">
+<a href="https://www.facebook.com/USAFacts" class="mx-2 text-gray-400 hover:text-usafacts-pink" aria-label="Facebook">
+<svg class="w-5 h-5 fill-current"><use xlink:href="#facebook"></use></svg>
+</a>
+<a href="https://twitter.com/USAFacts" class="mx-2 text-gray-400 hover:text-usafacts-pink" aria-label="Twitter">
+<svg class="w-5 h-5 fill-current"><use xlink:href="#twitter"></use></svg>
+</a>
+<a href="https://www.instagram.com/usafacts" class="mx-2 text-gray-400 hover:text-usafacts-pink" aria-label="Instagram">
+<svg class="w-5 h-5 fill-current"><use xlink:href="#instagram"></use></svg>
+</a>
+<a href="https://www.youtube.com/channel/UChwTFs3rYtFi-6ujmKtv-9Q" class="mx-2 text-gray-400 hover:text-usafacts-pink" aria-label="Youtube">
+<svg class="w-5 h-5 fill-current"><use xlink:href="#youtube"></use></svg>
+</a>
+<a href="https://usafacts.org/rss/" class="mx-2 text-gray-400 hover:text-usafacts-pink" aria-label="RSS">
+<svg class="w-5 h-5 stroke-current"><use xlink:href="#rss"></use></svg>
+</a>
+</div>
+</div>
+<div class="w-full md:w-1/3 order-2 md:order-3">
+<div class="text-base flex justify-center md:justify-end gap-padding gap-x-2 py-4 md:py-0">
+<a href="/contact-us/" class="text-sm inline-block text-gray-400 hover:text-usafacts-pink">Contact Us</a>
+<a href="/privacy-policy/" class="text-sm inline-block text-gray-400 hover:text-usafacts-pink">Privacy Policy</a>
+<a href="/terms-and-conditions/" class="text-sm inline-block text-gray-400 hover:text-usafacts-pink">Terms of Service</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<section id="newsletter__sticky" class="fixed bottom-0 right-0 z-40 p-6 md:p-8 lg:p-10 bg-usafacts-pink w-full max-w-screen-xs hidden">
+<a href="#" class="js-newsletter--close p-5 absolute top-0 right-0 z-20 text-usafacts-yellow flex items-center hover:text-white" aria-label="Close Newsletter">
+<span class="mt-0 font-base font-bold uppercase tracking-widest text-2xs mr-2">Close</span>
+<svg width="14" height="14" class="fill-current inline-block"><use xlink:href="#close"></use></svg>
+</a>
+<div class="newsletter__grid relative z-10">
+<div class="newsletter__header">
+<svg class="w-10 h-10 md:w-12 md:h-12 xl:w-16 xl:h-16 mb-2">
+<use xlink:href="#newsletter"></use>
+</svg>
+<p class="text-2xs mb-2 uppercase text-white tracking-wider text-semibold">Newsletter</p>
+<h2 class="text-lg lg:text-2xl font-headings font-bold text-white leading-tight">Data delivered to your inbox</h2>
+</div>
+<div class="newsletter__content flex flex-col justify-end">
+<p class="text-sm md:text-base text-white md:mt-6">Keep up with the latest data and most popular content.</p>
+</div>
+<form action="https://usafacts.us14.list-manage.com/subscribe/post?u=ff1bc9abb222ec965ded81e5e&amp;id=178c3e4197&SIGNUP=The%20diverse%20demographics%20of%20Asian%20Americans" method="post" id="mc-embedded-subscribe-form-base-block" name="mc-embedded-subscribe-form" class="newsletter__form validate" target="_blank" novalidate>
+<div id="mc_embed_signup_sticky" class="flex md:-mb-6">
+<div class="mc-field-group flex-grow">
+<label for="mce-EMAIL-base-block" class="hidden">Email Address</label>
+<input type="email" value="" name="EMAIL" aria-label="newsletter email signup" class="newsletter__input placeholder-white required email" id="mce-EMAIL-base-block" placeholder="Email address">
+</div>
+<div id="mce-responses-base" class="clear">
+<div class="response" id="mce-error-response-base" style="display:none"></div>
+<div class="response" id="mce-success-response-base" style="display:none"></div>
+</div> 
+<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_ff1bc9abb222ec965ded81e5e_178c3e4197" tabindex="-1" value=""></div>
+<button id="newsletter__sticky__submit" type="submit" class="ml-3 flex-shrink-0 flex justify-center items-center w-10 h-10 rounded-full bg-usafacts-yellow text-usafacts-pink" aria-label="Subscribe">
+<svg width="14" height="12" class="fill-current">
+<use xlink:href="#arrow"></use>
+</svg>
+</button>
+</div>
+</form>
+</div>
+<div class="newsletter__bg newsletter__bg--long is-notexpanding"></div>
+</section>
+<svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
+<symbol id="brand" viewBox="0 0 162 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.772.523v10.746c0 2.088.533 3.728 1.58 4.872 1.056 1.15 2.54 1.734 4.411 1.734 1.834 0 3.294-.56 4.34-1.663.984-1.038 1.51-2.538 1.566-4.463l.004-.344V.523h1.772v10.72c0 2.656-.703 4.718-2.088 6.126-1.387 1.406-3.287 2.119-5.647 2.119-2.344 0-4.234-.709-5.62-2.107C.77 16.05.068 14.163.004 11.768L0 11.405V.523h1.772zM28.844.25c2.27 0 4.326.66 6.119 1.963l.296.223-1.022 1.361C32.567 2.48 30.735 1.81 28.79 1.81c-1.249 0-2.274.311-3.044.924-.787.624-1.184 1.418-1.184 2.363 0 1.017.385 1.826 1.144 2.404.744.567 2.105 1.06 4.157 1.503 2.114.464 3.67 1.115 4.626 1.932.938.803 1.414 1.913 1.414 3.299 0 1.565-.59 2.838-1.75 3.785-1.172.956-2.703 1.441-4.549 1.441-2.672 0-5.097-.886-7.213-2.635l-.287-.244 1.09-1.291c.974.869 1.969 1.522 2.96 1.943 1.038.444 2.225.667 3.532.667 1.304 0 2.373-.32 3.177-.95.823-.64 1.24-1.481 1.24-2.5 0-.998-.372-1.797-1.103-2.376-.716-.567-2.019-1.04-3.981-1.45-2.203-.48-3.815-1.131-4.791-1.933-.955-.784-1.44-1.93-1.44-3.405 0-1.46.571-2.674 1.698-3.61C25.622.731 27.087.25 28.845.25zM51.35.388l8.486 18.801h-1.898l-2.174-4.92-.05-.11H45.137l-2.251 5.03h-1.79L49.582.388h1.768zM116.228 0c3.362 0 5.423 1.084 7.105 2.681l.186.18-2.588 2.993c-1.427-1.298-2.88-2.092-4.73-2.092-3.043 0-5.255 2.473-5.358 5.547l-.004.226v.052c0 3.179 2.193 5.827 5.363 5.827 2.011 0 3.281-.768 4.654-1.986l.206-.186 2.59 2.623c-1.903 2.038-4.016 3.309-7.582 3.309-5.349 0-9.345-4.067-9.481-9.26l-.004-.274v-.053c0-5.27 3.963-9.587 9.643-9.587zm37.993.054c2.695 0 4.994.848 6.87 2.357l-2.113 3.072c-1.64-1.139-3.25-1.828-4.81-1.828-1.558 0-2.377.716-2.377 1.616v.052c0 1.219.793 1.616 3.99 2.437 3.75.98 5.864 2.33 5.864 5.561v.054c0 3.68-2.8 5.748-6.79 5.748-2.8 0-5.627-.98-7.846-2.968l2.405-2.887c1.664 1.378 3.408 2.251 5.52 2.251 1.666 0 2.669-.66 2.669-1.747v-.053c0-1.033-.634-1.564-3.725-2.357-3.725-.954-6.129-1.986-6.129-5.667v-.053c0-3.364 2.694-5.588 6.472-5.588zM81.934.319v3.707H71.92v3.946h8.823v3.708H71.92v7.176h-4.069V.32h14.082zM95.488.187l7.925 18.669H99.16l-1.691-4.157h-7.82l-1.69 4.157H83.81L91.737.187h3.75zm47.74.132v3.76h-5.626v14.778h-4.068V4.079h-5.628V.319h15.322zM50.44 2.245l-4.511 10.09-.116.262h9.225L50.44 2.245zm43.12 2.84l-2.457 6.012h4.913L93.56 5.085z" fill-rule="evenodd" />
+</symbol>
+<symbol id="brand-full" viewBox="0 0 124 107" xmlns="http://www.w3.org/2000/svg">
+<g fill="#015193">
+<path d="M109.97 48.71H81.15c-19.5 0-29.27-10.37-36.4-17.95-4.32-4.6-7.74-8.22-11.82-8.22-3.99 0-6.8 2.04-10.07 4.4C18.18 30.3 12.36 34.5.75 34.5a.75.75 0 0 1 0-1.5c11.13 0 16.5-3.88 21.23-7.3 3.48-2.5 6.48-4.67 10.95-4.67 4.73 0 8.34 3.83 12.9 8.69 7.35 7.8 16.47 17.48 35.33 17.48h28.82a.75.75 0 0 1 0 1.5" />
+<path d="M42.4 57.57c-5.42 0-9.4-5.43-14.01-11.72C21.9 37 14.56 26.98.75 26.98a.76.76 0 0 1-.75-.76c0-.42.34-.76.75-.76 14.57 0 22.49 10.8 28.85 19.49 4.37 5.96 8.14 11.1 12.8 11.1 4.67 0 7.39-2.76 10.83-6.26C58.12 44.8 64.2 38.63 78.6 38.63h33.57a.76.76 0 0 1 0 1.52H78.6c-13.78 0-19.37 5.68-24.31 10.7-3.55 3.6-6.6 6.72-11.9 6.72m-5.75 43.87l3.2-7.13 3.26 7.32h-6.54l.08-.19zm6.94 1.29l.03.08 1.54 3.48h1.35L40.48 93h-1.25l-6.02 13.29h1.27l1.6-3.56h7.5zM16.6 93.1h-1.26v7.63c0 1.47-.38 2.6-1.13 3.37a4.15 4.15 0 0 1-3.1 1.16c-1.35 0-2.41-.4-3.17-1.21a4.82 4.82 0 0 1-1.13-3.41V93.1H5.54v7.62c0 1.8.5 3.2 1.5 4.19.99.98 2.34 1.47 4.02 1.47 1.7 0 3.06-.5 4.05-1.48 1-.99 1.5-2.43 1.5-4.3v-7.5zm13.14 12.19a3.17 3.17 0 0 0 1.26-2.62 2.8 2.8 0 0 0-1.02-2.28 7.98 7.98 0 0 0-3.34-1.34 8.37 8.37 0 0 1-3-1.04c-.55-.4-.83-.96-.83-1.66 0-.65.29-1.2.86-1.63.55-.43 1.3-.64 2.2-.64 1.4 0 2.72.46 3.93 1.37l.74-.94A7.58 7.58 0 0 0 25.9 93a4.9 4.9 0 0 0-3.14.99 3.06 3.06 0 0 0-1.23 2.5c0 1.01.35 1.8 1.04 2.35.7.55 1.87 1 3.46 1.34a7.5 7.5 0 0 1 2.87 1c.53.4.8.95.8 1.64 0 .7-.3 1.29-.9 1.73-.58.44-1.35.66-2.29.66a6.71 6.71 0 0 1-4.69-1.8l-.78.88c1.57 1.33 3.4 2 5.41 2a5.2 5.2 0 0 0 3.29-1m25.17-9.63v2.83h6.25v2.65h-6.25v5.15h-2.87V93H62v2.66zm14.8.83l-1.66 4.27h3.33L69.7 96.5zm3.8 9.8l-1.15-2.96h-5.3l-1.14 2.96H63.1L68.48 93h2.54l5.37 13.29h-2.88zm11.87 0a6.57 6.57 0 0 1-6.77-6.61v-.04C78.6 96 81.43 93 85.49 93c2.49 0 3.98.8 5.2 1.98l-1.85 2.08a4.93 4.93 0 0 0-3.37-1.45c-2.23 0-3.83 1.8-3.83 4v.03c0 2.2 1.57 4.04 3.83 4.04 1.5 0 2.43-.59 3.47-1.5l1.85 1.81a6.83 6.83 0 0 1-5.41 2.3m15.73-10.6v10.6h-2.94v-10.6h-4.06V93h11.07v2.69zm11.63 10.6a7.9 7.9 0 0 1-5.35-2.07l1.64-2.01a5.7 5.7 0 0 0 3.76 1.57c1.13 0 1.82-.46 1.82-1.22v-.04c0-.72-.44-1.09-2.54-1.64-2.54-.67-4.17-1.38-4.17-3.95v-.04c0-2.34 1.83-3.89 4.4-3.89 1.84 0 3.4.6 4.68 1.64l-1.44 2.14a5.82 5.82 0 0 0-3.27-1.27c-1.06 0-1.62.5-1.62 1.13v.03c0 .85.54 1.13 2.71 1.7 2.56.68 4 1.62 4 3.87v.04c0 2.57-1.9 4-4.62 4" />
+<path d="M4.1 18.45c15.43.25 22.3 6.87 29.28 14.04 7.8-4.13 14.64-9.1 20.49-13.34l3.68-2.65c-3.14-3.32-6.81-5.68-12.96-5.68l-17.97.07c-6.81-.21-8.12-.42-9.94-.7-1.09-.18-2.33-.37-5.13-.61-1.92-.17-2.31.12-2.37.18-.07.07-.04.4-.02.65.09.88.24 2.51-2.56 2.89-.86.11-1.91 2.6-2.5 5.15m55.7-1.7c.98 1.13 1.91 2.33 2.85 3.54 5.13 6.6 10.43 13.42 25.17 13.42l12.96.01.16-.01h11.28c-.17-1-.38-2.72-.35-5.03.06-5.74 1.97-6.88 3.65-7.9 1.21-.72 2.1-1.25 2.26-3.74-.74-3.23 1.46-5.53 3.08-7.21.83-.88 1.7-1.78 1.62-2.32-.05-.35-.54-.7-.94-.94-1.73-1.02-2.15-2.45-2.46-3.5-.29-.99-.43-1.32-1-1.46-.87-.23-1.73-.06-2.26.42-.22.2-.48.57-.4 1.07.56 3.25-.73 7.51-3.75 8.75a.75.75 0 0 1-.13.04c-.02 0-2.44.55-3.9 1.67-1.08.95-1.91 2.65-2.96 4.81-.35.7-.7 1.44-1.1 2.22-1.66 3.2-6.82 8.53-11.83 6.91-2.18-.71-4.17-3.46-6.1-6.11a76.46 76.46 0 0 0-1.58-2.14.76.76 0 0 1-.13-.23c-3.15-4.01-6.93-8.23-11.9-8.23-3.1 0-7.2 2.44-12.23 5.96M51.7 68.1l.49.03c1.2.11 2.24.65 2.93 1.5l1.03 1.22c1.11 1.3 2.26 2.63 2.85 4.2.8 2.13 2.39 3.06 4.51 3.8a8 8 0 0 1 .5.2c.76.32.97.34 1.2.1.1-.15-.09-.8-.17-1.09l-.07-.26c-.96-3.58.58-6.9 3.73-8.07.8-.3 1.58-.9 2.4-1.55 1.39-1.08 2.95-2.3 5.01-2.24l1.46.05c2.29.1 3.33.16 4.9-.93 3.4-2.36 11.6-4.36 17.52-1.82a6.17 6.17 0 0 1 3.93 4.4c.72 2.59 3.74 5.76 5.35 6.55.64.32 1.22.41 1.53.24.2-.1.32-.34.36-.72.14-1.03.06-3.38-1.17-4.85-5.87-7-5.85-8.85-5.27-12.05a6.96 6.96 0 0 1 1.69-3.75l.08-.11h-5.89c-.04 0-.09 0-.14-.02H78.3c-21.16 0-31.73-6.08-39.42-12.93-7.19 4.94-16.94 10-32.49 10.23C9.22 53.6 18.52 63.2 32.23 63.27l1.05-.01c2.69-.02 5.48-.05 7.01 1.4.51.49 1 .86 1.48 1.22.83.62 1.61 1.2 2.38 2.27.79 1.1 1.6 1.7 2.4 1.8.75.09 1.58-.25 2.48-1.01a4.27 4.27 0 0 1 2.67-.84m13.2 12.72c-.57 0-1.1-.22-1.48-.38-.13-.06-.26-.12-.4-.16-2.18-.76-4.35-1.85-5.43-4.7-.5-1.32-1.55-2.55-2.58-3.74-.35-.41-.72-.84-1.06-1.26a2.71 2.71 0 0 0-1.9-.95c-.88-.08-1.7.17-2.04.46-1.23 1.04-2.45 1.5-3.64 1.35-1.25-.15-2.4-.96-3.45-2.4a8.7 8.7 0 0 0-2.06-1.96c-.5-.38-1.04-.78-1.61-1.32-1.09-1.03-3.56-1.01-5.96-.99h-1.06c-5.01-.02-12.64-1.33-20.58-7.43a38.5 38.5 0 0 1-7.41-7.38.76.76 0 0 1 .55-1.2l.42-.03h.06c15.53 0 25.29-4.91 32.45-9.78a133.45 133.45 0 0 1-4.63-4.6c-9.13 4.7-19.55 8.23-31.23 8.23a.76.76 0 1 1 0-1.5c11.2 0 21.26-3.35 30.12-7.86C24.93 26 18.4 19.95 3.18 19.95a.76.76 0 0 1-.74-.9c.3-1.6 1.46-6.92 3.96-7.25 1.36-.18 1.33-.47 1.26-1.25-.05-.54-.12-1.29.45-1.86.59-.6 1.66-.78 3.57-.62 2.86.25 4.12.45 5.24.62 1.76.28 3.03.48 9.72.69L44.6 9.3c6.8 0 10.85 2.7 14.2 6.3 5.33-3.72 9.72-6.33 13.25-6.33 5.73 0 9.83 4.64 13.24 8.99.05.07.1.14.12.23.5.64 1 1.33 1.48 2 1.7 2.35 3.63 5 5.34 5.56 4.09 1.33 8.6-3.44 10.01-6.17.4-.75.75-1.48 1.09-2.18 1.13-2.32 2.02-4.16 3.34-5.3l.03-.03c1.6-1.24 4-1.84 4.46-1.95 2.19-.95 3.23-4.47 2.79-7.07-.16-.9.16-1.8.86-2.44.9-.83 2.3-1.12 3.65-.78 1.46.37 1.8 1.5 2.09 2.5.28.99.55 1.91 1.77 2.62 1.02.6 1.56 1.27 1.67 2.04.18 1.26-.85 2.33-2.03 3.57-1.54 1.61-3.3 3.44-2.68 5.93.02.07.03.15.02.22-.19 3.37-1.68 4.27-2.99 5.06-1.47.89-2.86 1.72-2.92 6.61-.04 3.47.49 5.56.5 5.58a.76.76 0 0 1-.74.95h-12a.75.75 0 0 1-.16.02l-13.17-.02c-15.47 0-21.26-7.44-26.36-14-.97-1.26-1.9-2.47-2.88-3.6-1.22.87-2.5 1.8-3.81 2.76-5.8 4.2-12.57 9.11-20.28 13.24 1.45 1.49 2.93 2.99 4.51 4.45 1.37-.97 2.64-1.92 3.85-2.83 4.67-3.5 8.36-6.26 12.63-6.26 4.06 0 6.81 2.4 10 5.19 4.3 3.76 9.66 8.44 20.58 8.44h25.5a.76.76 0 1 1 0 1.51h-25.5c-11.49 0-17.08-4.89-21.58-8.81-3.07-2.7-5.5-4.82-9-4.82-3.77 0-7.28 2.63-11.72 5.96-1.14.85-2.33 1.75-3.61 2.66a45.68 45.68 0 0 0 9.25 6.44c7.6 3.94 17.04 5.86 28.9 5.86h22.2l.14.01.06.02h7.21c.05 0 .1 0 .16.02l.08.01a.76.76 0 0 1 .47 1.17c-.4.56-.73 1-1 1.35-.76.99-1.08 1.4-1.4 3.09-.47 2.6-.73 4.04 4.95 10.81 1.57 1.86 1.69 4.66 1.51 6.02-.14 1.1-.7 1.62-1.15 1.86-.76.4-1.8.33-2.92-.23-1.86-.92-5.26-4.37-6.13-7.49a4.7 4.7 0 0 0-3.06-3.42c-5.23-2.24-12.88-.54-16.07 1.67-2 1.38-3.44 1.32-5.82 1.2l-1.44-.05c-1.52-.05-2.74.91-4.03 1.92-.88.69-1.79 1.4-2.81 1.78-2.8 1.04-3.41 3.97-2.8 6.26l.07.24c.22.78.52 1.83-.2 2.56-.46.46-.95.61-1.41.61" />
+</g>
+</symbol>
+<symbol id="brand-logo" viewBox="0 0 125 82" xmlns="http://www.w3.org/2000/svg">
+<path d="M109.97 49.7093H81.15C61.65 49.7093 51.88 39.3393 44.75 31.7593C40.43 27.1593 37.01 23.5393 32.93 23.5393C28.94 23.5393 26.13 25.5793 22.86 27.9393C18.18 31.2993 12.36 35.4993 0.75 35.4993C0.551088 35.4993 0.360322 35.4203 0.21967 35.2796C0.0790176 35.139 0 34.9482 0 34.7493C0 34.5504 0.0790176 34.3596 0.21967 34.219C0.360322 34.0783 0.551088 33.9993 0.75 33.9993C11.88 33.9993 17.25 30.1193 21.98 26.6993C25.46 24.1993 28.46 22.0293 32.93 22.0293C37.66 22.0293 41.27 25.8593 45.83 30.7193C53.18 38.5193 62.3 48.1993 81.16 48.1993H109.98C110.179 48.1993 110.37 48.2783 110.51 48.419C110.651 48.5596 110.73 48.7504 110.73 48.9493C110.73 49.1482 110.651 49.339 110.51 49.4796C110.37 49.6203 110.179 49.6993 109.98 49.6993" fill="#015193" />
+<path d="M42.4 58.57C36.98 58.57 33 53.14 28.39 46.85C21.9 38 14.56 27.98 0.75 27.98C0.550173 27.9773 0.359424 27.8961 0.219052 27.7539C0.0786798 27.6116 -1.72974e-05 27.4198 2.85177e-09 27.22C2.85177e-09 26.8 0.34 26.46 0.75 26.46C15.32 26.46 23.24 37.26 29.6 45.95C33.97 51.91 37.74 57.05 42.4 57.05C47.07 57.05 49.79 54.29 53.23 50.79C58.12 45.8 64.2 39.63 78.6 39.63H112.17C112.372 39.63 112.565 39.71 112.707 39.8526C112.85 39.9951 112.93 40.1884 112.93 40.39C112.93 40.5915 112.85 40.7848 112.707 40.9274C112.565 41.0699 112.372 41.15 112.17 41.15H78.6C64.82 41.15 59.23 46.83 54.29 51.85C50.74 55.45 47.69 58.57 42.39 58.57H42.4Z" fill="#015193" />
+<path d="M4.10005 19.4497C19.5301 19.6997 26.4001 26.3197 33.3801 33.4897C41.1801 29.3597 48.0201 24.3897 53.8701 20.1497L57.5501 17.4997C54.4101 14.1797 50.7401 11.8197 44.5901 11.8197L26.6201 11.8897C19.8101 11.6797 18.5001 11.4697 16.6801 11.1897C15.5901 11.0097 14.3501 10.8197 11.5501 10.5797C9.63006 10.4097 9.24006 10.6997 9.18006 10.7597C9.11006 10.8297 9.14006 11.1597 9.16006 11.4097C9.25006 12.2897 9.40005 13.9197 6.60005 14.2997C5.74005 14.4097 4.69005 16.8997 4.10005 19.4497ZM59.8001 17.7497C60.7801 18.8797 61.7101 20.0797 62.6501 21.2897C67.7801 27.8897 73.0801 34.7097 87.8201 34.7097L100.78 34.7197L100.94 34.7097H112.22C112.05 33.7097 111.84 31.9897 111.87 29.6797C111.93 23.9397 113.84 22.7997 115.52 21.7797C116.73 21.0597 117.62 20.5297 117.78 18.0397C117.04 14.8097 119.24 12.5097 120.86 10.8297C121.69 9.94967 122.56 9.04968 122.48 8.50968C122.43 8.15968 121.94 7.80967 121.54 7.56967C119.81 6.54967 119.39 5.11967 119.08 4.06967C118.79 3.07967 118.65 2.74967 118.08 2.60967C117.21 2.37967 116.35 2.54968 115.82 3.02968C115.6 3.22968 115.34 3.59967 115.42 4.09967C115.98 7.34967 114.69 11.6097 111.67 12.8497C111.628 12.8669 111.585 12.8803 111.54 12.8897C111.52 12.8897 109.1 13.4397 107.64 14.5597C106.56 15.5097 105.73 17.2097 104.68 19.3697C104.33 20.0697 103.98 20.8097 103.58 21.5897C101.92 24.7897 96.7601 30.1197 91.7501 28.4997C89.5701 27.7897 87.5801 25.0397 85.6501 22.3897C85.1358 21.6672 84.6091 20.9538 84.0701 20.2497C84.0136 20.1812 83.9696 20.1033 83.9401 20.0197C80.7901 16.0097 77.0101 11.7897 72.0401 11.7897C68.9401 11.7897 64.8401 14.2297 59.8101 17.7497H59.8001ZM51.7001 69.0997L52.1901 69.1297C53.3901 69.2397 54.4301 69.7797 55.1201 70.6297L56.1501 71.8497C57.2601 73.1497 58.4101 74.4797 59.0001 76.0497C59.8001 78.1797 61.3901 79.1097 63.5101 79.8497C63.6789 79.9107 63.8457 79.9774 64.0101 80.0497C64.7701 80.3697 64.9801 80.3897 65.2101 80.1497C65.3101 79.9997 65.1201 79.3497 65.0401 79.0597L64.9701 78.7997C64.0101 75.2197 65.5501 71.8997 68.7001 70.7297C69.5001 70.4297 70.2801 69.8297 71.1001 69.1797C72.4901 68.0997 74.0501 66.8797 76.1101 66.9397L77.5701 66.9897C79.8601 67.0897 80.9001 67.1497 82.4701 66.0597C85.8701 63.6997 94.0701 61.6997 99.9901 64.2397C100.96 64.5865 101.829 65.1709 102.515 65.9395C103.202 66.7081 103.685 67.6364 103.92 68.6397C104.64 71.2297 107.66 74.3997 109.27 75.1897C109.91 75.5097 110.49 75.5997 110.8 75.4297C111 75.3297 111.12 75.0897 111.16 74.7097C111.3 73.6797 111.22 71.3297 109.99 69.8597C104.12 62.8597 104.14 61.0097 104.72 57.8097C104.893 56.418 105.482 55.1109 106.41 54.0597L106.49 53.9497H100.6C100.56 53.9497 100.51 53.9497 100.46 53.9297H78.3001C57.1401 53.9297 46.5701 47.8497 38.8801 40.9997C31.6901 45.9397 21.9401 50.9997 6.39005 51.2297C9.22005 54.5997 18.5201 64.1997 32.2301 64.2697L33.2801 64.2597C35.9701 64.2397 38.7601 64.2097 40.2901 65.6597C40.8001 66.1497 41.2901 66.5197 41.7701 66.8797C42.6001 67.4997 43.3801 68.0797 44.1501 69.1497C44.9401 70.2497 45.7501 70.8497 46.5501 70.9497C47.3001 71.0397 48.1301 70.6997 49.0301 69.9397C49.8004 69.3676 50.741 69.0717 51.7001 69.0997ZM64.9001 81.8197C64.3301 81.8197 63.8001 81.5997 63.4201 81.4397C63.2901 81.3797 63.1601 81.3197 63.0201 81.2797C60.8401 80.5197 58.6701 79.4297 57.5901 76.5797C57.0901 75.2597 56.0401 74.0297 55.0101 72.8397C54.6601 72.4297 54.2901 71.9997 53.9501 71.5797C53.7137 71.3015 53.4235 71.074 53.097 70.9107C52.7705 70.7475 52.4144 70.6519 52.0501 70.6297C51.1701 70.5497 50.3501 70.7997 50.0101 71.0897C48.7801 72.1297 47.5601 72.5897 46.3701 72.4397C45.1201 72.2897 43.9701 71.4797 42.9201 70.0397C42.3455 69.2778 41.6496 68.6156 40.8601 68.0797C40.3601 67.6997 39.8201 67.2997 39.2501 66.7597C38.1601 65.7297 35.6901 65.7497 33.2901 65.7697H32.2301C27.2201 65.7497 19.5901 64.4397 11.6501 58.3397C8.85588 56.2282 6.36288 53.7453 4.24005 50.9597C4.16193 50.8508 4.11399 50.7231 4.10111 50.5897C4.08822 50.4563 4.11085 50.3219 4.1667 50.2C4.22254 50.0782 4.30962 49.9733 4.4191 49.8959C4.52857 49.8186 4.65655 49.7716 4.79005 49.7597L5.21005 49.7297H5.27005C20.8001 49.7297 30.5601 44.8197 37.7201 39.9497C36.1395 38.4543 34.5957 36.9205 33.0901 35.3497C23.9601 40.0497 13.5401 43.5797 1.86005 43.5797C1.7513 43.5975 1.63998 43.5914 1.5338 43.562C1.42762 43.5325 1.32912 43.4802 1.24513 43.4089C1.16114 43.3375 1.09368 43.2488 1.04741 43.1488C1.00114 43.0488 0.977173 42.9399 0.977173 42.8297C0.977173 42.7195 1.00114 42.6106 1.04741 42.5106C1.09368 42.4106 1.16114 42.3218 1.24513 42.2505C1.32912 42.1791 1.42762 42.1269 1.5338 42.0974C1.63998 42.0679 1.7513 42.0619 1.86005 42.0797C13.0601 42.0797 23.1201 38.7297 31.9801 34.2197C24.9301 26.9997 18.4001 20.9497 3.18005 20.9497C3.06898 20.9487 2.95948 20.9233 2.85926 20.8754C2.75904 20.8275 2.67055 20.7582 2.6 20.6724C2.52945 20.5866 2.47857 20.4864 2.45094 20.3788C2.4233 20.2712 2.41959 20.1589 2.44005 20.0497C2.74005 18.4497 3.90005 13.1297 6.40005 12.7997C7.76005 12.6197 7.73005 12.3297 7.66005 11.5497C7.61005 11.0097 7.54005 10.2597 8.11005 9.68967C8.70005 9.08967 9.77006 8.90967 11.6801 9.06967C14.5401 9.31967 15.8001 9.51967 16.9201 9.68967C18.6801 9.96967 19.9501 10.1697 26.6401 10.3797L44.6001 10.2997C51.4001 10.2997 55.4501 12.9997 58.8001 16.5997C64.1301 12.8797 68.5201 10.2697 72.0501 10.2697C77.7801 10.2697 81.8801 14.9097 85.2901 19.2597C85.3401 19.3297 85.3901 19.3997 85.4101 19.4897C85.9101 20.1297 86.4101 20.8197 86.8901 21.4897C88.5901 23.8397 90.5201 26.4897 92.2301 27.0497C96.3201 28.3797 100.83 23.6097 102.24 20.8797C102.64 20.1297 102.99 19.3997 103.33 18.6997C104.46 16.3797 105.35 14.5397 106.67 13.3997L106.7 13.3697C108.3 12.1297 110.7 11.5297 111.16 11.4197C113.35 10.4697 114.39 6.94967 113.95 4.34967C113.79 3.44967 114.11 2.54967 114.81 1.90968C115.71 1.07968 117.11 0.789675 118.46 1.12967C119.92 1.49967 120.26 2.62968 120.55 3.62968C120.83 4.61968 121.1 5.53967 122.32 6.24967C123.34 6.84967 123.88 7.51967 123.99 8.28967C124.17 9.54967 123.14 10.6197 121.96 11.8597C120.42 13.4697 118.66 15.2997 119.28 17.7897C119.3 17.8597 119.31 17.9397 119.3 18.0097C119.11 21.3797 117.62 22.2797 116.31 23.0697C114.84 23.9597 113.45 24.7897 113.39 29.6797C113.35 33.1497 113.88 35.2397 113.89 35.2597C113.919 35.3723 113.922 35.4901 113.898 35.6041C113.875 35.718 113.825 35.8249 113.754 35.9167C113.682 36.0085 113.591 36.0826 113.486 36.1334C113.381 36.1842 113.266 36.2103 113.15 36.2097H101.15C101.098 36.2221 101.044 36.2288 100.99 36.2297L87.8201 36.2097C72.3501 36.2097 66.5601 28.7697 61.4601 22.2097C60.4901 20.9497 59.5601 19.7397 58.5801 18.6097C57.3601 19.4797 56.0801 20.4097 54.7701 21.3697C48.9701 25.5697 42.2001 30.4797 34.4901 34.6097C35.9401 36.0997 37.4201 37.5997 39.0001 39.0597C40.3701 38.0897 41.6401 37.1397 42.8501 36.2297C47.5201 32.7297 51.2101 29.9697 55.4801 29.9697C59.5401 29.9697 62.2901 32.3697 65.4801 35.1597C69.7801 38.9197 75.1401 43.5997 86.0601 43.5997H111.56C111.666 43.5874 111.774 43.5978 111.876 43.6301C111.979 43.6625 112.073 43.716 112.153 43.7873C112.233 43.8586 112.297 43.946 112.341 44.0438C112.384 44.1416 112.407 44.2475 112.407 44.3547C112.407 44.4618 112.384 44.5678 112.341 44.6655C112.297 44.7633 112.233 44.8507 112.153 44.922C112.073 44.9933 111.979 45.0469 111.876 45.0792C111.774 45.1116 111.666 45.1219 111.56 45.1097H86.0601C74.5701 45.1097 68.9801 40.2197 64.4801 36.2997C61.4101 33.5997 58.9801 31.4797 55.4801 31.4797C51.7101 31.4797 48.2001 34.1097 43.7601 37.4397C42.6201 38.2897 41.4301 39.1897 40.1501 40.0997C42.9557 42.62 46.0627 44.7831 49.4001 46.5397C57.0001 50.4797 66.4401 52.3997 78.3001 52.3997H100.5L100.64 52.4097L100.7 52.4297H107.91C107.96 52.4297 108.01 52.4297 108.07 52.4497L108.15 52.4597C108.272 52.4857 108.385 52.5413 108.481 52.6215C108.576 52.7017 108.65 52.804 108.696 52.9196C108.743 53.0352 108.76 53.1603 108.747 53.2842C108.734 53.408 108.69 53.5266 108.62 53.6297C108.22 54.1897 107.89 54.6297 107.62 54.9797C106.86 55.9697 106.54 56.3797 106.22 58.0697C105.75 60.6697 105.49 62.1097 111.17 68.8797C112.74 70.7397 112.86 73.5397 112.68 74.8997C112.54 75.9997 111.98 76.5197 111.53 76.7597C110.77 77.1597 109.73 77.0897 108.61 76.5297C106.75 75.6097 103.35 72.1597 102.48 69.0397C102.305 68.2556 101.932 67.5295 101.396 66.9308C100.86 66.3321 100.18 65.8807 99.4201 65.6197C94.1901 63.3797 86.5401 65.0797 83.3501 67.2897C81.3501 68.6697 79.9101 68.6097 77.5301 68.4897L76.09 68.4397C74.57 68.3897 73.3501 69.3497 72.0601 70.3597C71.1801 71.0497 70.2701 71.7597 69.2501 72.1397C66.4501 73.1797 65.8401 76.1097 66.4501 78.3997L66.5201 78.6397C66.7401 79.4197 67.0401 80.4697 66.3201 81.1997C65.8601 81.6597 65.3701 81.8097 64.9101 81.8097" fill="#015193" />
+</symbol>
+<symbol id="facebook" viewBox="0 0 20 20">
+<path d="M11,10h2.6l0.4-3H11V5.3c0-0.9,0.2-1.5,1.5-1.5H14V1.1c-0.3,0-1-0.1-2.1-0.1C9.6,1,8,2.4,8,5v2H5.5v3H8v8h3V10z" />
+</symbol>
+<symbol id="twitter" viewBox="0 0 20 20">
+<path d="M19,4.74 C18.339,5.029 17.626,5.229 16.881,5.32 C17.644,4.86 18.227,4.139 18.503,3.28 C17.79,3.7 17.001,4.009 16.159,4.17 C15.485,3.45 14.526,3 13.464,3 C11.423,3 9.771,4.66 9.771,6.7 C9.771,6.99 9.804,7.269 9.868,7.539 C6.795,7.38 4.076,5.919 2.254,3.679 C1.936,4.219 1.754,4.86 1.754,5.539 C1.754,6.82 2.405,7.95 3.397,8.61 C2.79,8.589 2.22,8.429 1.723,8.149 L1.723,8.189 C1.723,9.978 2.997,11.478 4.686,11.82 C4.376,11.899 4.049,11.939 3.713,11.939 C3.475,11.939 3.245,11.919 3.018,11.88 C3.49,13.349 4.852,14.419 6.469,14.449 C5.205,15.429 3.612,16.019 1.882,16.019 C1.583,16.019 1.29,16.009 1,15.969 C2.635,17.019 4.576,17.629 6.662,17.629 C13.454,17.629 17.17,12 17.17,7.129 C17.17,6.969 17.166,6.809 17.157,6.649 C17.879,6.129 18.504,5.478 19,4.74" />
+</symbol>
+<symbol id="instagram" viewBox="0 0 20 20">
+<path d="M13.55,1H6.46C3.45,1,1,3.44,1,6.44v7.12c0,3,2.45,5.44,5.46,5.44h7.08c3.02,0,5.46-2.44,5.46-5.44V6.44 C19.01,3.44,16.56,1,13.55,1z M17.5,14c0,1.93-1.57,3.5-3.5,3.5H6c-1.93,0-3.5-1.57-3.5-3.5V6c0-1.93,1.57-3.5,3.5-3.5h8 c1.93,0,3.5,1.57,3.5,3.5V14z" />
+<circle cx="14.87" cy="5.26" r="1.09" />
+<path d="M10.03,5.45c-2.55,0-4.63,2.06-4.63,4.6c0,2.55,2.07,4.61,4.63,4.61c2.56,0,4.63-2.061,4.63-4.61 C14.65,7.51,12.58,5.45,10.03,5.45L10.03,5.45L10.03,5.45z M10.08,13c-1.66,0-3-1.34-3-2.99c0-1.65,1.34-2.99,3-2.99s3,1.34,3,2.99 C13.08,11.66,11.74,13,10.08,13L10.08,13L10.08,13z" />
+</symbol>
+<symbol id="youtube" viewBox="0 0 20 20">
+<path d="M15,4.1c1,0.1,2.3,0,3,0.8c0.8,0.8,0.9,2.1,0.9,3.1C19,9.2,19,10.9,19,12c-0.1,1.1,0,2.4-0.5,3.4c-0.5,1.1-1.4,1.5-2.5,1.6 c-1.2,0.1-8.6,0.1-11,0c-1.1-0.1-2.4-0.1-3.2-1c-0.7-0.8-0.7-2-0.8-3C1,11.8,1,10.1,1,8.9c0-1.1,0-2.4,0.5-3.4C2,4.5,3,4.3,4.1,4.2 C5.3,4.1,12.6,4,15,4.1z M8,7.5v6l5.5-3L8,7.5z" />
+</symbol>
+<symbol id="linkedin" viewBox="0 0 20 20">
+<path d="M5.77,17.89 L5.77,7.17 L2.21,7.17 L2.21,17.89 L5.77,17.89 L5.77,17.89 Z M3.99,5.71 C5.23,5.71 6.01,4.89 6.01,3.86 C5.99,2.8 5.24,2 4.02,2 C2.8,2 2,2.8 2,3.85 C2,4.88 2.77,5.7 3.97,5.7 L3.99,5.7 L3.99,5.71 L3.99,5.71 Z" />
+<path d="M7.75,17.89 L11.31,17.89 L11.31,11.9 C11.31,11.58 11.33,11.26 11.43,11.03 C11.69,10.39 12.27,9.73 13.26,9.73 C14.55,9.73 15.06,10.71 15.06,12.15 L15.06,17.89 L18.62,17.89 L18.62,11.74 C18.62,8.45 16.86,6.92 14.52,6.92 C12.6,6.92 11.75,7.99 11.28,8.73 L11.3,8.73 L11.3,7.17 L7.75,7.17 C7.79,8.17 7.75,17.89 7.75,17.89 L7.75,17.89 L7.75,17.89 Z" />
+</symbol>
+<symbol id="google-plus" viewBox="0 0 20 20">
+<path d="M12.9,9c0,2.7-0.6,5-3.2,6.3c-3.7,1.8-8.1,0.2-9.4-3.6C-1.1,7.6,1.9,3.3,6.1,3c1.7-0.1,3.2,0.3,4.6,1.3 c0.1,0.1,0.3,0.2,0.4,0.4c-0.5,0.5-1.2,1-1.7,1.6c-1-0.8-2.1-1.1-3.5-0.9C5,5.6,4.2,6,3.6,6.7c-1.3,1.3-1.5,3.4-0.5,5 c1,1.7,2.6,2.3,4.6,1.9c1.4-0.3,2.4-1.2,2.6-2.6H6.9V9H12.9z" />
+<polygon points="20,9 20,11 18,11 18,13 16,13 16,11 14,11 14,9 16,9 16,7 18,7 18,9 " />
+</symbol>
+<symbol id="rss" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 11a9 9 0 0 1 9 9"></path>
+<path d="M4 4a16 16 0 0 1 16 16"></path>
+<circle cx="5" cy="19" r="1"></circle>
+</symbol>
+<symbol id="icon-excel" viewBox="0 0 17 21" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.1 0L17 4.65V21H0V0h12.1zM8 17H1v3h7v-3zm8 0H9v3h7v-3zm-8-4H1v3h7v-3zm8 0H9v3h7v-3zM8 9H1v3h7V9zm8 0H9v3h7V9zM8 5H1v3h7V5zm3 0H9v3h7V6h-5V5zm1-3.71V5h3.91L12 1.29zM1 1v3h7V1H1zm8 3h2V1H9v3z" />
+</symbol>
+<symbol id="icon-pdf" viewBox="0 0 17 21" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 5V.5h-1V6h5.5V5z" />
+<path d="M17 21V4.65L12.1 0H0v21h17zM16 5.08V20H1V1h10.7L16 5.08z" />
+<path d="M7.55 6.76c.26.05.48.32.64.71.33.84.37 2.14.02 3.6l-.05-.08.19.3c.33.5.71.97 1.13 1.38.3.28.62.57.96.84l.14-.03a9.62 9.62 0 0 1 1.38-.18h.3c.32 0 .83.07 1.22.23.65.27.95.77.66 1.45-.26.6-.89.67-1.7.36a9 9 0 0 1-2.12-1.3l.11-.02c-1.14.24-2.47.65-4 1.28l.05-.08c-.18.31-.36.59-.55.84-.96 1.26-1.7 1.92-2.25 2.12-.43.16-.74.03-.88-.22l-.02-.05-.01-.03c-.07-.27.02-.64.36-1.08.5-.62 1.44-1.26 2.95-1.9l.05-.08.08-.15.18-.36.2-.4.5-1.06c.2-.47.36-.93.5-1.37l.09-.34-.1-.15a5.28 5.28 0 0 1-.69-3.62c.1-.42.33-.68.66-.61zm-1.95 8.9c-1.05.5-1.72 1-2.08 1.45-.24.31-.3.53-.28.62l.02.01c.04.03.1.03.25-.03.42-.15 1.03-.7 1.86-1.74l.16-.22.07-.08zm6.66-1.87c-.34 0-.74.03-1.28.13l.22.16c.52.36 1 .63 1.41.79.6.23.95.2 1.07-.1.17-.38.03-.6-.4-.78-.31-.13-.76-.2-1.02-.2zm-4.21-2.06l-.01.03-.01-.02-.1.31c-.12.34-.25.69-.4 1.03l-.17.35-.48 1.03-.07.14.03-.01.38-.14c.94-.35 1.8-.61 2.6-.8v-.01l-.23-.2-.45-.41a8.5 8.5 0 0 1-1.1-1.3zm-.6-4.48l-.03.09-.04.14c-.2.86-.02 1.88.46 2.9l.04-.28c.14-1 .07-1.86-.16-2.44-.1-.25-.21-.4-.26-.4z" />
+</symbol>
+<symbol id="icon-interactive" viewBox="0 0 17 21" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.1 0L17 4.65V21H0V0h12.1zM11 1H1v19h15V6h-5V1zM9.91 9.65c.36 0 .65.29.65.65v6.05a.65.65 0 1 1-1.3 0V10.3c0-.36.3-.65.65-.65zm-2.09.72c.36 0 .65.29.65.65v4.6a.65.65 0 1 1-1.3 0v-4.6c0-.36.3-.65.65-.65zM4.24 6.03l9.06 2.72c.4.12.7.5.7.88v5.8c0 .36-.26.61-.61.61a.82.82 0 0 1-.24-.03l-1.94-.59v-.52l2.09.62.09.02c.1 0 .1-.07.1-.1V9.63c0-.14-.14-.34-.34-.4L4.1 6.52A.3.3 0 0 0 4 6.5c-.11 0-.11.07-.11.1v4.53a1.29 1.29 0 0 0-.5 0V6.6c0-.42.4-.7.84-.57zm1.5 5.03c.35 0 .65.3.65.65v3.23a.65.65 0 1 1-1.3 0v-3.23c0-.35.29-.65.65-.65zm-2.1.7c.37 0 .66.29.66.65v1.83a.65.65 0 1 1-1.3 0v-1.83c0-.36.29-.65.65-.65zM12 1.29V5h3.91L12 1.29z" />
+</symbol>
+<symbol id="menu" viewBox="0 0 18 14" xmlns="http://www.w3.org/2000/svg">
+<path d="M17 12a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2h16zm0-6a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2h16zm0-6a1 1 0 0 1 0 2H1a1 1 0 0 1 0-2h16z" fill-rule="evenodd" />
+</symbol>
+<symbol id="two-bars-menu" viewBox="0 0 24 13" fill="none">
+<path stroke="currentColor" stroke-width="2.86" stroke-linecap="round" stroke-linejoin="round" d="M1.43 1.57h20.685M1.43 10.953h20.685" />
+</symbol>
+<symbol id="mail" viewBox="0 0 20 20">
+<polyline fill="none" stroke="#000" points="1.4,6.5 10,11 18.6,6.5" />
+<path d="M 1,4 1,16 19,16 19,4 1,4 Z M 18,15 2,15 2,5 18,5 18,15 Z" />
+</symbol>
+<symbol id="mail-share" viewBox="0 0 22 17">
+<g stroke="none" stroke-width="1" fill-rule="evenodd">
+<g transform="translate(-1440.000000, -231.000000)">
+<g transform="translate(0.000000, 44.000000)">
+<g transform="translate(1439.000000, 53.000000)">
+<g>
+<g>
+<path d="M21.8356996,140.171274 C21.964546,140.094042 22.1254533,140.094042 22.2542996,140.171274 C22.385682,140.244902 22.4667164,140.38407 22.4659058,140.534674 L22.4659058,140.534674 L22.4659058,148.407574 C22.4684498,149.779306 21.360519,150.894438 19.9887997,150.900774 L19.9887997,150.900774 L3.47710003,150.900774 C2.10717739,150.894443 1,149.782111 1,148.412174 L1,148.412174 L1,140.534674 C1,140.384323 1.08133493,140.24574 1.21272047,140.172642 C1.344106,140.099543 1.50479438,140.103422 1.63250007,140.182774 L1.63250007,140.182774 L9.7652999,145.286474 C10.9693845,146.04104 12.4988152,146.04104 13.7028998,145.286474 L13.7028998,145.286474 Z M19.9887997,134.800774 C21.3231206,134.767325 22.4320296,135.821664 22.4658996,137.155974 C22.4658996,137.196253 22.443753,137.233274 22.4083996,137.252574 L22.4083996,137.252574 L12.3895998,143.195774 C11.9839093,143.432771 11.4819904,143.432771 11.0762999,143.195774 L11.0762999,143.195774 L1.05750008,137.254874 C1.02309376,137.233507 1.0015468,137.196446 1.00000008,137.155974 C1.03387012,135.821664 2.14277914,134.767325 3.47710003,134.800774 L3.47710003,134.800774 Z" id="Combined-Shape"></path>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</symbol>
+<symbol id="print" viewBox="0 0 22 25">
+<g stroke="none" stroke-width="1" fill-rule="evenodd">
+<g transform="translate(-1440.000000, -271.000000)">
+<g transform="translate(0.000000, 44.000000)">
+<g transform="translate(1439.000000, 53.000000)">
+<g>
+<g>
+<path d="M22.9633518,185.133 L21.2123518,180.744 C20.9872779,180.172499 20.434572,179.797675 19.8203518,179.8 L17.7473518,179.8 C17.6809662,179.800267 17.6172223,179.774014 17.5702802,179.727072 C17.5233381,179.680129 17.4970847,179.616386 17.4973518,179.55 L17.4973518,177.658 C17.4970148,177.380139 17.3810833,177.114946 17.1773518,176.926 L15.1773518,175.068 C14.9923691,174.895828 14.7490604,174.8 14.4963518,174.8 L7.49635182,174.8 C6.94406707,174.8 6.49635182,175.247715 6.49635182,175.8 L6.49635182,179.55 C6.49635182,179.688071 6.38442301,179.8 6.24635182,179.8 L4.17335182,179.8 C3.55957294,179.797363 3.00715299,180.171864 2.78235182,180.743 L1.03035182,185.133 C1.00805613,185.207556 0.997926156,185.285219 1.00035182,185.363 L1.89635182,192.487 C1.99035903,193.235224 2.6252502,193.797336 3.37935182,193.8 L4.70335182,193.8 C4.78115092,193.799489 4.85471722,193.835372 4.90221008,193.896995 C4.94970293,193.958618 4.96566294,194.038897 4.94535182,194.114 L4.03135182,197.542 C3.95123237,197.842026 4.01504471,198.162248 4.20405265,198.408644 C4.39306059,198.65504 4.68581231,198.799645 4.99635182,198.8 L18.4963518,198.8 C18.8068913,198.799645 19.099643,198.65504 19.288651,198.408644 C19.4776589,198.162248 19.5414713,197.842026 19.4613518,197.542 L18.5473518,194.114 C18.5274265,194.038765 18.5436767,193.958542 18.5913097,193.896991 C18.6389426,193.835441 18.712524,193.799585 18.7903518,193.8 L20.6143518,193.8 C21.3706954,193.799787 22.0085652,193.236506 22.1023518,192.486 L22.9963518,185.358 C22.9938572,185.281997 22.982787,185.206519 22.9633518,185.133 Z M15.2473518,181.799998 L8.74735182,181.799998 C8.68096616,181.800267 8.61722234,181.774014 8.57028021,181.727072 C8.52333808,181.680129 8.49708467,181.616386 8.4973498,181.55 L8.4973498,177.05 C8.49708467,176.983614 8.52333808,176.919871 8.57028021,176.872928 C8.61722234,176.825986 8.68096616,176.799733 8.74735182,176.799998 L14.0063518,176.799998 C14.0692527,176.800102 14.1298599,176.823632 14.1763518,176.866 L15.4173518,178.018 C15.4683379,178.065616 15.4973498,178.132237 15.4973498,178.202 L15.4973498,181.551 C15.4968011,181.688681 15.3850334,181.799998 15.2473518,181.799998 L15.2473518,181.799998 Z M7.71635182,191.486 C7.74539752,191.37679 7.84434554,191.300834 7.95735182,191.301 L15.5363518,191.301 C15.6493581,191.300834 15.7483061,191.37679 15.7773518,191.486 L17.1113518,196.486 C17.1316012,196.561203 17.1156466,196.641547 17.0681994,196.703307 C17.0207522,196.765067 16.947233,196.801186 16.8693518,196.801 L6.62435182,196.801 C6.54647065,196.801186 6.47295145,196.765067 6.42550423,196.703307 C6.37805702,196.641547 6.36210243,196.561203 6.38235182,196.486 L7.71635182,191.486 Z"></path>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</symbol>
+<symbol id="receiver" viewBox="0 0 20 20">
+<path fill="none" stroke="#000" stroke-width="1.01" d="M6.189,13.611C8.134,15.525 11.097,18.239 13.867,18.257C16.47,18.275 18.2,16.241 18.2,16.241L14.509,12.551L11.539,13.639L6.189,8.29L7.313,5.355L3.76,1.8C3.76,1.8 1.732,3.537 1.7,6.092C1.667,8.809 4.347,11.738 6.189,13.611" />
+</symbol>
+<symbol id="search" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.185 12.44a7.683 7.683 0 0 0 1.605-4.68C15.79 3.48 12.234 0 7.885 0 3.537 0 0 3.48 0 7.76c0 4.28 3.536 7.76 7.885 7.76 1.626 0 3.15-.5 4.41-1.34l.04.04 3.455 3.4c.244.24.589.38.914.38.326 0 .671-.12.915-.38.508-.5.508-1.3 0-1.8l-3.434-3.38zm-6.3.54c-2.926 0-5.304-2.34-5.304-5.22s2.377-5.221 5.304-5.221c2.926 0 5.304 2.34 5.304 5.22s-2.378 5.22-5.304 5.22z" fill-rule="nonzero" />
+</symbol>
+<symbol id="arrow" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.175 0l4.254 4-4.254 4-.89-.836L9.044 4.57H0V3.43l9.042-.001L6.286.836 7.175 0z" fill-rule="nonzero" />
+</symbol>
+<symbol id="download" viewBox="0 0 100 100">
+<rect x="16.7" y="83.5" width="66.5" height="10.9"></rect>
+<polygon points="46.1,75.5 20.4,49.8 28.2,41.9 44.5,58.3 44.5,5.6 55.5,5.6 55.5,58.3 71.8,41.9 79.6,49.8 53.9,75.5 50,79.2  "></polygon>
+</symbol>
+<symbol id="download-csv" viewBox="0 0 30.9 13.6" xmlns="http://www.w3.org/2000/svg">
+<path class="st0" d="M4,0v7.39L1.81,5.2L0.4,6.61L3.58,9.8L5,11.21L6.41,9.8l3.18-3.18L8.18,5.2L6,7.38V0H4z M0,11.6v2h10v-2H0z
+       M15.25,9.21c-0.38,0-0.75-0.07-1.09-0.2c-0.34-0.14-0.64-0.33-0.9-0.6C13,8.16,12.8,7.84,12.65,7.45
+      c-0.15-0.39-0.22-0.84-0.22-1.35c0-0.5,0.08-0.95,0.23-1.34c0.15-0.4,0.36-0.73,0.62-1c0.26-0.27,0.56-0.48,0.91-0.62
+      c0.35-0.14,0.71-0.21,1.1-0.21c0.39,0,0.74,0.08,1.05,0.24c0.31,0.15,0.57,0.34,0.77,0.55l-0.73,0.87
+      c-0.16-0.14-0.32-0.26-0.49-0.34c-0.17-0.09-0.36-0.14-0.58-0.14c-0.2,0-0.4,0.05-0.59,0.14c-0.18,0.09-0.34,0.21-0.47,0.38
+      C14.13,4.79,14.02,5,13.94,5.24c-0.07,0.24-0.11,0.51-0.11,0.82c0,0.63,0.13,1.11,0.4,1.46c0.27,0.34,0.62,0.51,1.07,0.51
+      c0.25,0,0.47-0.05,0.66-0.16c0.2-0.11,0.37-0.25,0.52-0.41l0.73,0.86C16.7,8.91,16.05,9.21,15.25,9.21z M21.39,9.21
+      c-0.4,0-0.79-0.07-1.19-0.21c-0.39-0.15-0.74-0.37-1.05-0.66l0.78-0.94c0.22,0.19,0.46,0.34,0.72,0.46
+      c0.27,0.12,0.53,0.18,0.78,0.18c0.29,0,0.5-0.05,0.63-0.16c0.14-0.11,0.21-0.25,0.21-0.43c0-0.09-0.02-0.17-0.07-0.24
+      c-0.04-0.07-0.1-0.13-0.18-0.18c-0.07-0.06-0.17-0.11-0.28-0.15c-0.11-0.05-0.22-0.1-0.35-0.16l-0.79-0.33
+      c-0.15-0.06-0.31-0.14-0.46-0.24c-0.14-0.1-0.27-0.21-0.39-0.34c-0.11-0.14-0.2-0.29-0.27-0.47c-0.07-0.18-0.1-0.38-0.1-0.6
+      c0-0.25,0.05-0.48,0.16-0.7c0.11-0.22,0.25-0.42,0.45-0.58c0.19-0.17,0.42-0.3,0.68-0.39c0.27-0.09,0.56-0.14,0.87-0.14
+      c0.35,0,0.7,0.07,1.04,0.2c0.35,0.14,0.65,0.33,0.91,0.6l-0.7,0.86c-0.2-0.15-0.4-0.27-0.6-0.35c-0.2-0.09-0.42-0.13-0.66-0.13
+      c-0.24,0-0.42,0.05-0.57,0.15c-0.14,0.09-0.2,0.23-0.2,0.4c0,0.09,0.02,0.17,0.07,0.24c0.05,0.06,0.11,0.12,0.2,0.18
+      c0.09,0.05,0.19,0.1,0.3,0.15c0.11,0.04,0.23,0.09,0.36,0.15l0.78,0.32c0.37,0.15,0.66,0.35,0.87,0.61c0.22,0.26,0.33,0.6,0.33,1.03
+      c0,0.25-0.05,0.5-0.16,0.73c-0.1,0.22-0.25,0.42-0.45,0.6c-0.19,0.17-0.43,0.3-0.72,0.41C22.07,9.16,21.75,9.21,21.39,9.21z
+       M25.6,3.04l1.83,6.06h1.65l1.82-6.06h-1.4l-0.72,2.83c-0.09,0.33-0.17,0.66-0.24,0.98c-0.07,0.31-0.16,0.63-0.24,0.97h-0.04
+      c-0.09-0.33-0.18-0.66-0.25-0.97c-0.07-0.32-0.15-0.64-0.24-0.98l-0.73-2.83H25.6z" />
+</symbol>
+<symbol id="highlight" viewBox="0 0 245 53" xmlns="http://www.w3.org/2000/svg">
+<path d="M243.386 15.314c1.006-1.006.253-2.565.099-3.955-.279-2.536-.782-3.525-2.59-4.507-5.181-2.812-24.595-3.307-30.683-4.073-2.23-.281-4.494-.452-5.71 2.014-.849-.444-.668-1.915-1.63-1.963-1.369-.07-2.812-.746-4.143-.47-2.854.589-6.674-1.25-10.987-.119-.272.073-.592.06-.889-.032-5.97-1.822-13.776-.731-16.997-1.184-1.573-.222-3.116-.45-4.545.182-1.47.652-2.343-.5-3.76-.447-.23.008-23.215.683-27.818 1.417-1.251.2-3.357-.651-10.236.39-1.033.157-2.087.432-3.154.208-2.82-.59-5.442.034-8.21-.298-2.362-.281-4.587.182-6.894.208-4.314.05-8.663-.031-12.89.422-3.539.38-7.138.446-10.67.877-6.136.75-12.382 1.03-18.609 1.37-2.528.137-4.898.855-7.406 1.094-7.977.762-15.92 1.706-23.711 3.279-7.477 1.509-19.651 4.63-26.94 1.367-.975-.434-1.94-.606-2.885-.485-1.757.23-2.054.883-1.75 3.355.333 2.716 1.082 5.535.38 8.04-.069.251-.027.646.065.945.929 3.072.489 6.029 1.16 9.125.452 2.08.627 4.176 1.461 6.215.424 1.04.556 2.076.29 3.045-1.058 3.868 2.365 6.682 2.623 7.56.707 2.41 2.107 2.903 3.653 3.247 7.46 1.658 18.757-1.87 24.799-2.778 4.435-.669 2.489-1.358 11.538-2.399 2.619-.3 5.08-1.148 7.658-1.578 1.594-.267 5.003-3.955 5.923-2.065.78 1.603 1.677 1.534 2.608 1.406 4.041-.556 8.259-.239 12.277-.947 4.401-.773 6.25-.032 14.053-1.547 2.323-.452 1.697.706 4.23-.009 2.375-.674 6.571.332 9.755-.067 2.417-.304 4.863-.437 7.39-.273 2.111.138 4.165-.335 6.23-.57 3.786-.43 3.25.295 4.945.264 2.36-.042 4.702-.206 7.078-.143 1.268.033 2.378-.6 3.648-.402 4.132.64 5.48-1.612 7.272-.624 2.39 1.318 2.898-.857 6.366-.547 12.182 1.09 10.328-1.622 24.11-.136 2.942.316 5.922.91 8.626-.125.385-.148.814-.059 1.247.096 1.306.467 2.522.249 3.747.166.516-.036 1.08-.114 1.4-.687.779-.01 1.56-.004 2.33-.067 1.418-.117 2.786.115 4.186.318a.884.884 0 0 0 .307.215c3.603 1.594 7.046 1.506 10.69 1.504-.206-.404-.379-.733-.539-1.027 0 0 1.024-.036 1.537-.042-.005.15-.013.294.02.497 2.91.964 2.556-.107 4.797.383 4.848 1.061 9.62 1.262 14.448 2.075 2.472.419 4.937.562 7.364.584 1.663.013 3.35.227 5.004.2 2.14-.036 4.211 1.355 6.286 2.456.778.413 1.604.851 1.825-.238.26-1.273.547-2.844-.018-4.172-.95-2.234-.146-3.414.566-4.55.91-1.458 1.018-1.33-.14-3.168-1.748-2.77-.57-3.64.057-10.5.233-2.537.159-2.565-1.717-4.003-.086-.068-.13-.28-.242-.533.581-.579 1.059-1.35 1.78-1.746.772-.424.78-.435.094-1.456-.148-.22-.294-.458-.16-.592" fill="#FFEF73" fill-rule="evenodd" />
+</symbol>
+<symbol id="newsletter" viewBox="0 0 56 33" xmlns="http://www.w3.org/2000/svg">
+<path d="M55.53.84C55.17.3 54.5.04 53.7.14L2.22 6.34C1.22 6.46.96 7.1.9 7.35c-.06.26-.12.93.73 1.5l12.5 8.3 3.21 14.35c.13.6.5 1.06 1.03 1.26h.02c.51.2 1.09.1 1.58-.26l8.25-6 8.82 5.86a1.5 1.5 0 0 0 1.17.2c.4-.09.74-.35.94-.7L55.48 2.8c.4-.7.42-1.42.05-1.96zM4.01 8.1l43.82-5.3-32.72 12.66L4.01 8.1zm17.92 12.58l-.01.01-.04.02-.06.06-.06.04-.02.02-.05.07-.05.06h-.01l-.01.02-.04.07c0 .03-.02.05-.03.08l-.02.03v.01l-2.78 7.72-2.62-11.72L46.19 5.53 21.93 20.67zm-1.4 9.02l2.4-6.7 3.56 2.36-5.96 4.34zm17.17.77l-13.46-8.94L52.7 3.75l-15 26.7z" fill="#FFF" />
+</symbol>
+<symbol id="external" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+<g>
+<path d="M6.32 0l2.13 2.13-3.2 3.2 1.42 1.42 3.2-3.2L12 5.68V0z" />
+<path d="M10.5 10.5h-9v-9h3V0H0v12h12V7.5h-1.5z" />
+</g>
+</symbol>
+<symbol id="close" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 1.15L16.85 0 9 7.85 1.15 0 0 1.15 7.85 9 0 16.85 1.15 18 9 10.15 16.85 18 18 16.85 10.15 9z" />
+</symbol>
+<symbol id="chevron-down" viewBox="0 0 100 100">
+<polygon points="50,74.4 10,34.4 18.8,25.6 50,56.8 81.2,25.6 90,34.4"></polygon>
+</symbol>
+<symbol id="pulse" viewBox="0 0 100 100">
+<rect x="17.5" y="23.4975" width="15" height="53.005" fill="#e3007d">
+<animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="18;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s"></animate>
+<animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="64;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.2s"></animate>
+</rect>
+<rect x="42.5" y="30" width="15" height="40" fill="#e3007d">
+<animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="20.999999999999996;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.1s"></animate>
+<animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="58.00000000000001;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.1s"></animate>
+</rect>
+<rect x="67.5" y="30" width="15" height="40" fill="#e3007d">
+<animate attributeName="y" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="20.999999999999996;30;30" keySplines="0 0.5 0.5 1;0 0.5 0.5 1"></animate>
+<animate attributeName="height" repeatCount="indefinite" dur="1s" calcMode="spline" keyTimes="0;0.5;1" values="58.00000000000001;40;40" keySplines="0 0.5 0.5 1;0 0.5 0.5 1"></animate>
+</rect>
+</symbol>
+<symbol id="info" viewBox="0 0 100 100">
+<path d="M 49.9973,5 C 25.14553,5 5,25.1455 5,49.99732 5,74.84912 25.14553,95.00002 49.9973,95.00002 74.84906,95.00002 95,74.84912 95,49.99732 95,25.1455 74.84906,5 49.9973,5 z m 0,16.5908 c 3.87387,0 7.01916,3.1398 7.01916,7.0137 0,3.8739 -3.14529,7.0138 -7.01916,7.0138 -3.87388,0 -7.01376,-3.1399 -7.01376,-7.0138 0,-3.8739 3.13988,-7.0137 7.01376,-7.0137 z m 0,18.7051 c 1.71433,0 3.41994,0.6822 4.62356,1.8495 1.20362,1.1672 1.88989,2.8061 1.86565,4.4451 l 0,25.52422 c 0.0245,1.6546 -0.67386,3.308 -1.8981,4.4776 -1.22422,1.1696 -2.95805,1.8418 -4.68845,1.8169 -1.69797,-0.024 -3.37014,-0.7171 -4.55327,-1.8818 -1.18313,-1.1647 -1.86269,-2.7891 -1.83861,-4.4127 l 0,-25.52422 c -0.0242,-1.639 0.66744,-3.2779 1.87106,-4.4451 1.20362,-1.1673 2.90382,-1.8495 4.61816,-1.8495 z" style="" stroke="none"></path>
+</symbol>
+<symbol id="embed" viewBox="0 0 512 512">
+<path d="M288 368l48 48 160-160-160-160-48 48 112 112z"></path>
+<path d="M224 144l-48-48-160 160 160 160 48-48-112-112z"></path>
+</symbol>
+<symbol id="explore" viewBox="0 0 100 100">
+<rect x="17.7" y="54.9" width="14.8" height="19.8"></rect>
+<rect x="39.4" y="39.9" width="14.8" height="34.8"></rect>
+<rect x="61.1" y="25" width="14.8" height="49.7"></rect>
+<rect x="82.7" y="10" width="14.8" height="64.7"></rect>
+<polygon points="10.4,10 0,10 0,90 100,90 100,82.1 10.4,82.1"></polygon>
+</symbol>
+<symbol id="quote" viewBox="0 0 37 48">
+<path stroke="none" fill="currentColor" d="M20.5643074,43.8679389 C20.6275339,43.3729418 20.505943,43.0519606 20.0973924,43 C18.9155371,43.7277957 14.7716352,43.1356183 11.6929221,43.6509541 C9.2221324,46.8989549 13.9326823,47.045868 16.8289873,46.4717554 C17.339674,47.0096981 17.2424001,48.1126806 18.4631898,47.9906484 C19.3143448,47.7691446 19.285147,46.7294175 19.6304774,46.037786 C21.0433622,46.4333289 23.4192748,45.9812797 25,45.8208013 L25,44.518893 C23.4314768,44.2973892 21.7388788,43.1853339 20.5643074,43.8679389 Z" id="Path"></path>
+<path stroke="none" fill="currentColor" d="M15.9821793,0.155808049 C14.3577811,0.344739996 11.7868725,1.04545779 10.0459413,2.22212686 C9.62022474,2.44215461 9.28251064,1.53335392 9.1326739,2.22212686 C8.96143627,2.89657332 7.13012205,3.87946761 6.39287173,4.74762763 C6.35481892,4.15691147 7.55345193,3.64510114 7.07782228,3.37008176 C6.39524623,4.19997661 6.05989444,5.02981025 5.02297065,4.97721861 C4.75422041,5.66599155 5.15615547,6.33321354 4.3380201,6.81394644 C4.5948796,6.48391094 4.58536336,6.25431996 4.10970326,6.1251735 C4.29283163,7.26596516 3.18218889,6.97655808 3.42475271,8.65067427 C3.08703252,8.385212 2.84920552,8.385212 2.51148532,8.65067427 C1.21768985,11.0302776 -0.271118646,15.16065 0.684950543,17.8343134 C0.25209833,17.6621202 0.525603648,17.150316 0,17.6047225 L0,20.3598142 C1.60296692,27.7403989 5.05627446,32.7552781 11.6441592,35.5128188 C12.0865216,37.6747699 11.1518533,39.0762545 12.3291098,40.7934113 C15.9916773,41.0469165 21.1671027,41.0899694 25.5714869,40.7934113 C26.9080842,38.7845209 25.0863106,34.0660895 28.5396059,34.3648639 C29.6645687,33.1236645 30.8489548,31.9422199 32.4209924,31.1505902 C42.9497477,18.7049224 34.4282932,-1.99928594 15.9821793,0.155808049 Z M23.7473875,34.1352729 C23.2764825,35.551084 23.8686816,36.6727124 23.5190707,38.0383196 C21.5641305,38.7294803 19.3808126,36.768406 19.6376843,38.0383196 C16.2414864,38.064627 16.8289,37.8469938 14.6147136,36.6607737 C15.8609583,35.7352466 15.0380496,34.0180897 14.6147136,32.7577271 C12.6502146,33.0494974 11.3397976,30.7009592 9.36342613,31.1505902 C8.60711896,30.9257808 9.61790504,30.6961899 9.59174298,30.4618173 C4.59020367,26.2430983 2.27829772,19.9245097 4.11213864,13.4720848 C6.29777015,5.78292988 15.5139776,1.06437608 24.4323381,2.9108998 C28.7656092,5.45072704 33.113249,8.34932846 34.4782794,13.4720848 C37.1514739,23.521435 31.27472,31.2222226 23.7473875,34.1352729 Z" id="Shape"></path>
+</symbol>
+<symbol id="line" viewBox="-1 -1 34 28">
+<path d="M1.11764282,18.0981593 C0.840511759,18.4400586 0.374951327,18.4082799 -0.00253217398,18.1835093 C-0.416954626,17.9367437 -0.665403033,17.4848291 -0.395070131,17.0354531 L-0.0411147252,16.4557917 C0.0172776089,16.3616539 0.0754187791,16.2686824 0.133382215,16.1767724 C1.55853018,13.9171981 3.14782576,11.8388797 4.87230675,9.97430731 C6.57496277,8.13346816 8.39789979,6.50632533 10.3107214,5.11941037 C12.2227693,3.73302074 14.2359527,2.58424812 16.3258588,1.68224758 C18.3956352,0.789411001 20.5122225,0.164285635 22.6426377,-0.180158873 C24.8175663,-0.531819418 27.0077968,-0.593550496 29.1933269,-0.36496763 C29.5868465,-0.323482432 30.0394272,0.00874005682 30.0786639,0.479934237 C30.107095,0.818167128 29.9314135,1.09543037 29.6364705,1.20541052 C29.483343,1.26250965 29.3497433,1.26644735 29.187978,1.24940773 C26.9441051,1.01459831 24.6565699,1.12992645 22.3806525,1.58599896 C18.3545553,2.39249173 14.4163477,4.24187578 10.7940498,7.0203102 C7.2867658,9.71064836 4.13890076,13.2426746 1.53454673,17.4298501 L1.1827937,18.0048719 L1.11764282,18.0981593 Z"></path>
+</symbol>
+<symbol id="levels" viewBox="0 0 56 45">
+<path d="M30.5 4.38a8.49 8.49 0 010 16.24V42.5a2.5 2.5 0 01-5 0V20.62a8.49 8.49 0 010-16.24V2.5a2.5 2.5 0 015 0zm-6 8.12A3.5 3.5 0 1028 9a3.5 3.5 0 00-3.5 3.5zM11 26.38a8.49 8.49 0 010 16.24 2.5 2.5 0 01-5 0 8.49 8.49 0 010-16.24V2.5a2.5 2.5 0 015 0zM5 34.5A3.5 3.5 0 108.5 31 3.5 3.5 0 005 34.5zM50 19.38a8.49 8.49 0 010 16.24v6.88a2.5 2.5 0 01-5 0v-6.88a8.49 8.49 0 010-16.24V2.5a2.5 2.5 0 015 0zm-6 8.12a3.5 3.5 0 103.5-3.5 3.5 3.5 0 00-3.5 3.5z" fill="currentColor"></path>
+</symbol>
+<symbol id="covid-recovery-hub" viewBox="0 0 175 19" fill="none">
+<path d="M0.992676 7.29248C0.992676 11.6714 4.24902 14.2783 7.92285 14.2783C9.77832 14.2783 11.6152 13.6938 12.4502 13.0815L12.5615 10.2612H11.9121C11.374 12.6084 10.0938 13.2671 8.12695 13.2671C5.26025 13.2671 3.19141 10.7344 3.19141 7.05127C3.19141 3.67432 4.97266 1.33643 8.12695 1.33643C10.0845 1.33643 11.3091 2.07861 11.8472 4.22168H12.4873L12.3853 1.39209C11.5688 0.79834 9.97314 0.325195 7.92285 0.325195C4.00781 0.325195 0.992676 2.93213 0.992676 7.29248Z" fill="currentColor" />
+<path d="M14.4448 7.30176C14.4448 11.6528 17.7754 14.2783 21.1709 14.2783C25.3086 14.2783 27.9712 11.1797 27.9712 7.30176C27.9712 2.95068 24.6313 0.325195 21.2358 0.325195C17.1074 0.325195 14.4448 3.42383 14.4448 7.30176ZM16.6436 7.11621C16.6436 4.0083 17.9331 1.33643 21.0596 1.33643C23.9727 1.33643 25.7632 4.22168 25.7632 7.4873C25.7632 10.5952 24.4736 13.2671 21.3472 13.2671C18.4341 13.2671 16.6436 10.3818 16.6436 7.11621Z" fill="currentColor" />
+<path d="M30.2812 3.08057L34.2983 14H35.8848L39.9019 3.13623C40.4399 1.67041 40.6626 1.44775 41.8965 1.30859V0.603516H37.5361V1.30859C39.0483 1.49414 39.2246 1.73535 38.7607 3.08984L35.6064 12.1631L32.3965 3.08057C31.9233 1.74463 32.1089 1.49414 33.6211 1.30859V0.603516H28.3145V1.30859C29.4834 1.44775 29.7617 1.67041 30.2812 3.08057Z" fill="currentColor" />
+<path d="M46.0898 12.1631V2.44043C46.0898 1.60547 46.2383 1.43848 47.7134 1.30859V0.603516H42.4624V1.30859C43.9375 1.43848 44.0859 1.60547 44.0859 2.44043V12.1631C44.0859 12.998 43.9375 13.165 42.4624 13.2949V14H47.7134V13.2949C46.2383 13.165 46.0898 12.998 46.0898 12.1631Z" fill="currentColor" />
+<path d="M61.9448 7.09766C61.9448 3.00635 58.7163 0.603516 54.5229 0.603516H48.9937V1.30859C50.4688 1.43848 50.6172 1.60547 50.6172 2.44043V12.1631C50.6172 12.998 50.4688 13.165 48.9937 13.2949V14H54.5415C58.4565 14 61.9448 11.356 61.9448 7.09766ZM59.7368 7.24609C59.7368 10.8179 57.5103 13.0259 54.0591 13.1372L52.6211 13.1836V1.41992L54.0591 1.46631C57.501 1.57764 59.7368 3.79492 59.7368 7.24609Z" fill="currentColor" />
+<path d="M69.0049 9.29639V7.91406H63.8838V9.29639H69.0049Z" fill="currentColor" />
+<path d="M74.9146 0.603516H74.0425L70.814 2.09717V2.70947L73.0869 2.125V11.9961C73.0869 12.8682 72.7715 13.1094 70.9624 13.2949V14H77.0483V13.2949C75.23 13.1094 74.9146 12.8682 74.9146 11.9961V0.603516Z" fill="currentColor" />
+<path d="M78.8018 4.67627C78.8018 7.01416 80.2026 8.71191 82.4385 8.71191C84.3774 8.71191 85.4814 7.66357 85.9453 6.1792C85.8062 10.2334 83.2549 13.2021 79.3306 13.4248L79.3491 14.1113C84.3218 14.1113 87.8101 10.3911 87.8193 5.8916C87.8193 2.39404 86.1216 0.325195 83.2085 0.325195C80.8057 0.325195 78.8018 1.9209 78.8018 4.67627ZM80.7314 4.18457C80.7314 2.36621 81.7798 1.29932 83.2085 1.29932C84.8413 1.29932 85.8247 2.71875 85.8247 4.53711C85.8247 6.27197 84.7393 7.50586 83.1899 7.50586C81.6313 7.50586 80.7314 6.16992 80.7314 4.18457Z" fill="currentColor" />
+<path d="M104.899 4.31445C104.899 2.00439 103.118 0.603516 99.6758 0.603516H94.2856V1.30859C95.7607 1.43848 95.9092 1.60547 95.9092 2.44043V12.1631C95.9092 12.998 95.7607 13.165 94.2856 13.2949V14H99.4624V13.2949C98.0894 13.165 97.9131 13.0073 97.9131 12.2002V8.19238H100.297L103.572 14H106.105V13.3506C105.521 13.2114 105.066 12.8682 103.869 10.7529L102.162 7.70996C103.749 7.19971 104.908 6.02148 104.899 4.31445ZM102.83 4.47217C102.83 6.33691 101.652 7.25537 99.314 7.32959L97.9131 7.37598V1.41992L99.0728 1.45703C101.624 1.54053 102.83 2.57959 102.83 4.47217Z" fill="currentColor" />
+<path d="M106.986 9.42627C106.986 12.4136 108.981 14.2041 111.597 14.2041C113.174 14.2041 114.417 13.6289 115.085 12.8589V12.1538C114.501 12.7012 113.536 13.0444 112.599 13.0444C110.4 13.0444 108.953 11.5415 108.86 9.15723H115.28C115.299 8.99023 115.308 8.74902 115.308 8.51709C115.308 6.04004 113.926 4.50928 111.412 4.50928C108.805 4.50928 106.986 6.53174 106.986 9.42627ZM111.384 5.47412C112.757 5.47412 113.536 6.4668 113.536 8.32227V8.34082H108.87C109.027 6.37402 110.029 5.47412 111.384 5.47412Z" fill="currentColor" />
+<path d="M121.747 14.2041C123.314 14.2041 124.558 13.6289 125.216 12.8589V12.1538C124.623 12.6919 123.686 13.0444 122.767 13.0444C120.578 13.0444 119.149 11.4951 119.149 9.07373C119.149 6.7915 120.457 5.47412 122.136 5.47412C122.767 5.47412 123.259 5.56689 123.621 5.79883C123.25 5.93799 122.99 6.31836 122.99 6.76367C122.99 7.35742 123.444 7.82129 124.047 7.82129C124.65 7.82129 125.114 7.35742 125.114 6.71729C125.114 5.52979 124.112 4.50928 121.951 4.50928C119.427 4.50928 117.21 6.34619 117.21 9.42627C117.21 12.3486 119.214 14.2041 121.747 14.2041Z" fill="currentColor" />
+<path d="M131.414 14.2041C134.15 14.2041 136.219 12.2002 136.219 9.31494C136.219 6.49463 134.215 4.50928 131.562 4.50928C128.825 4.50928 126.766 6.51318 126.766 9.39844C126.766 12.2188 128.77 14.2041 131.414 14.2041ZM131.562 13.2393C129.938 13.2393 128.742 11.6807 128.742 9.21289C128.742 6.89355 129.725 5.47412 131.414 5.47412C133.037 5.47412 134.234 7.03271 134.234 9.50049C134.234 11.8198 133.25 13.2393 131.562 13.2393Z" fill="currentColor" />
+<path d="M138.511 6.91211L141.368 14H142.407L145.265 6.93066C145.775 5.67822 145.951 5.55762 146.879 5.41846V4.71338H143.205V5.41846C144.485 5.52051 144.717 5.73389 144.328 6.76367L142.37 11.9404L140.413 6.76367C140.023 5.73389 140.264 5.52051 141.535 5.41846V4.71338H136.896V5.41846C137.824 5.604 138.056 5.80811 138.511 6.91211Z" fill="currentColor" />
+<path d="M147.38 9.42627C147.38 12.4136 149.375 14.2041 151.991 14.2041C153.568 14.2041 154.811 13.6289 155.479 12.8589V12.1538C154.895 12.7012 153.93 13.0444 152.993 13.0444C150.794 13.0444 149.347 11.5415 149.254 9.15723H155.674C155.692 8.99023 155.702 8.74902 155.702 8.51709C155.702 6.04004 154.319 4.50928 151.805 4.50928C149.198 4.50928 147.38 6.53174 147.38 9.42627ZM151.777 5.47412C153.15 5.47412 153.93 6.4668 153.93 8.32227V8.34082H149.263C149.421 6.37402 150.423 5.47412 151.777 5.47412Z" fill="currentColor" />
+<path d="M160.415 4.61133L157.27 4.9917V5.61328L158.012 5.78955C158.55 5.91943 158.633 6.04004 158.633 6.54102V12.4878C158.633 13.0444 158.485 13.1743 157.27 13.2949V14H161.973V13.2949C160.609 13.1743 160.461 13.063 160.461 12.3765V7.08838C160.943 6.53174 162.14 6.13281 163.207 6.13281C163.578 6.13281 163.931 6.16992 164.125 6.22559C164.237 6.08643 164.302 5.82666 164.302 5.56689C164.302 5.02881 164.033 4.54639 163.281 4.54639C162.428 4.54639 161.565 5.20508 160.415 6.51318V4.61133Z" fill="currentColor" />
+<path d="M166.426 6.91211L169.265 13.8794C168.504 15.3452 167.558 17.145 166.974 18.2305V18.2676H168.644L170.193 14L170.879 12.3394L173.115 6.93066C173.635 5.66895 173.82 5.55762 174.767 5.41846V4.71338H171.074V5.41846C172.354 5.52051 172.586 5.72461 172.178 6.76367L170.184 11.8013L168.3 6.76367C167.92 5.73389 168.133 5.52979 169.404 5.41846V4.71338H164.821V5.41846C165.73 5.604 165.972 5.79883 166.426 6.91211Z" fill="currentColor" />
+</symbol>
+</svg>
+<script src="https://staticweb.usafacts.org/static/js/modernizr-custom.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/js/custom-elements.min.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-059be3de.2c22debc.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-15ab8956.0f36db06.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-24e11f67.16258bf7.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-2a49b74c.f56800f2.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-2e031043.261d2f6e.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-306954a6.45a7a480.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-49d0a293.fd300a3c.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-536eaa00.c5cf42c3.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-5c163be3.769924b0.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-6b40552d.16e5261d.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-70e2792b.5bdc7350.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-a49c5adc.a0caa5c6.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-ae502bed.9931f868.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-b527da5c.c28ce106.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-cfc888f5.1459a95c.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-e5203dbc.0e9d3179.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-f363bead.9a0491b6.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-f82e0cd2.251040f8.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/vendor-fcf017cf.eed2646c.js" defer></script>
+<script src="https://staticweb.usafacts.org/static/main.56af839f.js" defer></script>
+<script>window.twttr = (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0],
+      t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js, fjs);
+
+    t._e = [];
+    t.ready = function(f) {
+      t._e.push(f);
+    };
+
+    return t;
+  }(document, "script", "twitter-wjs"));</script>
+</body>
+</html>
