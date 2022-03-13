@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+preferred-citation:
+  type: generic
+  authors:
+  - family-names: "Kedron"
+    given-names: "Peter"
+    orcid: "https://orcid.org/0000-0002-1093-3416"
+  - family-names: "Bardin"
+    given-names: "Sarah"
+    orcid: "https://orcid.org/0000-0001-8657-1725"
+  - family-names: "Holler"
+    given-names: "Joseph"
+    orcid: "https://orcid.org/0000-0002-2381-2699"
+  - family-names: "Cliff"
+    given-names: "Summer"
+  - family-names: "Fuller"
+    given-names: "Kimberly"
+  - family-names: "Gilman"
+    given-names: "Joshua"
+  - family-names: "Bryant"
+    given-names: "Grady"
+  - family-names: "Seeley"
+    given-names: "Megan"
+  - family-names: "Van Zanbergen"
+    given-names: "Addison"
+  - family-names: "Wang"
+    given-names: "Wenxin"
+  - family-names: "Wang"
+    given-names: "Xin"
+  title: "Reproduction of Analysis of COVID-19 Cases’ Spatial Dependence in US Counties Reveals Health Inequalities"
+  doi:
+  year: 2022
