@@ -21,11 +21,8 @@ This study is a reproduction of:
 
 ## Repository Documents
 
-- Preregistration: https://osf.io/mgsr4/
-- Publication: ...
-- Pre-analysis plan: [docs/report/preanalysis.pdf](docs/report/preanalysis.pdf)
-- Study report: [docs/report/report.pdf](docs/report/report.pdf)
-- Manuscript: [docs/manuscript/manuscript.pdf](docs/manuscript/manuscript.pdf)
+- Manuscript: 
+- Pre-analysis plan and study report: [docs/report/RP-Saffary-Report.pdf
 
 ## Repository Contents
 
