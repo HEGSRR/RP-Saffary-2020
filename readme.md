@@ -22,7 +22,7 @@ This study is a reproduction of:
 ## Repository Documents
 
 - Manuscript: 
-- Pre-analysis plan and study report: [docs/report/RP-Saffary-Report.pdf
+- Pre-analysis plan and study report: [docs/report/RP-Saffary-Report.pdf](docs/report/RP-Saffary-Report.pdf)
 
 ## Repository Contents
 
