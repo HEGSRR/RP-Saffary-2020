@@ -4,6 +4,8 @@ This study is a reproduction of:
 
 > Saffary, T., O. A. Adegboye, E. Gayawan, F. Elfaki, M. A. Kuddus, and R. Saffary. 2020. Analysis of COVID-19 cases' spatial dependence in U.S. counties reveals health inequalities. *Frontiers in Public Health* 728. DOI:[10.3389/fpubh.2020.579190](https://doi.org/10.3389/fpubh.2020.579190)
 
+> Kedron, P., Bardin, S., Holler, J., Gilman, J., Grady, B., Seeley, M., Wang, X. and Yang, W. (2023), A Framework for Moving Beyond Computational Reproducibility: Lessons from Three Reproductions of Geographical Analyses of COVID-19. Geogr Anal. https://doi.org/10.1111/gean.12370
+
 ## Abstract
 
 > The original study is one of the first spatial statistical analyses of of COVID-19 in the United States. A main contribution of the study is to provide more detail into the interplay between COVID-19 and healthcare-related characteristics of the population using readily available datasets. At the outset of a larger project on reproducibility and replicability in the human-environment and geographic sciences, we chose this study to reproduce on account of its application of spatial statistical methods common in spatial epidemiology and compatible with graduate student training in spatial statistics (e.g., spatial regression and pattern analysis) as well as its data and code availability. As a reproduction study, we aimed to independently generate identical results from the original publication. We found an exact reproduction to be impossible due to missing variables in the published data and ambiguities in the narrative methodology. 
